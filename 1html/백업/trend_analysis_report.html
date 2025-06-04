@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>밀양시 정책제안 공모전 트렌드 분석 보고서</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 3px solid #3498db;
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1rem;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-tab:hover {
+            background: #e9ecef;
+            color: #3498db;
+        }
+
+        .nav-tab.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+            background: white;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .overview-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .overview-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .overview-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .overview-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .section h3 {
+            color: #3498db;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .section h4 {
+            color: #34495e;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .insight-box {
+            background: linear-gradient(135deg, #ff7b7b 0%, #667eea 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .insight-box h4 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .recommendation {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .recommendation h4 {
+            color: #0c5460;
+            margin-bottom: 1rem;
+        }
+
+        .tech-stack {
+            background: #f8f9fa;
+            border: 2px solid #6c757d;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .trend-indicator {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin: 0.2rem;
+        }
+
+        .trend-up {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .trend-down {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .trend-stable {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+            
+            .nav-tab {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏆 밀양시 정책제안 공모전 트렌드 분석 보고서</h1>
+            <div class="subtitle">네이버 데이터랩 기반 2022-2024 검색 트렌드 심층 분석</div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('overview')">📊 분석 개요</button>
+            <button class="nav-tab" onclick="showTab('trends')">📈 트렌드 분석</button>
+            <button class="nav-tab" onclick="showTab('ideas')">💡 아이디어 제안</button>
+            <button class="nav-tab" onclick="showTab('implementation')">🚀 구현 방안</button>
+            <button class="nav-tab" onclick="showTab('strategy')">📋 제안서 전략</button>
+        </div>
+
+        <div class="content">
+            <!-- 분석 개요 탭 -->
+            <div id="overview" class="tab-content active">
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <h3>분석 기간</h3>
+                        <div class="number">36</div>
+                        <div>개월 (2022.01~2024.12)</div>
+                    </div>
+                    <div class="overview-card">
+                        <h3>분석 키워드</h3>
+                        <div class="number">25</div>
+                        <div>개 핵심 키워드</div>
+                    </div>
+                    <div class="overview-card">
+                        <h3>공모 분야</h3>
+                        <div class="number">3</div>
+                        <div>개 정책 분야</div>
+                    </div>
+                    <div class="overview-card">
+                        <h3>데이터 소스</h3>
+                        <div class="number">API</div>
+                        <div>네이버 데이터랩</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>🎯 핵심 발견사항</h2>
+                    
+                    <div class="highlight">
+                        <h4>🥇 최고 관심도 키워드</h4>
+                        <p><strong>모바일</strong>: 70-100점 구간으로 압도적 1위</p>
+                        <p><strong>일자리</strong>: 지역경제 분야 절대 강자</p>
+                        <p><strong>청년정책</strong>: 2024년 최고치 후 하락세</p>
+                    </div>
+
+                    <div class="insight-box">
+                        <h4>💡 전략적 인사이트</h4>
+                        <p>• <strong>모바일 중심</strong>의 디지털 서비스가 가장 높은 관심도</p>
+                        <p>• <strong>청년정책 피로감</strong> 심화 → 새로운 접근법 필요</p>
+                        <p>• <strong>계절별 관심 패턴</strong> 명확 → 타이밍 전략 활용 가능</p>
+                        <p>• <strong>일자리 창출</strong>이 지역경제 분야 최우선 관심사</p>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>📊 주요 키워드 트렌드 비교</h3>
+                    <canvas id="overviewChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+
+            <!-- 트렌드 분석 탭 -->
+            <div id="trends" class="tab-content">
+                <div class="section">
+                    <h2>📈 분야별 상세 트렌드 분석</h2>
+                    
+                    <h3>1️⃣ 인구·청년 정책 분야</h3>
+                    <div class="chart-container">
+                        <canvas id="youthChart" width="400" height="200"></canvas>
+                    </div>
+                    
+                    <div class="highlight">
+                        <h4>주요 패턴</h4>
+                        <span class="trend-down">청년정책 (-30%)</span>
+                        <span class="trend-up">정주환경 (3-4월 급상승)</span>
+                        <span class="trend-stable">인구유입 (2% 이하 유지)</span>
+                    </div>
+
+                    <h3>2️⃣ 생활환경 개선 분야</h3>
+                    <div class="chart-container">
+                        <canvas id="lifeChart" width="400" height="200"></canvas>
+                    </div>
+
+                    <div class="highlight">
+                        <h4>주요 패턴</h4>
+                        <span class="trend-up">모바일 (압도적 1위)</span>
+                        <span class="trend-stable">디지털 (50-80점)</span>
+                        <span class="trend-down">스마트시티 (-40%)</span>
+                    </div>
+
+                    <h3>3️⃣ 지역경제 활성화 분야</h3>
+                    <div class="chart-container">
+                        <canvas id="economyChart" width="400" height="200"></canvas>
+                    </div>
+
+                    <div class="highlight">
+                        <h4>계절별 패턴</h4>
+                        <p>🌸 <strong>봄(3-5월)</strong>: 관광업 관심 최고조</p>
+                        <p>🍂 <strong>가을(9-11월)</strong>: 특산품 관심 증가</p>
+                        <p>❄️ <strong>겨울(12-2월)</strong>: 전반적 관심도 하락</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>🔍 밀양시 특이사항</h2>
+                    <div class="chart-container">
+                        <canvas id="miryangChart" width="400" height="200"></canvas>
+                    </div>
+                    
+                    <div class="insight-box">
+                        <h4>⚡ 2024년 6월 밀양 급상승 현상</h4>
+                        <p>• 6월: 100.0점 (최고치) → 7월: 21.1점 (급하락)</p>
+                        <p>• 특정 이슈/사건으로 인한 일시적 관심 증가</p>
+                        <p>• <strong>기회 요소</strong>: 높아진 인지도 활용 가능</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 아이디어 제안 탭 -->
+            <div id="ideas" class="tab-content">
+                <div class="section">
+                    <h2>💡 데이터 기반 아이디어 제안</h2>
+                    
+                    <div class="recommendation">
+                        <h4>🥇 최우선 추천: "밀양 청년 정착 디지털 플랫폼" (1분야)</h4>
+                        <p><strong>핵심 조합</strong>: 정주환경(3-4월 관심 급증) + 모바일(압도적 우위)</p>
+                        <p><strong>차별화</strong>: 청년정책 피로감 → 체험형 디지털 서비스로 전환</p>
+                        <p><strong>구현 요소</strong>:</p>
+                        <ul>
+                            <li>주거, 일자리, 생활정보 통합 플랫폼</li>
+                            <li>AR 기반 동네 미리보기 서비스</li>
+                            <li>기존 청년과의 멘토링 매칭 시스템</li>
+                        </ul>
+                    </div>
+
+                    <div class="recommendation">
+                        <h4>🥈 차선책: "밀양 생활편의 모바일 허브" (2분야)</h4>
+                        <p><strong>핵심</strong>: 모바일 압도적 우위 활용</p>
+                        <p><strong>구현 요소</strong>:</p>
+                        <ul>
+                            <li>공공시설 실시간 이용 현황</li>
+                            <li>민원 신고 간편 시스템</li>
+                            <li>이웃 간 도움 요청 플랫폼</li>
+                        </ul>
+                    </div>
+
+                    <div class="recommendation">
+                        <h4>🥉 대안: "밀양 관광×특산품 디지털 생태계" (3분야)</h4>
+                        <p><strong>핵심</strong>: 일자리(1위) + 관광(2위) + 특산품 연계</p>
+                        <p><strong>선순환 구조</strong>: 관광객 유입 → 특산품 판매 → 일자리 창출</p>
+                        <p><strong>구현 요소</strong>:</p>
+                        <ul>
+                            <li>QR코드 기반 관광지 특산품 직접 주문</li>
+                            <li>관광 가이드 + 쇼핑 + 배송 통합 서비스</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 구현 방안 탭 -->
+            <div id="implementation" class="tab-content">
+                <div class="section">
+                    <h2>🚀 웹 플랫폼 구현 방안</h2>
+                    
+                    <div class="tech-stack">
+                        <h4>💻 추천 기술 스택</h4>
+                        <p>Frontend: React.js + PWA</p>
+                        <p>Backend: Node.js + Express</p>
+                        <p>Database: MongoDB (유연한 데이터 구조)</p>
+                        <p>Infrastructure: AWS 또는 Naver Cloud Platform</p>
+                    </div>
+
+                    <div class="highlight">
+                        <h4>💰 비용 효율적 구현 전략</h4>
+                        <p>1. <strong>MVP(최소기능제품) 우선 개발</strong></p>
+                        <p>2. <strong>API 우선 설계</strong>로 확장성 확보</p>
+                        <p>3. <strong>오픈소스 라이브러리</strong> 적극 활용</p>
+                        <p>4. <strong>클라우드 서비스</strong> 활용으로 초기 비용 절감</p>
+                    </div>
+
+                    <div class="recommendation">
+                        <h4>🎯 차별화 전략</h4>
+                        <ul>
+                            <li><strong>밀양시 특화 기능</strong> (지역 맞춤형)</li>
+                            <li><strong>직관적 UI/UX</strong> (고령 인구 고려)</li>
+                            <li><strong>오프라인 연계</strong> (전통 상권과 협력)</li>
+                            <li><strong>PWA 기반</strong> 앱 설치 불필요</li>
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <h3>📅 단계별 구현 로드맵</h3>
+                        <div class="chart-container">
+                            <canvas id="roadmapChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 제안서 전략 탭 -->
+            <div id="strategy" class="tab-content">
+                <div class="section">
+                    <h2>📋 심사 기준 맞춤 전략</h2>
+                    
+                    <div class="chart-container">
+                        <h3>📊 심사 배점 현황</h3>
+                        <canvas id="scoringChart" width="400" height="200"></canvas>
+                    </div>
+
+                    <div class="recommendation">
+                        <h4>🎯 효율성 30점 만점 전략</h4>
+                        <p><strong>근거 제시 방법</strong>:</p>
+                        <p>"네이버 데이터랩 분석 결과, 모바일 기반 생활편의 서비스에 대한 관심도가 3년간 70점 이상 유지되고 있어 시민 수요가 높음을 확인"</p>
+                        <ul>
+                            <li>개발 비용: 500만원 (PWA 방식)</li>
+                            <li>연간 운영비: 200만원 (클라우드 기반)</li>
+                            <li>예상 사용자: 1,000명+ (첫해)</li>
+                            <li>ROI: 300% (시민 만족도 향상 효과)</li>
+                        </ul>
+                    </div>
+
+                    <div class="recommendation">
+                        <h4>🌟 창의성 20점 확보 전략</h4>
+                        <ul>
+                            <li><strong>트렌드 데이터 기반 접근</strong>: 다른 참가자와 차별화</li>
+                            <li><strong>3년 간 계절별 패턴 분석</strong> 활용</li>
+                            <li><strong>밀양시 특이 현상</strong> (6월 급상승) 반영</li>
+                            <li><strong>기존 청년정책 한계</strong> 지적 후 대안 제시</li>
+                        </ul>
+                    </div>
+
+                    <div class="recommendation">
+                        <h4>✅ 실시가능성 20점 확보 전략</h4>
+                        <ul>
+                            <li><strong>구체적 기술 스택</strong> 명시</li>
+                            <li><strong>단계별 개발 일정</strong> (3-6-12개월)</li>
+                            <li><strong>예산 및 인력 계획</strong> 상세 제시</li>
+                            <li><strong>리스크 요인 및 대응 방안</strong> 사전 검토</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight">
+                        <h4>📅 최적 제출 타이밍 전략</h4>
+                        <p>🎯 <strong>3월</strong>: 공모전 관심 최고조 (준비 단계)</p>
+                        <p>🎯 <strong>5월</strong>: 정책제안 관심 집중 (제출 시기)</p>
+                        <p>🎯 <strong>6월</strong>: 시민참여 의식 상승</p>
+                        <p><strong>→ 현재(6월 초) 최적의 제출 타이밍!</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>📊 밀양시 정책제안 공모전 트렌드 분석 보고서</p>
+            <p>데이터 기준: 네이버 데이터랩 2022.01~2024.12 | 작성일: 2025년 6월 2일</p>
+            <p>Prepared by: 박용환 (Creative Nexus)</p>
+        </div>
+    </div>
+
+    <script>
+        // 탭 전환 기능
+        function showTab(tabName) {
+            // 모든 탭 숨기기
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // 모든 버튼에서 active 클래스 제거
+            const buttons = document.querySelectorAll('.nav-tab');
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            // 선택된 탭 표시
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // 차트 데이터
+        const overviewData = {
+            labels: ['모바일', '일자리', '청년정책', '관광', '디지털', '스마트시티'],
+            datasets: [{
+                label: '평균 관심도',
+                data: [75, 80, 70, 50, 60, 45],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(255, 205, 86, 0.8)',
+                    'rgba(75, 192, 192, 0.8)',
+                    'rgba(153, 102, 255, 0.8)',
+                    'rgba(255, 159, 64, 0.8)'
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 205, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 2
+            }]
+        };
+
+        // 차트 초기화
+        window.addEventListener('load', function() {
+            // 개요 차트
+            const ctx1 = document.getElementById('overviewChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: overviewData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '주요 키워드별 평균 관심도 (2022-2024)'
+                        },
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            // 청년정책 트렌드 차트
+            const ctx2 = document.getElementById('youthChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: ['2022-01', '2022-06', '2022-12', '2023-06', '2024-01', '2024-06', '2024-12'],
+                    datasets: [{
+                        label: '청년정책',
+                        data: [87, 66, 60, 75, 100, 69, 47],
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        tension: 0.4
+                    }, {
+                        label: '청년창업',
+                        data: [76, 70, 60, 70, 76, 54, 46],
+                        borderColor: 'rgb(54, 162, 235)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        tension: 0.4
+                    }, {
+                        label: '정주환경',
+                        data: [8, 16, 8, 16, 9, 14, 7],
+                        borderColor: 'rgb(75, 192, 192)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '인구·청년 정책 분야 트렌드'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // 생활환경 차트
+            const ctx3 = document.getElementById('lifeChart').getContext('2d');
+            new Chart(ctx3, {
+                type: 'line',
+                data: {
+                    labels: ['2022-01', '2022-06', '2022-12', '2023-06', '2024-01', '2024-06', '2024-12'],
+                    datasets: [{
+                        label: '모바일',
+                        data: [84, 69, 80, 77, 86, 67, 65],
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        tension: 0.4
+                    }, {
+                        label: '디지털',
+                        data: [64, 62, 61, 60, 63, 52, 47],
+                        borderColor: 'rgb(54, 162, 235)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        tension: 0.4
+                    }, {
+                        label: '스마트시티',
+                        data: [45, 50, 52, 52, 31, 43, 33],
+                        borderColor: 'rgb(75, 192, 192)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '생활환경 개선 분야 트렌드'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // 지역경제 차트
+            const ctx4 = document.getElementById('economyChart').getContext('2d');
+            new Chart(ctx4, {
+                type: 'line',
+                data: {
+                    labels: ['2022-01', '2022-06', '2022-12', '2023-06', '2024-01', '2024-06', '2024-12'],
+                    datasets: [{
+                        label: '일자리',
+                        data: [88, 87, 85, 83, 87, 72, 80],
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        tension: 0.4
+                    }, {
+                        label: '관광',
+                        data: [29, 51, 43, 51, 45, 45, 43],
+                        borderColor: 'rgb(54, 162, 235)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        tension: 0.4
+                    }, {
+                        label: '특산품',
+                        data: [4, 5, 5, 5, 4, 5, 4],
+                        borderColor: 'rgb(75, 192, 192)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '지역경제 활성화 분야 트렌드'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // 밀양시 특이사항 차트
+            const ctx5 = document.getElementById('miryangChart').getContext('2d');
+            new Chart(ctx5, {
+                type: 'line',
+                data: {
+                    labels: ['2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12'],
+                    datasets: [{
+                        label: '밀양',
+                        data: [9.2, 12.2, 11.3, 10.4, 12.3, 100, 21.1, 13.9, 10.3, 10.0, 10.4, 8.1],
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '2024년 밀양 검색 트렌드 (6월 급상승 현상)'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // 로드맵 차트
+            const ctx6 = document.getElementById('roadmapChart').getContext('2d');
+            new Chart(ctx6, {
+                type: 'bar',
+                data: {
+                    labels: ['1차 (MVP)', '2차 (고도화)', '3차 (확산)'],
+                    datasets: [{
+                        label: '개발 기간 (개월)',
+                        data: [3, 3, 6],
+                        backgroundColor: ['rgba(75, 192, 192, 0.8)', 'rgba(54, 162, 235, 0.8)', 'rgba(255, 99, 132, 0.8)']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '단계별 개발 로드맵'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // 심사 배점 차트
+            const ctx7 = document.getElementById('scoringChart').getContext('2d');
+            new Chart(ctx7, {
+                type: 'doughnut',
+                data: {
+                    labels: ['효율성', '실시가능성', '창의성', '적용범위', '계속성'],
+                    datasets: [{
+                        data: [30, 20, 20, 15, 15],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.8)',
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(255, 205, 86, 0.8)',
+                            'rgba(75, 192, 192, 0.8)',
+                            'rgba(153, 102, 255, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '심사 기준별 배점 (총 100점)'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR 기반 생활환경 체험 서비스 | 청년이 실제 살아보고 결정하는 똑똑한 정착 플랫폼</title>
+    <meta name="description" content="전국 지자체 최초 AR 기술로 청년들이 실제 생활환경을 미리 체험하고 현명한 정착 결정을 내릴 수 있도록 지원하는 밀양시 혁신 정책 제안">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js - 안정적인 UMD 버전 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.js"></script>
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Typed.js -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
+        }
+
+        .ar-demo {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%);
+        }
+
+        .tech-stack-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
+            transition: all 0.3s ease;
+        }
+
+        .tech-stack-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50" data-aos="fade-down">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-xl font-bold gradient-text">AR 기반 생활환경 체험 서비스</h1>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#problem" class="text-gray-700 hover:text-blue-600 transition duration-300">문제분석</a>
+                    <a href="#solution" class="text-gray-700 hover:text-blue-600 transition duration-300">해결방안</a>
+                    <a href="#technology" class="text-gray-700 hover:text-blue-600 transition duration-300">기술스택</a>
+                    <a href="#impact" class="text-gray-700 hover:text-blue-600 transition duration-300">기대효과</a>
+                    <a href="trend_analysis_report.html" class="text-gray-700 hover:text-blue-600 transition duration-300">트렌드분석</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-700">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-30"></div>
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto" data-aos="fade-up">
+            <div class="mb-8">
+                <span class="inline-block bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">🏆 전국 226개 지자체 확산 가능한 최초 모델</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                <span id="typed-title"></span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 text-gray-200">
+                실제 생활환경을 미리 체험하고 현명한 정착 결정을 내리는 디지털 플랫폼
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-lg p-6">
+                    <div class="text-3xl font-bold mb-2">200명</div>
+                    <div class="text-sm">연간 청년 유입 목표</div>
+                </div>
+                <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-lg p-6">
+                    <div class="text-3xl font-bold mb-2">30%→60%</div>
+                    <div class="text-sm">정착률 개선 목표</div>
+                </div>
+                <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-lg p-6">
+                    <div class="text-3xl font-bold mb-2">3년</div>
+                    <div class="text-sm">투자 회수 기간</div>
+                </div>
+                <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-lg p-6">
+                    <div class="text-3xl font-bold mb-2">45억원</div>
+                    <div class="text-sm">전국 확산 잠재 시장</div>
+                </div>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="scrollToSection('solution')" class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold transition duration-300 transform hover:scale-105">
+                    🚀 AR 체험해보기
+                </button>
+                <button onclick="scrollToSection('problem')" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition duration-300">
+                    📊 데이터 분석 보기
+                </button>
+            </div>
+        </div>
+        
+        <!-- Floating AR Elements -->
+        <div class="absolute top-20 left-10 w-16 h-16 bg-blue-500 rounded-full opacity-70 pulse-dot"></div>
+        <div class="absolute top-40 right-20 w-12 h-12 bg-green-500 rounded-full opacity-70 pulse-dot" style="animation-delay: 0.5s;"></div>
+        <div class="absolute bottom-40 left-20 w-20 h-20 bg-purple-500 rounded-full opacity-70 pulse-dot" style="animation-delay: 1s;"></div>
+    </section>
+
+    <!-- Problem Analysis Section -->
+    <section id="problem" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">📉 트렌드 분석 기반 문제 진단</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    네이버 데이터랩 3년간 분석으로 검증된 밀양시 청년 정착률 저조의 근본 원인과 혁신적 해결 방향
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+                <!-- 인구 감소 차트 -->
+                <div class="bg-gray-50 rounded-xl p-8 card-hover" data-aos="fade-right">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">밀양시 인구 감소 현황</h3>
+                    <div class="h-80">
+                        <canvas id="populationChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-sm text-gray-600">
+                        * 1960년대 25만 명에서 현재 10만 명대로 60% 감소
+                    </div>
+                </div>
+
+                <!-- 청년정책 트렌드 차트 -->
+                <div class="bg-gray-50 rounded-xl p-8 card-hover" data-aos="fade-left">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">청년정책 관심도 변화</h3>
+                    <div class="h-80">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-sm text-gray-600">
+                        * 네이버 데이터랩 검색량 분석 (2022-2024)
+                    </div>
+                </div>
+            </div>
+
+            <!-- 문제점 카드들 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-aos="fade-up">
+                <div class="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+                    <div class="text-4xl mb-4">⚠️</div>
+                    <h4 class="font-bold text-red-800 mb-2">청년정책 피로감</h4>
+                    <p class="text-sm text-red-600">검색량 60% 감소</p>
+                </div>
+                <div class="bg-orange-50 border border-orange-200 rounded-lg p-6 text-center">
+                    <div class="text-4xl mb-4">📱</div>
+                    <h4 class="font-bold text-orange-800 mb-2">모바일 중심 전환</h4>
+                    <p class="text-sm text-orange-600">70-100점 압도적 우위</p>
+                </div>
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 text-center">
+                    <div class="text-4xl mb-4">🏠</div>
+                    <h4 class="font-bold text-yellow-800 mb-2">정주환경 관심 증가</h4>
+                    <p class="text-sm text-yellow-600">3-4월 100점 급상승</p>
+                </div>
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
+                    <div class="text-4xl mb-4">💼</div>
+                    <h4 class="font-bold text-blue-800 mb-2">일자리 부족</h4>
+                    <p class="text-sm text-blue-600">청년 취업 기회 한정</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section - 대폭 확장 -->
+    <section id="solution" class="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">🚀 전국 지자체 최초 혁신 솔루션</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    AR 기반 생활환경 체험으로 청년들이 실제 살아보고 결정할 수 있는 똑똑한 정착 플랫폼
+                </p>
+                <div class="mt-8 inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full text-lg font-semibold">
+                    <span class="mr-2">💡</span>
+                    혁신 포인트: 체험 → 결정 → 정착 → 성공 → 전국 확산의 완전한 생태계
+                </div>
+            </div>
+
+            <!-- Core Innovation Overview -->
+            <div class="mb-20" data-aos="zoom-in">
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+                    <div class="ar-demo p-12 text-white text-center">
+                        <h3 class="text-4xl font-bold mb-6">🥽 전국 확산 가능한 AR 체험 생태계</h3>
+                        <p class="text-xl mb-8 max-w-3xl mx-auto">
+                            "실제로 그곳에 살고 있는 것처럼" 완전 몰입형 AR 체험으로 
+                            정착 결정의 확신도를 90% 이상 향상시키는 혁신 서비스 - 전국 226개 지자체 확산 가능
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-xl p-6">
+                                <div class="text-3xl mb-3">📱</div>
+                                <div class="font-bold mb-2">앱 설치 Zero</div>
+                                <div class="text-sm">WebXR 기술로 링크 클릭만으로 즉시 체험</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-xl p-6">
+                                <div class="text-3xl mb-3">🌟</div>
+                                <div class="font-bold mb-2">몰입도 100%</div>
+                                <div class="text-sm">실제 거주하는 것 같은 완전 시뮬레이션</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-xl p-6">
+                                <div class="text-3xl mb-3">🎯</div>
+                                <div class="font-bold mb-2">정확도 99%</div>
+                                <div class="text-sm">실시간 데이터 연동으로 정확한 정보 제공</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1. AR 체험 서비스 상세 -->
+            <div class="mb-20" data-aos="fade-up">
+                <h3 class="text-3xl font-bold text-gray-900 mb-12 text-center">🎪 1단계: 혁신적 AR 체험 서비스</h3>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                    <div>
+                        <h4 class="text-2xl font-bold text-gray-900 mb-6">📍 실시간 AR 정보 오버레이</h4>
+                        <div class="space-y-4">
+                            <div class="feature-card rounded-xl p-6">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                                        <span class="text-white text-lg">🏥</span>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-bold text-gray-900">의료시설 완전 분석</h5>
+                                        <p class="text-gray-600 text-sm">병원까지 도보시간, 진료과목, 대기시간, 응급실 현황까지 실시간 표시</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-card rounded-xl p-6">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                                        <span class="text-white text-lg">🛒</span>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-bold text-gray-900">생활편의 스마트 분석</h5>
+                                        <p class="text-gray-600 text-sm">마트 가격비교, 24시간 편의점, 택배함 위치, 세탁소까지 완벽 매핑</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="feature-card rounded-xl p-6">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
+                                        <span class="text-white text-lg">🚌</span>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-bold text-gray-900">교통 최적화 분석</h5>
+                                        <p class="text-gray-600 text-sm">실시간 버스 도착정보, 출퇴근 최적경로, 교통비 시뮬레이터</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <!-- AR 스마트폰 시연 -->
+                        <div class="relative mx-auto w-80 h-[500px] bg-gray-900 rounded-[3rem] p-6 shadow-2xl">
+                            <div class="w-full h-full bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 rounded-[2rem] relative overflow-hidden">
+                                <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                                
+                                <!-- AR 화면 콘텐츠 -->
+                                <div class="absolute inset-4 text-white">
+                                    <div class="text-center mb-4">
+                                        <div class="text-sm opacity-90">📍 밀양시 중앙로 157</div>
+                                        <div class="text-xs opacity-75">실시간 AR 생활정보</div>
+                                    </div>
+                                    
+                                    <!-- AR 정보 카드들 -->
+                                    <div class="space-y-3">
+                                        <div class="bg-white bg-opacity-20 backdrop-blur rounded-lg p-3">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center space-x-2">
+                                                    <span>🏥</span>
+                                                    <span class="text-sm">밀양시립병원</span>
+                                                </div>
+                                                <span class="text-xs">도보 3분</span>
+                                            </div>
+                                            <div class="text-xs opacity-90 mt-1">응급실 운영중 • 대기 15분</div>
+                                        </div>
+
+                                        <div class="bg-white bg-opacity-20 backdrop-blur rounded-lg p-3">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center space-x-2">
+                                                    <span>🛒</span>
+                                                    <span class="text-sm">이마트24</span>
+                                                </div>
+                                                <span class="text-xs">도보 1분</span>
+                                            </div>
+                                            <div class="text-xs opacity-90 mt-1">24시간 • 택배함 있음</div>
+                                        </div>
+
+                                        <div class="bg-white bg-opacity-20 backdrop-blur rounded-lg p-3">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center space-x-2">
+                                                    <span>🚌</span>
+                                                    <span class="text-sm">중앙로정류장</span>
+                                                </div>
+                                                <span class="text-xs">도보 30초</span>
+                                            </div>
+                                            <div class="text-xs opacity-90 mt-1">다음버스 3분 후 • 부산 1시간</div>
+                                        </div>
+
+                                        <div class="bg-white bg-opacity-20 backdrop-blur rounded-lg p-3">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center space-x-2">
+                                                    <span>☕</span>
+                                                    <span class="text-sm">스타벅스</span>
+                                                </div>
+                                                <span class="text-xs">도보 2분</span>
+                                            </div>
+                                            <div class="text-xs opacity-90 mt-1">Wi-Fi 무료 • 24시간 스터디</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 하단 액션 버튼 -->
+                                    <div class="absolute bottom-4 left-4 right-4">
+                                        <div class="bg-white bg-opacity-30 backdrop-blur rounded-full p-3 text-center">
+                                            <div class="text-sm font-semibold">💰 월 예상 생활비: 65만원</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 플로팅 AR 아이콘들 -->
+                        <div class="absolute -top-4 -right-4 w-16 h-16 bg-yellow-400 rounded-full pulse-dot flex items-center justify-center shadow-lg">
+                            <span class="text-2xl">🏥</span>
+                        </div>
+                        <div class="absolute top-32 -left-6 w-14 h-14 bg-green-400 rounded-full pulse-dot flex items-center justify-center shadow-lg" style="animation-delay: 0.5s;">
+                            <span class="text-xl">🛒</span>
+                        </div>
+                        <div class="absolute bottom-32 -right-6 w-12 h-12 bg-purple-400 rounded-full pulse-dot flex items-center justify-center shadow-lg" style="animation-delay: 1s;">
+                            <span class="text-lg">☕</span>
+                        </div>
+                        <div class="absolute bottom-12 -left-4 w-14 h-14 bg-blue-400 rounded-full pulse-dot flex items-center justify-center shadow-lg" style="animation-delay: 1.5s;">
+                            <span class="text-xl">🚌</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 혁신 기능들 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="tech-stack-card rounded-xl p-6 text-center">
+                        <div class="text-4xl mb-4">🌅</div>
+                        <h5 class="font-bold text-gray-900 mb-2">시간 여행 기능</h5>
+                        <p class="text-gray-600 text-sm">아침, 점심, 저녁, 새벽까지 24시간 동네 분위기 체험</p>
+                    </div>
+                    
+                    <div class="tech-stack-card rounded-xl p-6 text-center">
+                        <div class="text-4xl mb-4">🌸</div>
+                        <h5 class="font-bold text-gray-900 mb-2">계절 체험 모드</h5>
+                        <p class="text-gray-600 text-sm">봄 벚꽃, 여름 축제, 가을 단풍까지 사계절 미리보기</p>
+                    </div>
+
+                    <div class="tech-stack-card rounded-xl p-6 text-center">
+                        <div class="text-4xl mb-4">🎯</div>
+                        <h5 class="font-bold text-gray-900 mb-2">라이프스타일 매칭</h5>
+                        <p class="text-gray-600 text-sm">개인 성향 분석 후 최적 거주지역 AI 추천</p>
+                    </div>
+
+                    <div class="tech-stack-card rounded-xl p-6 text-center">
+                        <div class="text-4xl mb-4">👥</div>
+                        <h5 class="font-bold text-gray-900 mb-2">가상 이웃 만나기</h5>
+                        <p class="text-gray-600 text-sm">기존 정착민의 실제 생활 모습을 AR 아바타로 체험</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. 통합 정보 플랫폼 -->
+            <div class="mb-20" data-aos="fade-up">
+                <h3 class="text-3xl font-bold text-gray-900 mb-12 text-center">🌐 2단계: 스마트 통합 정보 플랫폼</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- 주거 정보 -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                        <div class="text-center mb-6">
+                            <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-white text-2xl">🏠</span>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-900">스마트 주거 분석</h4>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h5 class="font-semibold text-gray-900">실거래가 실시간 연동</h5>
+                                <p class="text-gray-600 text-sm">국토교통부 데이터 기반 정확한 시세 정보</p>
+                            </div>
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h5 class="font-semibold text-gray-900">거주자 만족도 평가</h5>
+                                <p class="text-gray-600 text-sm">실제 입주민들의 솔직한 후기와 평점</p>
+                            </div>
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h5 class="font-semibold text-gray-900">생활비 시뮬레이터</h5>
+                                <p class="text-gray-600 text-sm">개인 소비패턴 반영한 맞춤 예산 계산</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 일자리 정보 -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                        <div class="text-center mb-6">
+                            <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-white text-2xl">💼</span>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-900">맞춤형 일자리 매칭</h4>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-green-500 pl-4">
+                                <h5 class="font-semibold text-gray-900">실시간 구인정보</h5>
+                                <p class="text-gray-600 text-sm">워크넷, 사람인 등 주요 채용사이트 통합</p>
+                            </div>
+                            <div class="border-l-4 border-green-500 pl-4">
+                                <h5 class="font-semibold text-gray-900">나노산업단지 특화</h5>
+                                <p class="text-gray-600 text-sm">밀양 나노산업단지 입주기업 우선 노출</p>
+                            </div>
+                            <div class="border-l-4 border-green-500 pl-4">
+                                <h5 class="font-semibold text-gray-900">원격근무 필터링</h5>
+                                <p class="text-gray-600 text-sm">WFH 가능 일자리 별도 카테고리 운영</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 생활 정보 -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8">
+                        <div class="text-center mb-6">
+                            <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-white text-2xl">🌟</span>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-900">생활 편의 서비스</h4>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-purple-500 pl-4">
+                                <h5 class="font-semibold text-gray-900">문화·여가 가이드</h5>
+                                <p class="text-gray-600 text-sm">공연, 전시, 축제 일정과 할인 혜택</p>
+                            </div>
+                            <div class="border-l-4 border-purple-500 pl-4">
+                                <h5 class="font-semibold text-gray-900">공공서비스 안내</h5>
+                                <p class="text-gray-600 text-sm">도서관, 체육시설, 복지센터 이용 정보</p>
+                            </div>
+                            <div class="border-l-4 border-purple-500 pl-4">
+                                <h5 class="font-semibold text-gray-900">응급상황 대응</h5>
+                                <p class="text-gray-600 text-sm">야간 응급실, 약국, 24시간 서비스 정보</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 멘토링 생태계 -->
+            <div class="mb-20" data-aos="fade-up">
+                <h3 class="text-3xl font-bold text-gray-900 mb-12 text-center">🤝 3단계: AI 기반 멘토링 생태계</h3>
+                
+                <div class="bg-white rounded-3xl shadow-2xl p-12">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h4 class="text-2xl font-bold text-gray-900 mb-6">🧠 똑똑한 매칭 알고리즘</h4>
+                            <div class="space-y-6">
+                                <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6">
+                                    <h5 class="font-bold text-gray-900 mb-3">🔍 정밀 분석 매칭</h5>
+                                    <p class="text-gray-700 mb-4">연령대, 직업군, 취미, 성격, 가족구성까지 30여 가지 요소를 종합 분석</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">성격 유형</span>
+                                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs">라이프스타일</span>
+                                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">출신 지역</span>
+                                        <span class="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-xs">취미/관심사</span>
+                                    </div>
+                                </div>
+
+                                <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-6">
+                                    <h5 class="font-bold text-gray-900 mb-3">📚 단계별 가이드 시스템</h5>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-sm">1</div>
+                                            <span class="text-gray-700">이주 준비: 집 찾기, 이사 체크리스트</span>
+                                        </div>
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">2</div>
+                                            <span class="text-gray-700">정착 초기: 주민등록, 생활 인프라 등록</span>
+                                        </div>
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm">3</div>
+                                            <span class="text-gray-700">커뮤니티 참여: 지역 모임, 인맥 형성</span>
+                                        </div>
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-sm">4</div>
+                                            <span class="text-gray-700">완전 정착: 지역 발전 참여, 후배 멘토링</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <!-- 멘토링 매칭 시뮬레이션 -->
+                            <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl p-8 text-white">
+                                <h5 class="text-xl font-bold mb-6 text-center">🎯 실시간 멘토 매칭</h5>
+                                
+                                <div class="space-y-4">
+                                    <div class="bg-white bg-opacity-20 backdrop-blur rounded-lg p-4">
+                                        <div class="flex items-center space-x-3 mb-2">
+                                            <div class="w-10 h-10 bg-white bg-opacity-30 rounded-full flex items-center justify-center">
+                                                <span class="text-lg">👨‍💼</span>
+                                            </div>
+                                            <div>
+                                                <div class="font-semibold">김멘토 (32세, IT 개발자)</div>
+                                                <div class="text-sm opacity-90">정착 3년차 • 매칭도 98%</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-sm opacity-90">
+                                            "서울에서 이주한 개발자입니다. 원격근무 노하우와 밀양 생활의 장점을 알려드릴게요!"
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-white bg-opacity-20 backdrop-blur rounded-lg p-4">
+                                        <div class="flex items-center space-x-3 mb-2">
+                                            <div class="w-10 h-10 bg-white bg-opacity-30 rounded-full flex items-center justify-center">
+                                                <span class="text-lg">👩‍🎨</span>
+                                            </div>
+                                            <div>
+                                                <div class="font-semibold">이멘토 (29세, 디자이너)</div>
+                                                <div class="text-sm opacity-90">정착 2년차 • 매칭도 95%</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-sm opacity-90">
+                                            "부산에서 온 디자이너예요. 문화생활과 카페 맛집 정보가 궁금하다면 연락주세요!"
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-6 text-center">
+                                    <button class="bg-white text-purple-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300">
+                                        💬 멘토와 채팅 시작하기
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 커뮤니티 활동 -->
+                            <div class="bg-white border border-gray-200 rounded-2xl p-6">
+                                <h5 class="font-bold text-gray-900 mb-4">🌐 활발한 커뮤니티</h5>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                        <span class="text-gray-700">📚 청년 독서모임</span>
+                                        <span class="text-sm text-gray-500">매주 토요일</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                        <span class="text-gray-700">🏃‍♂️ 밀양 러닝 크루</span>
+                                        <span class="text-sm text-gray-500">매주 일요일</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                        <span class="text-gray-700">🍺 신규 정착민 환영회</span>
+                                        <span class="text-sm text-gray-500">매월 첫째 금요일</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-2">
+                                        <span class="text-gray-700">💻 IT 개발자 모임</span>
+                                        <span class="text-sm text-gray-500">매월 둘째 토요일</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 차별화 포인트 -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8" data-aos="fade-up">
+                <div class="bg-white rounded-2xl p-8 text-center shadow-xl card-hover">
+                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-white text-3xl">🥇</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-4">전국 최초 혁신</h4>
+                    <p class="text-gray-600 mb-4">지자체 최초 AR 기반 정착 지원 서비스로 전국 벤치마킹 대상</p>
+                    <div class="bg-blue-50 rounded-lg p-3">
+                        <span class="text-blue-800 font-semibold text-sm">💡 혁신도: 99/100점</span>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 text-center shadow-xl card-hover">
+                    <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-white text-3xl">⚡</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-4">즉시 접근 가능</h4>
+                    <p class="text-gray-600 mb-4">앱 설치 없이 링크 클릭만으로 바로 체험하는 WebXR 기술</p>
+                    <div class="bg-green-50 rounded-lg p-3">
+                        <span class="text-green-800 font-semibold text-sm">🚀 접근성: 100/100점</span>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 text-center shadow-xl card-hover">
+                    <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-white text-3xl">🎯</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-4">완벽한 맞춤화</h4>
+                    <p class="text-gray-600 mb-4">AI 기반 개인 라이프스타일 분석으로 최적 정착지 추천</p>
+                    <div class="bg-purple-50 rounded-lg p-3">
+                        <span class="text-purple-800 font-semibold text-sm">🎯 정확도: 98/100점</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 text-center shadow-xl card-hover">
+                    <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-white text-3xl">💰</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-4">확장 가능한 수익</h4>
+                    <p class="text-gray-600 mb-4">전국 226개 지자체 라이선스로 연간 45억원 잠재 시장</p>
+                    <div class="bg-orange-50 rounded-lg p-3">
+                        <span class="text-orange-800 font-semibold text-sm">📈 확장성: 226개 지자체</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="technology" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">⚙️ 전국 확산 가능한 검증된 기술 스택</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    안정성과 확장성을 모두 확보한 최신 기술 조합으로 리스크 없는 구현 및 전국 226개 지자체 확산 준비
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="bg-blue-50 rounded-xl p-6 text-center card-hover" data-aos="fade-up" data-aos-delay="0">
+                    <div class="text-4xl mb-4">⚛️</div>
+                    <h4 class="font-bold text-blue-800 mb-2">React.js + PWA</h4>
+                    <p class="text-sm text-blue-600">네이티브 앱 수준 성능</p>
+                </div>
+                <div class="bg-green-50 rounded-xl p-6 text-center card-hover" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl mb-4">🥽</div>
+                    <h4 class="font-bold text-green-800 mb-2">WebXR + Three.js</h4>
+                    <p class="text-sm text-green-600">브라우저 기반 AR</p>
+                </div>
+                <div class="bg-purple-50 rounded-xl p-6 text-center card-hover" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl mb-4">🗺️</div>
+                    <h4 class="font-bold text-purple-800 mb-2">카카오맵 API</h4>
+                    <p class="text-sm text-purple-600">99% 이상 정확도</p>
+                </div>
+                <div class="bg-orange-50 rounded-xl p-6 text-center card-hover" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl mb-4">🤖</div>
+                    <h4 class="font-bold text-orange-800 mb-2">AI 추천 엔진</h4>
+                    <p class="text-sm text-orange-600">개인 맞춤 최적화</p>
+                </div>
+            </div>
+
+            <!-- 구현 타임라인 -->
+            <div class="bg-gray-50 rounded-2xl p-8" data-aos="fade-up">
+                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">📅 4단계 구현 계획</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">1</div>
+                        <h4 class="font-bold text-gray-900 mb-2">MVP 개발</h4>
+                        <p class="text-sm text-gray-600 mb-2">3개월</p>
+                        <p class="text-xs text-gray-500">기본 플랫폼 구축 및 핵심 AR 기능</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">2</div>
+                        <h4 class="font-bold text-gray-900 mb-2">베타 서비스</h4>
+                        <p class="text-sm text-gray-600 mb-2">3개월</p>
+                        <p class="text-xs text-gray-500">전체 지역 확장 및 사용자 테스트</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">3</div>
+                        <h4 class="font-bold text-gray-900 mb-2">정식 런칭</h4>
+                        <p class="text-sm text-gray-600 mb-2">3개월</p>
+                        <p class="text-xs text-gray-500">완전 기능 통합 및 마케팅 시작</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">4</div>
+                        <h4 class="font-bold text-gray-900 mb-2">전국 확산 및 수익화</h4>
+                        <p class="text-sm text-gray-600 mb-2">6개월</p>
+                        <p class="text-xs text-gray-500">226개 지자체 라이선스 및 다각화된 수익 모델 가동</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact & ROI Section -->
+    <section id="impact" class="py-20 bg-gradient-to-br from-green-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">💰 투자 효과 및 전국 확산 수익 모델</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    구체적인 수치로 검증된 투자 가치와 전국 226개 지자체 확산을 통한 지속가능한 수익 모델
+                </p>
+            </div>
+
+            <!-- ROI 계산기 -->
+            <div class="bg-white rounded-2xl shadow-2xl p-8 mb-16" data-aos="zoom-in">
+                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">📊 ROI 계산기</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">연간 청년 유입 목표</label>
+                                <input type="range" id="youthInflux" min="100" max="500" value="200" class="w-full">
+                                <div class="flex justify-between text-sm text-gray-500">
+                                    <span>100명</span>
+                                    <span id="youthInfluxValue" class="font-bold text-blue-600">200명</span>
+                                    <span>500명</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">정착률 개선 목표 (30% → 60%)</label>
+                                <input type="range" id="settlementRate" min="30" max="80" value="60" class="w-full">
+                                <div class="flex justify-between text-sm text-gray-500">
+                                    <span>30%</span>
+                                    <span id="settlementRateValue" class="font-bold text-green-600">60%</span>
+                                    <span>80%</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">1인당 연간 지방세 기여</label>
+                                <input type="range" id="taxContribution" min="100" max="300" value="150" class="w-full">
+                                <div class="flex justify-between text-sm text-gray-500">
+                                    <span>100만원</span>
+                                    <span id="taxContributionValue" class="font-bold text-purple-600">150만원</span>
+                                    <span>300만원</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h4 class="text-xl font-bold text-gray-900 mb-6">💡 투자 수익 분석</h4>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                                <span class="text-gray-700">초기 투자 비용</span>
+                                <span class="font-bold text-red-600">1.1억원</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                                <span class="text-gray-700">연간 세수 증대</span>
+                                <span id="annualRevenue" class="font-bold text-green-600">3.0억원</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                                <span class="text-gray-700">투자 회수 기간</span>
+                                <span id="paybackPeriod" class="font-bold text-blue-600">3년</span>
+                            </div>
+                            <div class="flex justify-between items-center py-3 bg-green-100 rounded-lg px-4">
+                                <span class="text-green-800 font-bold">3년 누적 수익</span>
+                                <span id="totalProfit" class="font-bold text-green-800 text-xl">7.9억원</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 기대 효과 카운터 -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8" data-aos="fade-up">
+                <div class="bg-white rounded-xl p-8 text-center shadow-lg card-hover">
+                    <div class="text-4xl font-bold text-blue-600 mb-2" data-counter="200">0</div>
+                    <div class="text-gray-600">연간 청년 유입</div>
+                    <div class="text-sm text-gray-500 mt-1">명</div>
+                </div>
+                <div class="bg-white rounded-xl p-8 text-center shadow-lg card-hover">
+                    <div class="text-4xl font-bold text-green-600 mb-2" data-counter="30">0</div>
+                    <div class="text-gray-600">정착률 개선</div>
+                    <div class="text-sm text-gray-500 mt-1">%포인트 (30%→60%)</div>
+                </div>
+                <div class="bg-white rounded-xl p-8 text-center shadow-lg card-hover">
+                    <div class="text-4xl font-bold text-purple-600 mb-2" data-counter="45">0</div>
+                    <div class="text-gray-600">전국 확산 잠재 시장</div>
+                    <div class="text-sm text-gray-500 mt-1">억원 (라이선스 모델)</div>
+                </div>
+                <div class="bg-white rounded-xl p-8 text-center shadow-lg card-hover">
+                    <div class="text-4xl font-bold text-orange-600 mb-2" data-counter="36">0</div>
+                    <div class="text-gray-600">투자 회수 기간</div>
+                    <div class="text-sm text-gray-500 mt-1">개월</div>
+                </div>
+            </div>
+
+            <!-- 수익 모델 차트 -->
+            <div class="mt-16 bg-white rounded-2xl shadow-xl p-8" data-aos="fade-up">
+                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">📈 지속가능한 수익 모델</h3>
+                <div class="h-96">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 장기 수익 모델 상세 -->
+            <div class="mt-16 bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8" data-aos="fade-up">
+                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">🚀 전국 확산 기반 장기 수익 모델</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                    <!-- 1. 타 지자체 라이선스 -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="text-center mb-4">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <span class="text-white text-xl">🏛️</span>
+                            </div>
+                            <h4 class="font-bold text-gray-900">지자체 라이선스</h4>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">전국 기초지자체</span>
+                                <span class="font-semibold">226개</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">연간 라이선스비</span>
+                                <span class="font-semibold">2,000만원</span>
+                            </div>
+                            <div class="border-t pt-2 mt-2">
+                                <div class="flex justify-between">
+                                    <span class="text-blue-600 font-bold">잠재 시장 규모</span>
+                                    <span class="text-blue-600 font-bold">45억원</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. 플랫폼 중개 수수료 -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="text-center mb-4">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <span class="text-white text-xl">💰</span>
+                            </div>
+                            <h4 class="font-bold text-gray-900">중개 수수료</h4>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">부동산 거래</span>
+                                <span class="font-semibold">1% 수수료</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">일자리 매칭</span>
+                                <span class="font-semibold">성공 수수료</span>
+                            </div>
+                            <div class="border-t pt-2 mt-2">
+                                <div class="flex justify-between">
+                                    <span class="text-green-600 font-bold">연간 목표</span>
+                                    <span class="text-green-600 font-bold">5억원</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. 지역 상권 광고 -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="text-center mb-4">
+                            <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <span class="text-white text-xl">📢</span>
+                            </div>
+                            <h4 class="font-bold text-gray-900">제휴 광고</h4>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">식당·카페</span>
+                                <span class="font-semibold">월 광고비</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">마트·편의점</span>
+                                <span class="font-semibold">제휴 수수료</span>
+                            </div>
+                            <div class="border-t pt-2 mt-2">
+                                <div class="flex justify-between">
+                                    <span class="text-purple-600 font-bold">연간 목표</span>
+                                    <span class="text-purple-600 font-bold">2억원</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. 프리미엄 서비스 -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="text-center mb-4">
+                            <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <span class="text-white text-xl">⭐</span>
+                            </div>
+                            <h4 class="font-bold text-gray-900">프리미엄 서비스</h4>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">맞춤 컨설팅</span>
+                                <span class="font-semibold">개별 상담</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">VIP 멘토링</span>
+                                <span class="font-semibold">1:1 전담</span>
+                            </div>
+                            <div class="border-t pt-2 mt-2">
+                                <div class="flex justify-between">
+                                    <span class="text-orange-600 font-bold">연간 목표</span>
+                                    <span class="text-orange-600 font-bold">1억원</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 수익 모델 요약 -->
+                <div class="bg-white rounded-xl p-8 shadow-lg">
+                    <h4 class="text-xl font-bold text-gray-900 mb-6 text-center">💡 단계별 수익 확산 전략</h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- 1단계: 밀양 검증 -->
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-white text-2xl">🎯</span>
+                            </div>
+                            <h5 class="font-bold text-gray-900 mb-3">1단계: 밀양 성공 모델 구축</h5>
+                            <div class="space-y-2 text-sm">
+                                <div class="bg-blue-50 rounded-lg p-3">
+                                    <div class="font-semibold text-blue-800">연간 200명 청년 유입</div>
+                                    <div class="text-blue-600">정착률 30% → 60% 개선</div>
+                                </div>
+                                <div class="text-gray-600">검증된 성공 사례 확보</div>
+                            </div>
+                        </div>
+
+                        <!-- 2단계: 권역별 확산 -->
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-white text-2xl">🌍</span>
+                            </div>
+                            <h5 class="font-bold text-gray-900 mb-3">2단계: 권역별 라이선스 확산</h5>
+                            <div class="space-y-2 text-sm">
+                                <div class="bg-green-50 rounded-lg p-3">
+                                    <div class="font-semibold text-green-800">경남권 → 전국 확산</div>
+                                    <div class="text-green-600">연 50개 지자체 목표</div>
+                                </div>
+                                <div class="text-gray-600">벤치마킹 → 라이선스 전환</div>
+                            </div>
+                        </div>
+
+                        <!-- 3단계: 플랫폼 생태계 -->
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-white text-2xl">🚀</span>
+                            </div>
+                            <h5 class="font-bold text-gray-900 mb-3">3단계: 종합 플랫폼 완성</h5>
+                            <div class="space-y-2 text-sm">
+                                <div class="bg-purple-50 rounded-lg p-3">
+                                    <div class="font-semibold text-purple-800">전국 생태계 구축</div>
+                                    <div class="text-purple-600">다양한 수익원 확보</div>
+                                </div>
+                                <div class="text-gray-600">지속가능한 비즈니스 모델</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 총 수익 예상 -->
+                    <div class="mt-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-6 text-white text-center">
+                        <h5 class="text-xl font-bold mb-4">🎯 5년 후 연간 총 수익 목표</h5>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                            <div>
+                                <div class="text-2xl font-bold">10억원</div>
+                                <div class="text-sm opacity-90">라이선스</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold">5억원</div>
+                                <div class="text-sm opacity-90">중개수수료</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold">3억원</div>
+                                <div class="text-sm opacity-90">제휴광고</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold">2억원</div>
+                                <div class="text-sm opacity-90">프리미엄</div>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-white border-opacity-30">
+                            <div class="text-3xl font-bold">총 20억원</div>
+                            <div class="text-lg opacity-90">연간 수익 목표 (5년 후)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 정부 지원 연계 -->
+                <div class="mt-8 bg-white rounded-xl p-6 shadow-lg">
+                    <h4 class="text-lg font-bold text-gray-900 mb-4 text-center">🏛️ 정부 지원 사업 연계 가능성</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-800 mb-2">스마트시티 국가시범도시</h5>
+                            <p class="text-sm text-blue-600">AR/VR 기술 활용 도시 서비스 연계</p>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h5 class="font-semibold text-green-800 mb-2">디지털 뉴딜 정책</h5>
+                            <p class="text-sm text-green-600">디지털 전환 우수사례 지원금</p>
+                        </div>
+                        <div class="bg-purple-50 rounded-lg p-4">
+                            <h5 class="font-semibold text-purple-800 mb-2">지역균형뉴딜</h5>
+                            <p class="text-sm text-purple-600">인구 감소 지역 특별 지원</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trend Analysis Link Section -->
+    <section id="trend-analysis" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">📊 네이버 트렌드 분석 보고서</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    3년간의 데이터 분석을 통해 도출한 청년정책의 새로운 방향성과 전국 확산 가능성 검증
+                </p>
+            </div>
+
+            <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8" data-aos="zoom-in">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-900 mb-6">🔍 핵심 인사이트</h3>
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                    <span class="text-white text-xs">!</span>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-gray-900">청년정책 피로감 심화</span>
+                                    <p class="text-gray-600 text-sm">검색량 2022년 80점 → 2024년 20점으로 급감</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                    <span class="text-white text-xs">📱</span>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-gray-900">모바일 압도적 우위</span>
+                                    <p class="text-gray-600 text-sm">PC 대비 70-100점으로 모바일 중심 정보 소비</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                    <span class="text-white text-xs">🏠</span>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-gray-900">정주환경 관심도 급상승</span>
+                                    <p class="text-gray-600 text-sm">3-4월 100점 달성, 이주 결정 시기와 일치</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="trend_analysis_report.html" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105">
+                            📈 상세 보고서 보기
+                        </a>
+                    </div>
+                    <div class="relative">
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <div class="h-64">
+                                <canvas id="trendSummaryChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 hero-bg text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-40"></div>
+        <div class="relative z-10 max-w-4xl mx-auto text-center px-4" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                🏆 밀양시가 전국 지자체 최초<br>AR 기반 정착 지원의 새로운 표준을 제시합니다
+            </h2>
+            <p class="text-xl mb-8 text-gray-200">
+                청년이 실제 살아보고 결정하는 똑똑한 정착 플랫폼으로 전국 226개 지자체 확산 가능한 혁신 모델
+            </p>
+            
+            <!-- 핵심 가치 체크리스트 -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-lg p-6">
+                    <div class="text-2xl mb-2">✅</div>
+                    <div class="font-bold">전국 지자체 최초</div>
+                    <div class="text-sm text-gray-300">AR 기반 체험형 정착 지원</div>
+                </div>
+                <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-lg p-6">
+                    <div class="text-2xl mb-2">✅</div>
+                    <div class="font-bold">실현 가능성</div>
+                    <div class="text-sm text-gray-300">검증된 기술과 합리적 예산</div>
+                </div>
+                <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-lg p-6">
+                    <div class="text-2xl mb-2">✅</div>
+                    <div class="font-bold">지속가능한 수익</div>
+                    <div class="text-sm text-gray-300">전국 확산 가능 모델</div>
+                </div>
+                <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-lg p-6">
+                    <div class="text-2xl mb-2">✅</div>
+                    <div class="font-bold">45억원 잠재 시장</div>
+                    <div class="text-sm text-gray-300">226개 지자체 라이선스</div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <button onclick="downloadProposal()" class="bg-orange-500 hover:bg-orange-600 text-white px-12 py-4 rounded-lg font-bold text-lg transition duration-300 transform hover:scale-105 block w-full md:w-auto md:inline-block">
+                    📄 제안서 PDF 다운로드
+                </button>
+                <div class="text-sm text-gray-300">
+                    * 완전한 제안서는 PDF로 제공됩니다
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 gradient-text">제안자 정보</h3>
+                    <div class="space-y-2 text-gray-400">
+                        <p>성명: 박용환</p>
+                        <p>소속: 크리에이티브 넥서스</p>
+                        <p>주소: 경기도 용인시 수지구 성복2로 126</p>
+                        <p>연락처: 010-7939-3123</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">제안서 정보</h3>
+                    <div class="space-y-2 text-gray-400">
+                        <p>제출일: 2025년 6월 5일</p>
+                        <p>공모전: 2025년 밀양시 상반기 정책제안</p>
+                        <p>분야: 인구·청년 정책</p>
+                        <p>유형: 테마형 공모전</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">기술 스택 및 확장성</h3>
+                    <div class="space-y-2 text-gray-400">
+                        <p>Frontend: React.js + PWA</p>
+                        <p>AR Engine: WebXR + Three.js</p>
+                        <p>Maps: 카카오맵 API</p>
+                        <p>AI: 개인 맞춤 추천 알고리즘</p>
+                        <p>확장성: 전국 226개 지자체 적용 가능</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 AR 기반 생활환경 체험 서비스 제안서. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Chart.js 로딩 확인
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded');
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js is not loaded');
+                return;
+            }
+            console.log('Chart.js loaded successfully:', Chart.version);
+            
+            // AOS 초기화
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 100
+            });
+
+            // 타이핑 효과
+            const typed = new Typed('#typed-title', {
+                strings: [
+                    'AR 기반 생활환경 체험 서비스',
+                    '청년이 실제 살아보고 결정하는',
+                    '똑똑한 정착 플랫폼'
+                ],
+                typeSpeed: 50,
+                backSpeed: 30,
+                backDelay: 2000,
+                loop: true
+            });
+        });
+
+        // 스무스 스크롤
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // 모바일 메뉴 토글
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            // 모바일 메뉴 구현 (간단한 버전)
+            alert('모바일 메뉴 기능은 실제 구현에서 완성됩니다.');
+        });
+
+        // 카운터 애니메이션
+        function animateCounters() {
+            const counters = document.querySelectorAll('[data-counter]');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-counter'));
+                const increment = target / 50;
+                let current = 0;
+                
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.ceil(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+                
+                updateCounter();
+            });
+        }
+
+        // Intersection Observer로 카운터 트리거
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.disconnect();
+                }
+            });
+        }, observerOptions);
+
+        if (document.getElementById('impact')) {
+            observer.observe(document.getElementById('impact'));
+        }
+
+        // PDF 다운로드 기능
+        function downloadProposal() {
+            alert('📄 제안서 PDF가 다운로드됩니다.\n\n실제 구현에서는 완전한 제안서 PDF 파일이 제공됩니다.');
+        }
+    </script>
+
+    <!-- Charts 스크립트 로드 -->
+    <script src="charts.js"></script>
+</body>
+</html>
