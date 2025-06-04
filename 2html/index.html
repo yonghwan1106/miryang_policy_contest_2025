@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>밀양 청년 Re-Turn 브릿지 | 청년이 돌아오는 밀양, 꿈이 시작되는 공간</title>
+    <meta name="description" content="밀양시 정책제안 공모전 - 청년 정착 지원 종합 솔루션">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/landing.css">
+    
+    <!-- 외부 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="index-page">
+    <!-- 헤더 -->
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i data-lucide="home"></i>
+                </div>
+                밀양 Re-Turn 브릿지
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="#hero" class="nav-link active">홈</a></li>
+                <li><a href="background.html" class="nav-link">배경·문제점</a></li>
+                <li><a href="solution.html" class="nav-link">개선방안</a></li>
+                <li><a href="budget.html" class="nav-link">사업예산</a></li>
+                <li><a href="effects.html" class="nav-link">기대효과</a></li>
+                <li><a href="benchmarking.html" class="nav-link">벤치마킹</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 스크롤 인디케이터 -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- Hero 섹션 -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="animate-fadeInUp">청년이 돌아오는 밀양,<br>꿈이 시작되는 공간</h1>
+                <p class="hero-subtitle animate-fadeInUp">밀양 청년 Re-Turn 브릿지로 지역 청년 생태계를 혁신하고<br>지속 가능한 청년 정착 모델을 구축합니다</p>
+                
+                <div class="hero-stats">
+                    <div class="hero-stat animate-fadeInUp">
+                        <span class="hero-stat-number text-number" data-target="50">0</span>
+                        <div class="hero-stat-label">억원 투자</div>
+                    </div>
+                    <div class="hero-stat animate-fadeInUp">
+                        <span class="hero-stat-number text-number" data-target="500">0</span>
+                        <div class="hero-stat-label">명 청년 참여</div>
+                    </div>
+                    <div class="hero-stat animate-fadeInUp">
+                        <span class="hero-stat-number text-number" data-target="85">0</span>
+                        <div class="hero-stat-label">% 정착률 목표</div>
+                    </div>
+                </div>
+                
+                <div class="hero-cta animate-fadeInUp">
+                    <a href="#problem-overview" class="btn btn-primary btn-large">
+                        <i data-lucide="arrow-down"></i>
+                        제안서 전체보기
+                    </a>
+                    <a href="background.html" class="btn btn-outline btn-large">
+                        <i data-lucide="file-text"></i>
+                        상세 내용
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="hero-chart">
+                    <canvas id="heroChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 문제 요약 섹션 -->
+    <section class="problem-overview" id="problem-overview">
+        <div class="container">
+            <div class="problem-title">
+                <h2>밀양시 청년 현황</h2>
+                <p class="lead">데이터로 보는 밀양시 청년 문제의 심각성</p>
+            </div>
+            
+            <div class="problem-stats">
+                <div class="problem-stat animate-fadeInUp" data-delay="0.1s">
+                    <div class="problem-stat-visual">
+                        <div class="problem-stat-icon trending-down">
+                            <svg viewBox="0 0 100 100" class="stat-svg">
+                                <!-- 하락 그래프 -->
+                                <path d="M10,30 L30,45 L50,60 L70,75 L90,85" stroke="#FF6B35" stroke-width="4" fill="none"/>
+                                <!-- 데이터 포인트들 -->
+                                <circle cx="10" cy="30" r="3" fill="#FF6B35"/>
+                                <circle cx="30" cy="45" r="3" fill="#FF6B35"/>
+                                <circle cx="50" cy="60" r="3" fill="#FF6B35"/>
+                                <circle cx="70" cy="75" r="3" fill="#FF6B35"/>
+                                <circle cx="90" cy="85" r="3" fill="#FF6B35"/>
+                                <!-- 하락 화살표 -->
+                                <path d="M80,75 L90,85 L80,85 Z" fill="#FF6B35"/>
+                            </svg>
+                        </div>
+                        <div class="stat-background-pattern">
+                            <div class="pattern-dots"></div>
+                        </div>
+                    </div>
+                    <span class="problem-stat-number text-number" data-target="4.2">0</span>
+                    <div class="problem-stat-label">인구 감소율 (%)</div>
+                    <div class="problem-stat-desc">최근 5년간 지속적 감소</div>
+                </div>
+                
+                <div class="problem-stat animate-fadeInUp" data-delay="0.2s">
+                    <div class="problem-stat-visual">
+                        <div class="problem-stat-icon people-leaving">
+                            <svg viewBox="0 0 100 100" class="stat-svg">
+                                <!-- 사람들이 떠나는 모습 -->
+                                <g class="person person-1">
+                                    <circle cx="20" cy="25" r="8" fill="#E74C3C"/>
+                                    <rect x="15" y="35" width="10" height="15" fill="#E74C3C" rx="2"/>
+                                </g>
+                                <g class="person person-2">
+                                    <circle cx="40" cy="30" r="8" fill="#E74C3C"/>
+                                    <rect x="35" y="40" width="10" height="15" fill="#E74C3C" rx="2"/>
+                                </g>
+                                <g class="person person-3">
+                                    <circle cx="60" cy="35" r="8" fill="#E74C3C"/>
+                                    <rect x="55" y="45" width="10" height="15" fill="#E74C3C" rx="2"/>
+                                </g>
+                                <!-- 이동 경로 -->
+                                <path d="M25,40 Q50,20 75,30" stroke="#E74C3C" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                                <!-- 출구 화살표 -->
+                                <path d="M75,25 L85,30 L75,35 Z" fill="#E74C3C"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="problem-stat-number text-number" data-target="2847">0</span>
+                    <div class="problem-stat-label">청년 유출 인구</div>
+                    <div class="problem-stat-desc">2023년 기준 순유출</div>
+                </div>
+                
+                <div class="problem-stat animate-fadeInUp" data-delay="0.3s">
+                    <div class="problem-stat-visual">
+                        <div class="problem-stat-icon birth-rate">
+                            <svg viewBox="0 0 100 100" class="stat-svg">
+                                <!-- 아기 아이콘과 하락 트렌드 -->
+                                <circle cx="50" cy="35" r="12" fill="#F39C12"/>
+                                <circle cx="45" cy="32" r="2" fill="white"/>
+                                <circle cx="55" cy="32" r="2" fill="white"/>
+                                <path d="M47,40 Q50,42 53,40" stroke="white" stroke-width="2" fill="none"/>
+                                <!-- 출생률 그래프 -->
+                                <rect x="20" y="70" width="8" height="20" fill="#F39C12" opacity="0.3"/>
+                                <rect x="32" y="75" width="8" height="15" fill="#F39C12" opacity="0.5"/>
+                                <rect x="44" y="80" width="8" height="10" fill="#F39C12" opacity="0.7"/>
+                                <rect x="56" y="85" width="8" height="5" fill="#F39C12"/>
+                                <rect x="68" y="87" width="8" height="3" fill="#F39C12"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="problem-stat-number text-number" data-target="612">0</span>
+                    <div class="problem-stat-label">연간 출생아 수</div>
+                    <div class="problem-stat-desc">역대 최저 수준</div>
+                </div>
+                
+                <div class="problem-stat animate-fadeInUp" data-delay="0.4s">
+                    <div class="problem-stat-visual">
+                        <div class="problem-stat-icon unemployment">
+                            <svg viewBox="0 0 100 100" class="stat-svg">
+                                <!-- 실업 상황을 나타내는 그래픽 -->
+                                <rect x="20" y="60" width="60" height="25" fill="#9B59B6" opacity="0.3" rx="5"/>
+                                <text x="50" y="75" text-anchor="middle" fill="#9B59B6" font-size="8">구직중</text>
+                                <!-- 사람 실루엣 -->
+                                <circle cx="50" cy="30" r="10" fill="#9B59B6"/>
+                                <rect x="43" y="42" width="14" height="18" fill="#9B59B6" rx="3"/>
+                                <!-- 돋보기 (구직 의미) -->
+                                <circle cx="70" cy="25" r="8" stroke="#9B59B6" stroke-width="3" fill="none"/>
+                                <line x1="76" y1="31" x2="82" y2="37" stroke="#9B59B6" stroke-width="3"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="problem-stat-number text-number" data-target="23.5">0</span>
+                    <div class="problem-stat-label">청년 실업률 (%)</div>
+                    <div class="problem-stat-desc">전국 평균보다 높음</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 솔루션 개요 -->
+    <section class="solution-overview">
+        <div class="container">
+            <div class="solution-title">
+                <h2>3단계 솔루션 접근법</h2>
+                <p class="lead">교육-공간-정착의 통합적 지원 시스템</p>
+            </div>
+            
+            <div class="solution-steps">
+                <div class="solution-step animate-fadeInUp">
+                    <div class="step-number">1</div>
+                    <div class="step-visual-container">
+                        <div class="step-icon academy-icon">
+                            <svg viewBox="0 0 120 120" class="solution-svg">
+                                <!-- 졸업모자 -->
+                                <rect x="30" y="45" width="60" height="8" fill="#4CAF50" rx="4"/>
+                                <polygon points="60,35 70,45 50,45" fill="#4CAF50"/>
+                                <!-- 책들 -->
+                                <rect x="20" y="55" width="25" height="30" fill="#2E5BBA" rx="2"/>
+                                <rect x="50" y="60" width="25" height="25" fill="#FF6B35" rx="2"/>
+                                <rect x="80" y="58" width="25" height="27" fill="#4CAF50" rx="2"/>
+                                <!-- 학습 진행 라인 -->
+                                <path d="M15,95 Q60,85 105,95" stroke="#FFD700" stroke-width="3" fill="none" stroke-dasharray="5,5"/>
+                                <!-- 성취 별들 -->
+                                <g class="achievement-stars">
+                                    <polygon points="25,100 27,106 33,106 28,110 30,116 25,112 20,116 22,110 17,106 23,106" fill="#FFD700"/>
+                                    <polygon points="60,90 62,96 68,96 63,100 65,106 60,102 55,106 57,100 52,96 58,96" fill="#FFD700"/>
+                                    <polygon points="95,100 97,106 103,106 98,110 100,116 95,112 90,116 92,110 87,106 93,106" fill="#FFD700"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="step-progress-ring">
+                            <svg class="progress-ring" width="140" height="140">
+                                <circle cx="70" cy="70" r="65" stroke="rgba(76, 175, 80, 0.2)" stroke-width="6" fill="none"/>
+                                <circle cx="70" cy="70" r="65" stroke="#4CAF50" stroke-width="6" fill="none" 
+                                        stroke-dasharray="408" stroke-dashoffset="408" class="progress-circle academy-progress"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="step-title">Re-Turn 아카데미</h3>
+                    <p class="step-description">밀양 특화 직업교육과 창업 지원을 통해 청년들의 역량을 강화하고 지역 맞춤형 인재를 양성합니다.</p>
+                    <ul class="step-features">
+                        <li>6개월 집중 교육 프로그램</li>
+                        <li>지역 산업 맞춤형 커리큘럼</li>
+                        <li>멘토링 및 네트워킹 지원</li>
+                        <li>창업 인큐베이팅 프로그램</li>
+                    </ul>
+                </div>
+                
+                <div class="solution-step animate-fadeInUp">
+                    <div class="step-number">2</div>
+                    <div class="step-visual-container">
+                        <div class="step-icon space-icon">
+                            <svg viewBox="0 0 120 120" class="solution-svg">
+                                <!-- 건물 외관 -->
+                                <rect x="20" y="30" width="80" height="70" fill="#2E5BBA" rx="5"/>
+                                <rect x="30" y="25" width="60" height="10" fill="#1a4480" rx="5"/>
+                                <!-- 창문들 -->
+                                <rect x="30" y="40" width="15" height="15" fill="#FFD700" rx="2"/>
+                                <rect x="50" y="40" width="15" height="15" fill="#FFD700" rx="2"/>
+                                <rect x="70" y="40" width="15" height="15" fill="#FFD700" rx="2"/>
+                                <rect x="30" y="60" width="15" height="15" fill="#FFD700" rx="2"/>
+                                <rect x="50" y="60" width="15" height="15" fill="#4CAF50" rx="2"/>
+                                <rect x="70" y="60" width="15" height="15" fill="#FFD700" rx="2"/>
+                                <!-- 입구 -->
+                                <rect x="45" y="80" width="20" height="20" fill="#FF6B35" rx="3"/>
+                                <!-- 연결 네트워크 -->
+                                <g class="network-connections">
+                                    <line x1="37" y1="47" x2="57" y2="47" stroke="#4CAF50" stroke-width="2"/>
+                                    <line x1="57" y1="47" x2="77" y2="47" stroke="#4CAF50" stroke-width="2"/>
+                                    <line x1="37" y1="67" x2="57" y2="67" stroke="#4CAF50" stroke-width="2"/>
+                                    <line x1="57" y1="67" x2="77" y2="67" stroke="#4CAF50" stroke-width="2"/>
+                                    <circle cx="37" cy="47" r="2" fill="#4CAF50"/>
+                                    <circle cx="57" cy="47" r="2" fill="#4CAF50"/>
+                                    <circle cx="77" cy="47" r="2" fill="#4CAF50"/>
+                                    <circle cx="37" cy="67" r="2" fill="#4CAF50"/>
+                                    <circle cx="77" cy="67" r="2" fill="#4CAF50"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="step-progress-ring">
+                            <svg class="progress-ring" width="140" height="140">
+                                <circle cx="70" cy="70" r="65" stroke="rgba(46, 91, 186, 0.2)" stroke-width="6" fill="none"/>
+                                <circle cx="70" cy="70" r="65" stroke="#2E5BBA" stroke-width="6" fill="none" 
+                                        stroke-dasharray="408" stroke-dashoffset="408" class="progress-circle space-progress"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="step-title">Re-Turn 스페이스</h3>
+                    <p class="step-description">청년들이 자유롭게 활동하고 네트워킹할 수 있는 복합 문화 공간을 조성하여 지역 내 청년 커뮤니티를 활성화합니다.</p>
+                    <ul class="step-features">
+                        <li>코워킹 스페이스 운영</li>
+                        <li>창업 지원 시설</li>
+                        <li>문화·예술 활동 공간</li>
+                        <li>청년 네트워킹 허브</li>
+                    </ul>
+                </div>
+                
+                <div class="solution-step animate-fadeInUp">
+                    <div class="step-number">3</div>
+                    <div class="step-visual-container">
+                        <div class="step-icon settlement-icon">
+                            <svg viewBox="0 0 120 120" class="solution-svg">
+                                <!-- 집 -->
+                                <polygon points="60,20 90,45 90,90 30,90 30,45" fill="#4CAF50"/>
+                                <polygon points="60,20 90,45 30,45" fill="#2E5BBA"/>
+                                <rect x="40" y="60" width="15" height="20" fill="#FFD700" rx="2"/>
+                                <rect x="65" y="60" width="15" height="15" fill="#87CEEB" rx="2"/>
+                                <!-- 하트 (정착의 의미) -->
+                                <path d="M60,50 C55,45 45,50 50,60 C55,65 60,70 60,70 C60,70 65,65 70,60 C75,50 65,45 60,50 Z" fill="#FF6B35"/>
+                                <!-- 뿌리 (정착의 의미) -->
+                                <g class="roots">
+                                    <path d="M55,90 Q50,100 45,110" stroke="#8B4513" stroke-width="3" fill="none"/>
+                                    <path d="M60,90 Q60,105 55,115" stroke="#8B4513" stroke-width="3" fill="none"/>
+                                    <path d="M65,90 Q70,100 75,110" stroke="#8B4513" stroke-width="3" fill="none"/>
+                                </g>
+                                <!-- 지원 요소들 -->
+                                <circle cx="25" cy="35" r="8" fill="#FFD700"/>
+                                <text x="25" y="39" text-anchor="middle" fill="white" font-size="8">₩</text>
+                                <circle cx="95" cy="35" r="8" fill="#FF6B35"/>
+                                <text x="95" y="39" text-anchor="middle" fill="white" font-size="8">♥</text>
+                            </svg>
+                        </div>
+                        <div class="step-progress-ring">
+                            <svg class="progress-ring" width="140" height="140">
+                                <circle cx="70" cy="70" r="65" stroke="rgba(255, 107, 53, 0.2)" stroke-width="6" fill="none"/>
+                                <circle cx="70" cy="70" r="65" stroke="#FF6B35" stroke-width="6" fill="none" 
+                                        stroke-dasharray="408" stroke-dashoffset="408" class="progress-circle settlement-progress"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="step-title">정착 지원 프로그램</h3>
+                    <p class="step-description">주거, 금융, 생활 전반에 걸친 체계적인 정착 지원으로 청년들의 밀양 정착을 적극 지원합니다.</p>
+                    <ul class="step-features">
+                        <li>주거비 지원 및 임대주택</li>
+                        <li>창업 자금 지원</li>
+                        <li>생활 정착금 지급</li>
+                        <li>지역 적응 프로그램</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KPI 대시보드 -->
+    <section class="kpi-dashboard">
+        <div class="container">
+            <div class="kpi-title">
+                <h2>핵심 성과 지표</h2>
+                <p class="lead">5년간 달성하고자 하는 정량적 목표</p>
+            </div>
+            
+            <div class="kpi-grid">
+                <div class="kpi-card animate-fadeInUp">
+                    <div class="kpi-icon">
+                        <i data-lucide="users-round"></i>
+                    </div>
+                    <span class="kpi-number text-number" data-target="500">0</span>
+                    <div class="kpi-label">참여 청년 수</div>
+                    <div class="kpi-description">5년간 누적 참여자</div>
+                    <div class="kpi-progress">
+                        <div class="kpi-progress-bar" data-progress="0"></div>
+                    </div>
+                </div>
+                
+                <div class="kpi-card animate-fadeInUp">
+                    <div class="kpi-icon">
+                        <i data-lucide="home"></i>
+                    </div>
+                    <span class="kpi-number text-number" data-target="85">0</span>
+                    <div class="kpi-label">정착률 (%)</div>
+                    <div class="kpi-description">프로그램 완료 후 정착</div>
+                    <div class="kpi-progress">
+                        <div class="kpi-progress-bar" data-progress="85"></div>
+                    </div>
+                </div>
+                
+                <div class="kpi-card animate-fadeInUp">
+                    <div class="kpi-icon">
+                        <i data-lucide="briefcase"></i>
+                    </div>
+                    <span class="kpi-number text-number" data-target="350">0</span>
+                    <div class="kpi-label">일자리 창출</div>
+                    <div class="kpi-description">직접·간접 일자리</div>
+                    <div class="kpi-progress">
+                        <div class="kpi-progress-bar" data-progress="70"></div>
+                    </div>
+                </div>
+                
+                <div class="kpi-card animate-fadeInUp">
+                    <div class="kpi-icon">
+                        <i data-lucide="rocket"></i>
+                    </div>
+                    <span class="kpi-number text-number" data-target="45">0</span>
+                    <div class="kpi-label">창업 기업 수</div>
+                    <div class="kpi-description">청년 창업 지원</div>
+                    <div class="kpi-progress">
+                        <div class="kpi-progress-bar" data-progress="60"></div>
+                    </div>
+                </div>
+                
+                <div class="kpi-card animate-fadeInUp">
+                    <div class="kpi-icon">
+                        <i data-lucide="trending-up"></i>
+                    </div>
+                    <span class="kpi-number text-number" data-target="15.2">0</span>
+                    <div class="kpi-label">경제 파급효과</div>
+                    <div class="kpi-description">억원 지역경제 기여</div>
+                    <div class="kpi-progress">
+                        <div class="kpi-progress-bar" data-progress="90"></div>
+                    </div>
+                </div>
+                
+                <div class="kpi-card animate-fadeInUp">
+                    <div class="kpi-icon">
+                        <i data-lucide="award"></i>
+                    </div>
+                    <span class="kpi-number text-number" data-target="92">0</span>
+                    <div class="kpi-label">만족도</div>
+                    <div class="kpi-description">프로그램 참여자 만족도</div>
+                    <div class="kpi-progress">
+                        <div class="kpi-progress-bar" data-progress="92"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 빠른 내비게이션 -->
+    <section class="navigation-section">
+        <div class="container">
+            <div class="navigation-title">
+                <h2>제안서 상세 내용</h2>
+                <p class="lead">각 섹션을 클릭하여 자세한 내용을 확인하세요</p>
+            </div>
+            
+            <div class="navigation-grid">
+                <a href="background.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <i class="nav-card-icon" data-lucide="bar-chart-3"></i>
+                    </div>
+                    <div class="nav-card-content">
+                        <h3 class="nav-card-title">배경 및 문제점</h3>
+                        <p class="nav-card-description">밀양시 청년 현황과 주요 문제점을 데이터와 함께 분석합니다.</p>
+                        <ul class="nav-card-features">
+                            <li>인구 변화 추이 분석</li>
+                            <li>청년 유출 원인 파악</li>
+                            <li>경쟁력 분석</li>
+                        </ul>
+                    </div>
+                    <div class="nav-card-progress">
+                        <div class="nav-card-progress-bar" style="width: 0%"></div>
+                    </div>
+                </a>
+                
+                <a href="solution.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <i class="nav-card-icon" data-lucide="lightbulb"></i>
+                    </div>
+                    <div class="nav-card-content">
+                        <h3 class="nav-card-title">개선방안</h3>
+                        <p class="nav-card-description">3단계 솔루션의 구체적인 실행 계획과 차별화 포인트를 제시합니다.</p>
+                        <ul class="nav-card-features">
+                            <li>아카데미 프로그램</li>
+                            <li>Re-Turn 스페이스</li>
+                            <li>정착 지원 시스템</li>
+                        </ul>
+                    </div>
+                    <div class="nav-card-progress">
+                        <div class="nav-card-progress-bar" style="width: 0%"></div>
+                    </div>
+                </a>
+                
+                <a href="budget.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <i class="nav-card-icon" data-lucide="calculator"></i>
+                    </div>
+                    <div class="nav-card-content">
+                        <h3 class="nav-card-title">사업예산</h3>
+                        <p class="nav-card-description">투명하고 합리적인 예산 계획으로 사업의 실행 가능성을 입증합니다.</p>
+                        <ul class="nav-card-features">
+                            <li>연차별 예산 계획</li>
+                            <li>자립화 로드맵</li>
+                            <li>비용 효율성 분석</li>
+                        </ul>
+                    </div>
+                    <div class="nav-card-progress">
+                        <div class="nav-card-progress-bar" style="width: 0%"></div>
+                    </div>
+                </a>
+                
+                <a href="effects.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <i class="nav-card-icon" data-lucide="target"></i>
+                    </div>
+                    <div class="nav-card-content">
+                        <h3 class="nav-card-title">기대효과</h3>
+                        <p class="nav-card-description">정량적·정성적 효과를 통한 사업 가치 및 파급효과를 입증합니다.</p>
+                        <ul class="nav-card-features">
+                            <li>경제적 파급효과</li>
+                            <li>사회적 가치 창출</li>
+                            <li>장기 비전</li>
+                        </ul>
+                    </div>
+                    <div class="nav-card-progress">
+                        <div class="nav-card-progress-bar" style="width: 0%"></div>
+                    </div>
+                </a>
+                
+                <a href="benchmarking.html" class="nav-card">
+                    <div class="nav-card-header">
+                        <i class="nav-card-icon" data-lucide="search"></i>
+                    </div>
+                    <div class="nav-card-content">
+                        <h3 class="nav-card-title">벤치마킹</h3>
+                        <p class="nav-card-description">성공 사례 분석을 통한 사업의 실현 가능성과 차별화 전략을 제시합니다.</p>
+                        <ul class="nav-card-features">
+                            <li>국내외 성공 사례</li>
+                            <li>성공 요인 분석</li>
+                            <li>밀양 적용 전략</li>
+                        </ul>
+                    </div>
+                    <div class="nav-card-progress">
+                        <div class="nav-card-progress-bar" style="width: 0%"></div>
+                    </div>
+                </a>
+                
+                <div class="nav-card" style="background: var(--gradient-primary); color: white;">
+                    <div class="nav-card-header" style="background: rgba(255,255,255,0.1);">
+                        <i class="nav-card-icon" data-lucide="contact"></i>
+                    </div>
+                    <div class="nav-card-content">
+                        <h3 class="nav-card-title" style="color: white;">제안자 정보</h3>
+                        <p class="nav-card-description" style="color: rgba(255,255,255,0.9);">제안자: 박용환 (크리에이티브 넥서스)</p>
+                        <ul class="nav-card-features">
+                            <li>연락처: 010-7939-3123</li>
+                            <li>이메일: sanoramyun8@gmail.com</li> 
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 플로팅 액션 버튼 -->
+    <div class="floating-actions">
+        <button class="floating-btn" onclick="downloadPDF()" title="PDF 다운로드">
+            <i data-lucide="download"></i>
+        </button>
+        <button class="floating-btn scroll-top" onclick="scrollToTop()" title="맨 위로">
+            <i data-lucide="arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/common.js"></script>
+    <script>
+        // Lucide 아이콘 초기화
+        lucide.createIcons();
+
+        // 카운터 애니메이션
+        function animateCounter(element, target) {
+            let count = 0;
+            const increment = target / 100;
+            
+            const updateCounter = () => {
+                count += increment;
+                if (count < target) {
+                    element.textContent = Math.floor(count);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            };
+            
+            updateCounter();
+        }
+
+        // 숫자 카운터 실행
+        function startCounters() {
+            const counters = document.querySelectorAll('[data-target]');
+            counters.forEach(counter => {
+                const target = parseInt(counter.dataset.target);
+                animateCounter(counter, target);
+            });
+        }
+
+        // 프로그레스 바 애니메이션
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('[data-progress]');
+            progressBars.forEach(bar => {
+                const progress = parseInt(bar.dataset.progress);
+                setTimeout(() => {
+                    bar.style.width = progress + '%';
+                }, 300);
+            });
+        }
+
+        // Hero 차트 그리기 (개선된 단순 버전)
+        function drawHeroChart() {
+            const ctx = document.getElementById('heroChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['2019', '2020', '2021', '2022', '2023', '2024', '예상 2029'],
+                    datasets: [{
+                        label: '현재 추세',
+                        data: [15420, 14892, 14256, 13687, 13142, 12634, 10500],
+                        borderColor: '#FF6B35',
+                        backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                        borderWidth: 4,
+                        fill: false,
+                        tension: 0.4,
+                        pointBackgroundColor: '#FF6B35',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 3,
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    }, {
+                        label: '정책 적용 후',
+                        data: [null, null, null, null, null, 12634, 16500],
+                        borderColor: '#4CAF50',
+                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                        borderWidth: 4,
+                        fill: false,
+                        tension: 0.4,
+                        borderDash: [10, 5],
+                        pointBackgroundColor: '#4CAF50',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 3,
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: {
+                                color: 'white',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                },
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: 'white',
+                            bodyColor: 'white',
+                            borderColor: 'rgba(255, 255, 255, 0.3)',
+                            borderWidth: 1,
+                            cornerRadius: 10,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + 
+                                           (context.parsed.y ? context.parsed.y.toLocaleString() + '명' : 'N/A');
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: 'white',
+                                font: {
+                                    weight: 'bold',
+                                    size: 12
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: '연도',
+                                color: 'white',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: 'white',
+                                font: {
+                                    weight: 'bold',
+                                    size: 12
+                                },
+                                callback: function(value) {
+                                    return (value / 1000).toFixed(0) + 'K명';
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: '청년 인구 수 (명)',
+                                color: 'white',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeInOutQuart'
+                    }
+                }
+            });
+        }
+
+        // 프로그레스 링 애니메이션
+        function animateProgressRings() {
+            setTimeout(() => {
+                document.querySelector('.academy-progress').style.strokeDashoffset = '122'; // 70%
+            }, 500);
+            
+            setTimeout(() => {
+                document.querySelector('.space-progress').style.strokeDashoffset = '163'; // 60%
+            }, 1000);
+            
+            setTimeout(() => {
+                document.querySelector('.settlement-progress').style.strokeDashoffset = '82'; // 80%
+            }, 1500);
+        }
+
+        // 개선된 카운터 애니메이션
+        function animateCounter(element, target, suffix = '') {
+            let count = 0;
+            const increment = target / 150; // 더 부드러운 애니메이션
+            const isDecimal = target % 1 !== 0;
+            
+            const updateCounter = () => {
+                count += increment;
+                if (count < target) {
+                    if (isDecimal) {
+                        element.textContent = count.toFixed(1) + suffix;
+                    } else {
+                        element.textContent = Math.floor(count).toLocaleString() + suffix;
+                    }
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    if (isDecimal) {
+                        element.textContent = target.toFixed(1) + suffix;
+                    } else {
+                        element.textContent = target.toLocaleString() + suffix;
+                    }
+                }
+            };
+            
+            updateCounter();
+        }
+
+        // 지연된 애니메이션 시작
+        function startDelayedAnimations() {
+            const animatedElements = document.querySelectorAll('[data-delay]');
+            
+            animatedElements.forEach(element => {
+                const delay = parseFloat(element.dataset.delay) * 1000;
+                setTimeout(() => {
+                    element.classList.add('animate-fadeInUp');
+                }, delay);
+            });
+        }
+
+        // 스크롤 인디케이터 업데이트
+        function updateScrollIndicator() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            
+            document.getElementById('scrollIndicator').style.width = scrollPercent + '%';
+        }
+
+        // PDF 다운로드 함수
+        function downloadPDF() {
+            alert('PDF 다운로드 기능은 구현 예정입니다.');
+        }
+
+        // 맨 위로 스크롤
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 페이지 로드 시 실행
+        window.addEventListener('load', function() {
+            // 기존 기능들
+            startCounters();
+            animateProgressBars();
+            drawHeroChart();
+            animateProgressRings();
+            startDelayedAnimations();
+            
+            // 페이지 진입 애니메이션 강화 (인덱스 페이지만)
+            setTimeout(() => {
+                document.body.classList.add('page-loaded');
+            }, 100);
+        });
+
+        // 스크롤 기반 애니메이션 추가
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in-view');
+                }
+            });
+        }, observerOptions);
+
+        // 애니메이션 대상 요소들 관찰
+        window.addEventListener('load', function() {
+            const animateElements = document.querySelectorAll('.solution-step, .kpi-card, .nav-card');
+            animateElements.forEach(el => observer.observe(el));
+        });
+
+        // 스크롤 이벤트
+        window.addEventListener('scroll', function() {
+            updateScrollIndicator();
+            
+            // 헤더 스크롤 효과
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 네비게이션 카드 클릭 추적
+        document.querySelectorAll('.nav-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const progressBar = this.querySelector('.nav-card-progress-bar');
+                if (progressBar) {
+                    progressBar.style.width = '100%';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개선방안 | 밀양 청년 Re-Turn 브릿지</title>
+    <meta name="description" content="3단계 솔루션의 구체적인 실행 계획과 차별화 포인트">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        /* 개선방안 페이지 전용 스타일 */
+        .page-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 120px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><polygon fill="rgba(255,255,255,0.1)" points="0,200 1000,0 1000,200"/></svg>');
+            background-size: cover;
+            background-position: bottom;
+        }
+        
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-title {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-md);
+            color: white;
+        }
+        
+        .page-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .breadcrumb {
+            margin-top: var(--spacing-md);
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            align-items: center;
+        }
+        
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+        
+        .breadcrumb a:hover {
+            color: white;
+        }
+        
+        .solution-overview {
+            padding: var(--spacing-xxl) 0;
+            background: var(--neutral-bg);
+        }
+        
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gradient-primary);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: var(--spacing-xl);
+            display: flex;
+            align-items: center;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+        
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-content {
+            width: 45%;
+            background: white;
+            padding: var(--spacing-lg);
+            border-radius: 16px;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition-medium);
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .timeline-number {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            z-index: 10;
+            border: 4px solid white;
+        }
+        
+        .timeline-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-md);
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .timeline-features {
+            list-style: none;
+        }
+        
+        .timeline-features li {
+            padding: var(--spacing-xs) 0;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: var(--spacing-md);
+        }
+        
+        .timeline-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+        
+        .program-details {
+            padding: var(--spacing-xxl) 0;
+        }
+        
+        .program-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: var(--spacing-xl);
+            background: white;
+            border-radius: 12px;
+            padding: var(--spacing-xs);
+            box-shadow: var(--shadow-light);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        
+        .tab-btn.active {
+            background: var(--gradient-primary);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .program-content {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+        }
+        
+        .program-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .program-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--spacing-md);
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .program-info h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .program-info p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .program-card {
+            background: var(--neutral-bg);
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            transition: var(--transition-medium);
+        }
+        
+        .program-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-light);
+        }
+        
+        .program-card h4 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .curriculum-flow {
+            background: var(--neutral-bg);
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .flow-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+        }
+        
+        .flow-step {
+            background: white;
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            text-align: center;
+            min-width: 120px;
+            position: relative;
+        }
+        
+        .flow-step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .flow-step-number {
+            width: 30px;
+            height: 30px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            margin: 0 auto var(--spacing-xs);
+        }
+        
+        .flow-step-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+        
+        .space-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .gallery-item {
+            background: var(--neutral-bg);
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            text-align: center;
+            transition: var(--transition-medium);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-light);
+        }
+        
+        .gallery-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-secondary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-sm);
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .gallery-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .gallery-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .support-programs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .support-card {
+            background: white;
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            border-left: 4px solid var(--accent-color);
+            transition: var(--transition-medium);
+        }
+        
+        .support-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-light);
+        }
+        
+        .support-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .support-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--spacing-sm);
+            color: white;
+        }
+        
+        .success-story {
+            background: var(--gradient-accent);
+            color: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+            text-align: center;
+        }
+        
+        .success-story h4 {
+            color: white;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .success-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        .success-metric {
+            text-align: center;
+        }
+        
+        .metric-number {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .differentiation {
+            padding: var(--spacing-xxl) 0;
+            background: var(--neutral-bg);
+        }
+        
+        .differentiation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        
+        .differentiation-card {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            position: relative;
+            border-top: 4px solid var(--secondary-color);
+        }
+        
+        .differentiation-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .diff-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .diff-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .diff-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .navigation-footer {
+            padding: var(--spacing-lg) 0;
+            background: white;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-footer-content .btn {
+            min-width: 150px;
+        }
+        
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .timeline-line {
+                left: 30px;
+                transform: none;
+            }
+            
+            .timeline-item {
+                flex-direction: row !important;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 80px;
+            }
+            
+            .timeline-number {
+                left: 30px;
+                transform: translateY(-50%);
+            }
+            
+            .program-tabs {
+                flex-direction: column;
+            }
+            
+            .flow-steps {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .flow-step:not(:last-child)::after {
+                content: '↓';
+                right: 50%;
+                bottom: -15px;
+                top: auto;
+                transform: translateX(50%);
+            }
+            
+            .nav-footer-content {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+        }
+    </style>
+    
+    <!-- 외부 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i data-lucide="home"></i>
+                </div>
+                밀양 Re-Turn 브릿지
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">홈</a></li>
+                <li><a href="background.html" class="nav-link">배경·문제점</a></li>
+                <li><a href="solution.html" class="nav-link active">개선방안</a></li>
+                <li><a href="budget.html" class="nav-link">사업예산</a></li>
+                <li><a href="effects.html" class="nav-link">기대효과</a></li>
+                <li><a href="benchmarking.html" class="nav-link">벤치마킹</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 스크롤 인디케이터 -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- 페이지 헤더 -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1 class="page-title">개선방안</h1>
+                <p class="page-subtitle">3단계 솔루션의 구체적인 실행 계획과 차별화 포인트</p>
+                <div class="breadcrumb">
+                    <a href="index.html">홈</a>
+                    <i data-lucide="chevron-right"></i>
+                    <span>개선방안</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 솔루션 오버뷰 -->
+    <section class="solution-overview">
+        <div class="container">
+            <h2 class="text-center mb-5">3단계 통합 솔루션</h2>
+            
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <div class="timeline-content">
+                        <div class="timeline-icon">
+                            <i data-lucide="graduation-cap"></i>
+                        </div>
+                        <h3 class="timeline-title">Re-Turn 아카데미</h3>
+                        <p class="timeline-description">밀양 특화 직업교육과 창업 지원을 통해 청년들의 역량을 강화하고 지역 맞춤형 인재를 양성합니다.</p>
+                        <ul class="timeline-features">
+                            <li>6개월 집중 교육 프로그램</li>
+                            <li>지역 산업 맞춤형 커리큘럼</li>
+                            <li>1:1 멘토링 시스템</li>
+                            <li>창업 인큐베이팅 지원</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-number">2</div>
+                    <div class="timeline-content">
+                        <div class="timeline-icon">
+                            <i data-lucide="building-2"></i>
+                        </div>
+                        <h3 class="timeline-title">Re-Turn 스페이스</h3>
+                        <p class="timeline-description">청년들이 자유롭게 활동하고 네트워킹할 수 있는 복합 문화 공간을 조성하여 지역 내 청년 커뮤니티를 활성화합니다.</p>
+                        <ul class="timeline-features">
+                            <li>코워킹 스페이스 운영</li>
+                            <li>창업 지원 시설</li>
+                            <li>문화·예술 활동 공간</li>
+                            <li>청년 네트워킹 허브</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-number">3</div>
+                    <div class="timeline-content">
+                        <div class="timeline-icon">
+                            <i data-lucide="heart-handshake"></i>
+                        </div>
+                        <h3 class="timeline-title">정착 지원 프로그램</h3>
+                        <p class="timeline-description">주거, 금융, 생활 전반에 걸친 체계적인 정착 지원으로 청년들의 밀양 정착을 적극 지원합니다.</p>
+                        <ul class="timeline-features">
+                            <li>주거비 지원 및 임대주택</li>
+                            <li>창업 자금 지원</li>
+                            <li>생활 정착금 지급</li>
+                            <li>지역 적응 프로그램</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 프로그램 상세 -->
+    <section class="program-details">
+        <div class="container">
+            <h2 class="text-center mb-5">프로그램 상세 계획</h2>
+            
+            <div class="program-tabs">
+                <button class="tab-btn active" data-tab="academy">Re-Turn 아카데미</button>
+                <button class="tab-btn" data-tab="space">Re-Turn 스페이스</button>
+                <button class="tab-btn" data-tab="support">정착 지원</button>
+            </div>
+            
+            <!-- 아카데미 탭 -->
+            <div class="tab-content active" id="academy">
+                <div class="program-content">
+                    <div class="program-header">
+                        <div class="program-icon">
+                            <i data-lucide="graduation-cap"></i>
+                        </div>
+                        <div class="program-info">
+                            <h3>Re-Turn 아카데미</h3>
+                            <p>밀양 특화 교육으로 청년 역량 강화</p>
+                        </div>
+                    </div>
+                    
+                    <div class="program-grid">
+                        <div class="program-card">
+                            <h4><i data-lucide="cpu"></i> 디지털 전환 교육</h4>
+                            <ul>
+                                <li>스마트팜 기술 교육</li>
+                                <li>e-커머스 운영 교육</li>
+                                <li>디지털 마케팅 실무</li>
+                                <li>데이터 분석 기초</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="program-card">
+                            <h4><i data-lucide="hammer"></i> 전통산업 혁신</h4>
+                            <ul>
+                                <li>농업 6차 산업화</li>
+                                <li>전통 제조업 현대화</li>
+                                <li>관광상품 개발</li>
+                                <li>로컬 브랜딩 전략</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="program-card">
+                            <h4><i data-lucide="rocket"></i> 창업 지원</h4>
+                            <ul>
+                                <li>아이디어 발굴 워크숍</li>
+                                <li>사업계획서 작성</li>
+                                <li>투자유치 전략</li>
+                                <li>법무·세무 기초</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="program-card">
+                            <h4><i data-lucide="users"></i> 소프트 스킬</h4>
+                            <ul>
+                                <li>리더십 개발</li>
+                                <li>커뮤니케이션</li>
+                                <li>프로젝트 관리</li>
+                                <li>네트워킹 스킬</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="curriculum-flow">
+                        <h4 class="text-center mb-3">6개월 커리큘럼 플로우</h4>
+                        <div class="flow-steps">
+                            <div class="flow-step">
+                                <div class="flow-step-number">1</div>
+                                <div class="flow-step-title">기초 교육<br>(1-2개월)</div>
+                            </div>
+                            <div class="flow-step">
+                                <div class="flow-step-number">2</div>
+                                <div class="flow-step-title">전문 과정<br>(3-4개월)</div>
+                            </div>
+                            <div class="flow-step">
+                                <div class="flow-step-number">3</div>
+                                <div class="flow-step-title">실습 프로젝트<br>(5개월)</div>
+                            </div>
+                            <div class="flow-step">
+                                <div class="flow-step-number">4</div>
+                                <div class="flow-step-title">취창업 연계<br>(6개월)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 스페이스 탭 -->
+            <div class="tab-content" id="space">
+                <div class="program-content">
+                    <div class="program-header">
+                        <div class="program-icon">
+                            <i data-lucide="building-2"></i>
+                        </div>
+                        <div class="program-info">
+                            <h3>Re-Turn 스페이스</h3>
+                            <p>청년 커뮤니티 활성화를 위한 복합 공간</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-gallery">
+                        <div class="gallery-item">
+                            <div class="gallery-icon">
+                                <i data-lucide="laptop"></i>
+                            </div>
+                            <h4 class="gallery-title">코워킹 스페이스</h4>
+                            <p class="gallery-description">개방형 업무 공간, 회의실, 프라이빗 오피스 제공</p>
+                        </div>
+                        
+                        <div class="gallery-item">
+                            <div class="gallery-icon">
+                                <i data-lucide="lightbulb"></i>
+                            </div>
+                            <h4 class="gallery-title">창업 인큐베이터</h4>
+                            <p class="gallery-description">스타트업 지원 시설, 멘토링룸, 피칭 스튜디오</p>
+                        </div>
+                        
+                        <div class="gallery-item">
+                            <div class="gallery-icon">
+                                <i data-lucide="palette"></i>
+                            </div>
+                            <h4 class="gallery-title">문화 예술 공간</h4>
+                            <p class="gallery-description">전시관, 공연장, 창작 스튜디오, 미디어랩</p>
+                        </div>
+                        
+                        <div class="gallery-item">
+                            <div class="gallery-icon">
+                                <i data-lucide="coffee"></i>
+                            </div>
+                            <h4 class="gallery-title">커뮤니티 카페</h4>
+                            <p class="gallery-description">네트워킹 공간, 북카페, 라운지 영역</p>
+                        </div>
+                        
+                        <div class="gallery-item">
+                            <div class="gallery-icon">
+                                <i data-lucide="dumbbell"></i>
+                            </div>
+                            <h4 class="gallery-title">웰니스 센터</h4>
+                            <p class="gallery-description">피트니스, 요가실, 명상공간, 휴게실</p>
+                        </div>
+                        
+                        <div class="gallery-item">
+                            <div class="gallery-icon">
+                                <i data-lucide="calendar"></i>
+                            </div>
+                            <h4 class="gallery-title">이벤트 홀</h4>
+                            <p class="gallery-description">세미나, 컨퍼런스, 네트워킹 파티 공간</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 정착 지원 탭 -->
+            <div class="tab-content" id="support">
+                <div class="program-content">
+                    <div class="program-header">
+                        <div class="program-icon">
+                            <i data-lucide="heart-handshake"></i>
+                        </div>
+                        <div class="program-info">
+                            <h3>정착 지원 프로그램</h3>
+                            <p>체계적인 정착 지원으로 안정적인 밀양 생활</p>
+                        </div>
+                    </div>
+                    
+                    <div class="support-programs">
+                        <div class="support-card">
+                            <div class="support-header">
+                                <div class="support-icon">
+                                    <i data-lucide="home"></i>
+                                </div>
+                                <h4>주거 지원</h4>
+                            </div>
+                            <ul>
+                                <li>청년 전용 임대주택 제공</li>
+                                <li>월 임대료 30% 지원 (최대 3년)</li>
+                                <li>보증금 무이자 대출</li>
+                                <li>주거환경 개선 지원</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="support-card">
+                            <div class="support-header">
+                                <div class="support-icon">
+                                    <i data-lucide="coins"></i>
+                                </div>
+                                <h4>금융 지원</h4>
+                            </div>
+                            <ul>
+                                <li>창업 자금 최대 5천만원</li>
+                                <li>생활안정자금 월 50만원</li>
+                                <li>교육비 전액 지원</li>
+                                <li>멘토링 수당 지급</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="support-card">
+                            <div class="support-header">
+                                <div class="support-icon">
+                                    <i data-lucide="briefcase"></i>
+                                </div>
+                                <h4>취업 지원</h4>
+                            </div>
+                            <ul>
+                                <li>지역 기업 맞춤 매칭</li>
+                                <li>인턴십 프로그램 운영</li>
+                                <li>취업 성공 시 장려금</li>
+                                <li>경력개발 컨설팅</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="support-card">
+                            <div class="support-header">
+                                <div class="support-icon">
+                                    <i data-lucide="heart"></i>
+                                </div>
+                                <h4>생활 지원</h4>
+                            </div>
+                            <ul>
+                                <li>지역 적응 프로그램</li>
+                                <li>문화·여가 활동 할인</li>
+                                <li>건강관리 서비스</li>
+                                <li>심리상담 지원</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="success-story">
+                        <h4><i data-lucide="trophy"></i> 타 지역 성공 사례 목표</h4>
+                        <div class="success-metrics">
+                            <div class="success-metric">
+                                <span class="metric-number">85%</span>
+                                <div class="metric-label">정착률</div>
+                            </div>
+                            <div class="success-metric">
+                                <span class="metric-number">92%</span>
+                                <div class="metric-label">만족도</div>
+                            </div>
+                            <div class="success-metric">
+                                <span class="metric-number">67%</span>
+                                <div class="metric-label">창업성공률</div>
+                            </div>
+                            <div class="success-metric">
+                                <span class="metric-number">78%</span>
+                                <div class="metric-label">취업성공률</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 차별화 포인트 -->
+    <section class="differentiation">
+        <div class="container">
+            <h2 class="text-center mb-5">핵심 차별화 포인트</h2>
+            
+            <div class="differentiation-grid">
+                <div class="differentiation-card">
+                    <div class="diff-icon">
+                        <i data-lucide="target"></i>
+                    </div>
+                    <h3 class="diff-title">통합적 접근</h3>
+                    <p class="diff-description">교육-공간-정착의 3단계를 하나의 시스템으로 연계하여 청년의 전 생애주기를 지원하는 통합 솔루션</p>
+                </div>
+                
+                <div class="differentiation-card">
+                    <div class="diff-icon">
+                        <i data-lucide="map-pin"></i>
+                    </div>
+                    <h3 class="diff-title">지역 특화</h3>
+                    <p class="diff-description">밀양의 지리적 위치, 전통산업, 문화자원을 활용한 맞춤형 프로그램으로 지역 정체성 강화</p>
+                </div>
+                
+                <div class="differentiation-card">
+                    <div class="diff-icon">
+                        <i data-lucide="recycle"></i>
+                    </div>
+                    <h3 class="diff-title">지속가능성</h3>
+                    <p class="diff-description">5년 후 자립 운영이 가능한 수익 모델을 구축하여 장기적이고 지속가능한 청년 정책 실현</p>
+                </div>
+                
+                <div class="differentiation-card">
+                    <div class="diff-icon">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <h3 class="diff-title">커뮤니티 중심</h3>
+                    <p class="diff-description">청년들이 주체가 되어 운영하는 상향식 커뮤니티 모델로 자발적 참여와 지속적 활동 보장</p>
+                </div>
+                
+                <div class="differentiation-card">
+                    <div class="diff-icon">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3 class="diff-title">혁신 기술</h3>
+                    <p class="diff-description">AI, IoT, 빅데이터를 활용한 스마트 운영 시스템으로 효율성과 성과 측정의 정확성 제고</p>
+                </div>
+                
+                <div class="differentiation-card">
+                    <div class="diff-icon">
+                        <i data-lucide="handshake"></i>
+                    </div>
+                    <h3 class="diff-title">민관협력</h3>
+                    <p class="diff-description">지역 기업, 대학, 시민사회와의 긴밀한 협력 네트워크를 통한 실질적이고 현실적인 지원 체계</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 네비게이션 푸터 -->
+    <section class="navigation-footer">
+        <div class="container">
+            <div class="nav-footer-content">
+                <a href="background.html" class="btn btn-outline">
+                    <i data-lucide="arrow-left"></i>
+                    이전 페이지
+                </a>
+                <span class="text-muted">2 / 5</span>
+                <a href="budget.html" class="btn btn-primary">
+                    다음 페이지
+                    <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 플로팅 액션 버튼 -->
+    <div class="floating-actions">
+        <button class="floating-btn" onclick="downloadPDF()" title="PDF 다운로드">
+            <i data-lucide="download"></i>
+        </button>
+        <button class="floating-btn scroll-top" onclick="scrollToTop()" title="맨 위로">
+            <i data-lucide="arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/common.js"></script>
+    <script>
+        // Lucide 아이콘 초기화
+        lucide.createIcons();
+
+        // 탭 기능
+        function initTabs() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetTab = this.dataset.tab;
+                    
+                    // 모든 탭 버튼과 콘텐츠에서 active 제거
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // 클릭된 탭 버튼과 해당 콘텐츠에 active 추가
+                    this.classList.add('active');
+                    document.getElementById(targetTab).classList.add('active');
+                });
+            });
+        }
+
+        // 스크롤 인디케이터 업데이트
+        function updateScrollIndicator() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            
+            document.getElementById('scrollIndicator').style.width = scrollPercent + '%';
+        }
+
+        // PDF 다운로드 함수
+        function downloadPDF() {
+            alert('PDF 다운로드 기능은 구현 예정입니다.');
+        }
+
+        // 맨 위로 스크롤
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 페이지 로드 시 실행
+        window.addEventListener('load', function() {
+            initTabs();
+        });
+
+        // 스크롤 이벤트
+        window.addEventListener('scroll', function() {
+            updateScrollIndicator();
+            
+            // 헤더 스크롤 효과
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

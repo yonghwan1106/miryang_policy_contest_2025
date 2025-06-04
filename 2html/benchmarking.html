@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>벤치마킹 | 밀양 청년 Re-Turn 브릿지</title>
+    <meta name="description" content="성공 사례 분석을 통한 사업의 실현 가능성과 차별화 전략">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        /* 벤치마킹 페이지 전용 스타일 */
+        .page-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 120px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><polygon fill="rgba(255,255,255,0.1)" points="0,200 1000,0 1000,200"/></svg>');
+            background-size: cover;
+            background-position: bottom;
+        }
+        
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-title {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-md);
+            color: white;
+        }
+        
+        .page-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .breadcrumb {
+            margin-top: var(--spacing-md);
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            align-items: center;
+        }
+        
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+        
+        .breadcrumb a:hover {
+            color: white;
+        }
+        
+        .case-gallery {
+            padding: var(--spacing-xxl) 0;
+            background: var(--neutral-bg);
+        }
+        
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        
+        .case-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition-medium);
+            cursor: pointer;
+        }
+        
+        .case-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .case-header {
+            height: 120px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .case-header.domestic {
+            background: var(--gradient-primary);
+        }
+        
+        .case-header.international {
+            background: var(--gradient-secondary);
+        }
+        
+        .case-flag {
+            position: absolute;
+            top: var(--spacing-sm);
+            right: var(--spacing-sm);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .case-icon {
+            font-size: 3rem;
+            color: white;
+        }
+        
+        .case-content {
+            padding: var(--spacing-lg);
+        }
+        
+        .case-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .case-location {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        
+        .case-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .case-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .case-metric {
+            text-align: center;
+            padding: var(--spacing-xs);
+            background: var(--neutral-bg);
+            border-radius: 8px;
+        }
+        
+        .metric-value {
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+        }
+        
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .case-tags {
+            display: flex;
+            gap: var(--spacing-xs);
+            flex-wrap: wrap;
+        }
+        
+        .case-tag {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background: var(--primary-color);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+        
+        .analysis-section {
+            padding: var(--spacing-xxl) 0;
+        }
+        
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        
+        .analysis-card {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+        }
+        
+        .analysis-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-md);
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .analysis-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .analysis-list {
+            list-style: none;
+        }
+        
+        .analysis-list li {
+            padding: var(--spacing-xs) 0;
+            position: relative;
+            padding-left: var(--spacing-md);
+            color: var(--text-secondary);
+        }
+        
+        .analysis-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+        
+        .comparison-table-section {
+            padding: var(--spacing-xxl) 0;
+            background: var(--neutral-bg);
+        }
+        
+        .comparison-container {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+            overflow-x: auto;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: var(--spacing-sm) var(--spacing-md);
+            text-align: center;
+            border-bottom: 1px solid var(--neutral-bg);
+        }
+        
+        .comparison-table th {
+            background: var(--neutral-bg);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        .comparison-table .highlight {
+            background: rgba(76, 175, 80, 0.1);
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .comparison-table .project-name {
+            background: var(--gradient-primary);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .application-strategy {
+            padding: var(--spacing-xxl) 0;
+        }
+        
+        .strategy-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: start;
+        }
+        
+        .strategy-text {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+        }
+        
+        .strategy-steps {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+        }
+        
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--neutral-bg);
+        }
+        
+        .step-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            margin-right: var(--spacing-sm);
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .step-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .risk-analysis {
+            padding: var(--spacing-xxl) 0;
+            background: var(--neutral-bg);
+        }
+        
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        
+        .risk-card {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .risk-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .risk-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-secondary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--spacing-sm);
+            color: white;
+        }
+        
+        .risk-title {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .risk-level {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-left: auto;
+        }
+        
+        .risk-level.high {
+            background: rgba(244, 67, 54, 0.1);
+            color: #f44336;
+        }
+        
+        .risk-level.medium {
+            background: rgba(255, 149, 0, 0.1);
+            color: #FF9500;
+        }
+        
+        .risk-level.low {
+            background: rgba(76, 175, 80, 0.1);
+            color: var(--accent-color);
+        }
+        
+        .risk-description {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.5;
+        }
+        
+        .risk-mitigation {
+            background: var(--neutral-bg);
+            padding: var(--spacing-sm);
+            border-radius: 8px;
+        }
+        
+        .risk-mitigation h5 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+            color: var(--primary-color);
+        }
+        
+        .risk-mitigation p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        .success-probability {
+            padding: var(--spacing-xxl) 0;
+            text-align: center;
+        }
+        
+        .probability-chart {
+            max-width: 600px;
+            margin: 0 auto var(--spacing-lg);
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+        }
+        
+        .probability-score {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .probability-factors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .factor-item {
+            text-align: center;
+            padding: var(--spacing-md);
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+        }
+        
+        .factor-score {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .factor-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: var(--spacing-sm);
+            right: var(--spacing-sm);
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+        
+        .modal-title {
+            margin-bottom: var(--spacing-md);
+            color: var(--primary-color);
+        }
+        
+        .navigation-footer {
+            padding: var(--spacing-lg) 0;
+            background: white;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-footer-content .btn {
+            min-width: 150px;
+        }
+        
+        @media (max-width: 768px) {
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .analysis-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .strategy-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .risk-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .probability-factors {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .comparison-container {
+                padding: var(--spacing-sm);
+            }
+            
+            .nav-footer-content {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .probability-factors {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    
+    <!-- 외부 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i data-lucide="home"></i>
+                </div>
+                밀양 Re-Turn 브릿지
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">홈</a></li>
+                <li><a href="background.html" class="nav-link">배경·문제점</a></li>
+                <li><a href="solution.html" class="nav-link">개선방안</a></li>
+                <li><a href="budget.html" class="nav-link">사업예산</a></li>
+                <li><a href="effects.html" class="nav-link">기대효과</a></li>
+                <li><a href="benchmarking.html" class="nav-link active">벤치마킹</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 스크롤 인디케이터 -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- 페이지 헤더 -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1 class="page-title">벤치마킹</h1>
+                <p class="page-subtitle">성공 사례 분석을 통한 사업의 실현 가능성과 차별화 전략</p>
+                <div class="breadcrumb">
+                    <a href="index.html">홈</a>
+                    <i data-lucide="chevron-right"></i>
+                    <span>벤치마킹</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 성공 사례 갤러리 -->
+    <section class="case-gallery">
+        <div class="container">
+            <h2 class="text-center mb-5">국내외 성공 사례</h2>
+            
+            <div class="case-grid">
+                <!-- 국내 사례 1 -->
+                <div class="case-card" onclick="openModal('modal-seongnam')">
+                    <div class="case-header domestic">
+                        <div class="case-flag">🇰🇷 국내</div>
+                        <i class="case-icon" data-lucide="building-2"></i>
+                    </div>
+                    <div class="case-content">
+                        <h3 class="case-title">성남시 청년배당</h3>
+                        <div class="case-location">
+                            <i data-lucide="map-pin"></i>
+                            <span>경기도 성남시</span>
+                        </div>
+                        <p class="case-description">전국 최초 청년배당 정책으로 청년 정착률 향상 및 지역경제 활성화 달성</p>
+                        
+                        <div class="case-metrics">
+                            <div class="case-metric">
+                                <span class="metric-value">78%</span>
+                                <div class="metric-label">정착률</div>
+                            </div>
+                            <div class="case-metric">
+                                <span class="metric-value">15,000명</span>
+                                <div class="metric-label">수혜자</div>
+                            </div>
+                        </div>
+                        
+                        <div class="case-tags">
+                            <span class="case-tag">청년정책</span>
+                            <span class="case-tag">정착지원</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 국내 사례 2 -->
+                <div class="case-card" onclick="openModal('modal-wanju')">
+                    <div class="case-header domestic">
+                        <div class="case-flag">🇰🇷 국내</div>
+                        <i class="case-icon" data-lucide="home"></i>
+                    </div>
+                    <div class="case-content">
+                        <h3 class="case-title">완주군 로컬푸드</h3>
+                        <div class="case-location">
+                            <i data-lucide="map-pin"></i>
+                            <span>전라북도 완주군</span>
+                        </div>
+                        <p class="case-description">로컬푸드 육성을 통한 청년 귀농·귀촌 유도 및 지역경제 선순환 구조 구축</p>
+                        
+                        <div class="case-metrics">
+                            <div class="case-metric">
+                                <span class="metric-value">2,400명</span>
+                                <div class="metric-label">귀농인</div>
+                            </div>
+                            <div class="case-metric">
+                                <span class="metric-value">350억원</span>
+                                <div class="metric-label">매출</div>
+                            </div>
+                        </div>
+                        
+                        <div class="case-tags">
+                            <span class="case-tag">로컬푸드</span>
+                            <span class="case-tag">귀농귀촌</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 국내 사례 3 -->
+                <div class="case-card" onclick="openModal('modal-jecheon')">
+                    <div class="case-header domestic">
+                        <div class="case-flag">🇰🇷 국내</div>
+                        <i class="case-icon" data-lucide="palette"></i>
+                    </div>
+                    <div class="case-content">
+                        <h3 class="case-title">제천시 청풍명월</h3>
+                        <div class="case-location">
+                            <i data-lucide="map-pin"></i>
+                            <span>충청북도 제천시</span>
+                        </div>
+                        <p class="case-description">문화예술을 활용한 청년 창업 지원 및 도시재생을 통한 지역활력 증진</p>
+                        
+                        <div class="case-metrics">
+                            <div class="case-metric">
+                                <span class="metric-value">120개</span>
+                                <div class="metric-label">창업기업</div>
+                            </div>
+                            <div class="case-metric">
+                                <span class="metric-value">82%</span>
+                                <div class="metric-label">생존율</div>
+                            </div>
+                        </div>
+                        
+                        <div class="case-tags">
+                            <span class="case-tag">문화예술</span>
+                            <span class="case-tag">창업지원</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 해외 사례 1 -->
+                <div class="case-card" onclick="openModal('modal-detroit')">
+                    <div class="case-header international">
+                        <div class="case-flag">🇺🇸 미국</div>
+                        <i class="case-icon" data-lucide="rocket"></i>
+                    </div>
+                    <div class="case-content">
+                        <h3 class="case-title">디트로이트 스타트업</h3>
+                        <div class="case-location">
+                            <i data-lucide="map-pin"></i>
+                            <span>미국 미시간주</span>
+                        </div>
+                        <p class="case-description">쇠퇴한 공업도시를 스타트업 허브로 재생시킨 청년 유치 성공 모델</p>
+                        
+                        <div class="case-metrics">
+                            <div class="case-metric">
+                                <span class="metric-value">50,000명</span>
+                                <div class="metric-label">청년유입</div>
+                            </div>
+                            <div class="case-metric">
+                                <span class="metric-value">1,200개</span>
+                                <div class="metric-label">스타트업</div>
+                            </div>
+                        </div>
+                        
+                        <div class="case-tags">
+                            <span class="case-tag">도시재생</span>
+                            <span class="case-tag">스타트업</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 해외 사례 2 -->
+                <div class="case-card" onclick="openModal('modal-estonia')">
+                    <div class="case-header international">
+                        <div class="case-flag">🇪🇪 에스토니아</div>
+                        <i data-lucide="wifi"></i>
+                    </div>
+                    <div class="case-content">
+                        <h3 class="case-title">e-레지던시</h3>
+                        <div class="case-location">
+                            <i data-lucide="map-pin"></i>
+                            <span>에스토니아 전국</span>
+                        </div>
+                        <p class="case-description">디지털 기반 원격 거주 프로그램으로 글로벌 인재 유치 및 디지털 경제 활성화</p>
+                        
+                        <div class="case-metrics">
+                            <div class="case-metric">
+                                <span class="metric-value">100,000명</span>
+                                <div class="metric-label">e-시민</div>
+                            </div>
+                            <div class="case-metric">
+                                <span class="metric-value">18,000개</span>
+                                <div class="metric-label">기업설립</div>
+                            </div>
+                        </div>
+                        
+                        <div class="case-tags">
+                            <span class="case-tag">디지털</span>
+                            <span class="case-tag">글로벌</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 해외 사례 3 -->
+                <div class="case-card" onclick="openModal('modal-lisbon')">
+                    <div class="case-header international">
+                        <div class="case-flag">🇵🇹 포르투갈</div>
+                        <i data-lucide="users"></i>
+                    </div>
+                    <div class="case-content">
+                        <h3 class="case-title">리스본 스타트업 시티</h3>
+                        <div class="case-location">
+                            <i data-lucide="map-pin"></i>
+                            <span>포르투갈 리스본</span>
+                        </div>
+                        <p class="case-description">Web Summit 유치와 스타트업 생태계 조성으로 유럽 최대 테크 허브 도시로 성장</p>
+                        
+                        <div class="case-metrics">
+                            <div class="case-metric">
+                                <span class="metric-value">70,000명</span>
+                                <div class="metric-label">참여자</div>
+                            </div>
+                            <div class="case-metric">
+                                <span class="metric-value">3,000개</span>
+                                <div class="metric-label">스타트업</div>
+                            </div>
+                        </div>
+                        
+                        <div class="case-tags">
+                            <span class="case-tag">테크허브</span>
+                            <span class="case-tag">이벤트</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 성공 요인 분석 -->
+    <section class="analysis-section">
+        <div class="container">
+            <h2 class="text-center mb-5">공통 성공 요인 분석</h2>
+            
+            <div class="analysis-grid">
+                <div class="analysis-card">
+                    <div class="analysis-icon">
+                        <i data-lucide="target"></i>
+                    </div>
+                    <h3 class="analysis-title">명확한 비전 설정</h3>
+                    <ul class="analysis-list">
+                        <li>구체적이고 측정 가능한 목표 설정</li>
+                        <li>지역 특성을 반영한 차별화 전략</li>
+                        <li>장기적 관점의 단계별 로드맵</li>
+                        <li>이해관계자 간 비전 공유</li>
+                    </ul>
+                </div>
+                
+                <div class="analysis-card">
+                    <div class="analysis-icon">
+                        <i data-lucide="handshake"></i>
+                    </div>
+                    <h3 class="analysis-title">민관 협력 체계</h3>
+                    <ul class="analysis-list">
+                        <li>정부와 민간의 역할 분담</li>
+                        <li>지속적인 소통 채널 구축</li>
+                        <li>유연한 정책 추진 체계</li>
+                        <li>성과 공유 및 피드백 시스템</li>
+                    </ul>
+                </div>
+                
+                <div class="analysis-card">
+                    <div class="analysis-icon">
+                        <i data-lucide="rocket"></i>
+                    </div>
+                    <h3 class="analysis-title">혁신적 접근법</h3>
+                    <ul class="analysis-list">
+                        <li>기존 정책의 한계 극복</li>
+                        <li>창의적 아이디어 도입</li>
+                        <li>신기술 활용 및 디지털 전환</li>
+                        <li>글로벌 트렌드 반영</li>
+                    </ul>
+                </div>
+                
+                <div class="analysis-card">
+                    <div class="analysis-icon">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <h3 class="analysis-title">참여형 거버넌스</h3>
+                    <ul class="analysis-list">
+                        <li>청년들의 직접 참여 유도</li>
+                        <li>상향식 의사결정 구조</li>
+                        <li>다양한 이해관계자 참여</li>
+                        <li>지속적인 네트워킹 지원</li>
+                    </ul>
+                </div>
+                
+                <div class="analysis-card">
+                    <div class="analysis-icon">
+                        <i data-lucide="coins"></i>
+                    </div>
+                    <h3 class="analysis-title">지속가능한 재정</h3>
+                    <ul class="analysis-list">
+                        <li>다각화된 재원 확보</li>
+                        <li>점진적 자립화 계획</li>
+                        <li>투자 대비 효과 최적화</li>
+                        <li>수익 모델 개발</li>
+                    </ul>
+                </div>
+                
+                <div class="analysis-card">
+                    <div class="analysis-icon">
+                        <i data-lucide="bar-chart"></i>
+                    </div>
+                    <h3 class="analysis-title">성과 측정 시스템</h3>
+                    <ul class="analysis-list">
+                        <li>객관적 지표 설정</li>
+                        <li>정기적 모니터링</li>
+                        <li>데이터 기반 의사결정</li>
+                        <li>지속적 개선 체계</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 비교 분석표 -->
+    <section class="comparison-table-section">
+        <div class="container">
+            <h2 class="text-center mb-5">사업 비교 분석</h2>
+            
+            <div class="comparison-container">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>구분</th>
+                            <th class="project-name">밀양 Re-Turn 브릿지</th>
+                            <th>성남시 청년배당</th>
+                            <th>완주군 로컬푸드</th>
+                            <th>제천시 청풍명월</th>
+                            <th>디트로이트 스타트업</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>사업규모</td>
+                            <td class="highlight">50억원</td>
+                            <td>180억원</td>
+                            <td>25억원</td>
+                            <td>30억원</td>
+                            <td>1,200억원</td>
+                        </tr>
+                        <tr>
+                            <td>대상인원</td>
+                            <td class="highlight">500명</td>
+                            <td>15,000명</td>
+                            <td>2,400명</td>
+                            <td>300명</td>
+                            <td>50,000명</td>
+                        </tr>
+                        <tr>
+                            <td>1인당 투자</td>
+                            <td class="highlight">1,000만원</td>
+                            <td>1,200만원</td>
+                            <td>1,042만원</td>
+                            <td>1,000만원</td>
+                            <td>2,400만원</td>
+                        </tr>
+                        <tr>
+                            <td>정착/성공률</td>
+                            <td class="highlight">85%</td>
+                            <td>78%</td>
+                            <td>72%</td>
+                            <td>82%</td>
+                            <td>68%</td>
+                        </tr>
+                        <tr>
+                            <td>자립화 기간</td>
+                            <td class="highlight">5년</td>
+                            <td>지속지원</td>
+                            <td>7년</td>
+                            <td>6년</td>
+                            <td>10년</td>
+                        </tr>
+                        <tr>
+                            <td>특화분야</td>
+                            <td class="highlight">통합지원</td>
+                            <td>현금지원</td>
+                            <td>농업</td>
+                            <td>문화예술</td>
+                            <td>테크</td>
+                        </tr>
+                        <tr>
+                            <td>지속가능성</td>
+                            <td class="highlight">높음</td>
+                            <td>중간</td>
+                            <td>높음</td>
+                            <td>높음</td>
+                            <td>중간</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 밀양 적용 전략 -->
+    <section class="application-strategy">
+        <div class="container">
+            <h2 class="text-center mb-5">밀양 적용 전략</h2>
+            
+            <div class="strategy-content">
+                <div class="strategy-text">
+                    <h3><i data-lucide="map-pin"></i> 밀양 특화 전략</h3>
+                    <p class="mb-3">성공 사례 분석을 통해 도출된 밀양시만의 차별화된 접근 전략</p>
+                    
+                    <h4>지리적 이점 활용</h4>
+                    <p>KTX 밀양역과 고속도로 접근성을 활용한 "접근 가능한 지방 도시" 모델 구축</p>
+                    
+                    <h4>전통 산업의 현대화</h4>
+                    <p>농업과 전통 제조업을 디지털 기술과 융합하여 새로운 가치 창출</p>
+                    
+                    <h4>문화 자원 연계</h4>
+                    <p>밀양의 역사문화 자원과 청년 창업을 연결한 스토리텔링 기반 비즈니스</p>
+                    
+                    <h4>네트워크 허브 역할</h4>
+                    <p>부산-대구 중간 지점의 지리적 특성을 활용한 광역 네트워킹 거점 구축</p>
+                </div>
+                
+                <div class="strategy-steps">
+                    <h3><i data-lucide="clipboard-list"></i> 단계별 적용 계획</h3>
+                    
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4 class="step-title">기반 조성 (1-2년차)</h4>
+                            <p class="step-description">Re-Turn 스페이스 구축, 초기 프로그램 런칭, 파트너십 구축</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4 class="step-title">확산 및 정착 (3-4년차)</h4>
+                            <p class="step-description">프로그램 다양화, 성공 사례 창출, 지역 네트워크 강화</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4 class="step-title">자립 및 확장 (5년차)</h4>
+                            <p class="step-description">수익 모델 안정화, 타 지역 확산, 지속가능한 운영 체계 완성</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 리스크 분석 -->
+    <section class="risk-analysis">
+        <div class="container">
+            <h2 class="text-center mb-5">리스크 분석 및 대응 방안</h2>
+            
+            <div class="risk-grid">
+                <div class="risk-card">
+                    <div class="risk-header">
+                        <div class="risk-icon">
+                            <i data-lucide="users-x"></i>
+                        </div>
+                        <h4 class="risk-title">참여율 저조</h4>
+                        <span class="risk-level medium">중간</span>
+                    </div>
+                    <p class="risk-description">예상보다 낮은 청년 참여율로 인한 사업 목표 달성 어려움</p>
+                    <div class="risk-mitigation">
+                        <h5>대응 방안</h5>
+                        <p>적극적 홍보 마케팅, 인센티브 강화, 단계적 목표 조정, 타겟 그룹 다변화</p>
+                    </div>
+                </div>
+                
+                <div class="risk-card">
+                    <div class="risk-header">
+                        <div class="risk-icon">
+                            <i data-lucide="coins"></i>
+                        </div>
+                        <h4 class="risk-title">예산 부족</h4>
+                        <span class="risk-level high">높음</span>
+                    </div>
+                    <p class="risk-description">지방재정 악화나 중앙정부 지원 축소로 인한 예산 확보 실패</p>
+                    <div class="risk-mitigation">
+                        <h5>대응 방안</h5>
+                        <p>다양한 재원 발굴, 민간 투자 유치, 단계적 사업 추진, 크라우드 펀딩 활용</p>
+                    </div>
+                </div>
+                
+                <div class="risk-card">
+                    <div class="risk-header">
+                        <div class="risk-icon">
+                            <i data-lucide="trending-down"></i>
+                        </div>
+                        <h4 class="risk-title">정착률 저조</h4>
+                        <span class="risk-level medium">중간</span>
+                    </div>
+                    <p class="risk-description">프로그램 완료 후 타 지역 이주로 인한 실질적 정착 효과 미흡</p>
+                    <div class="risk-mitigation">
+                        <h5>대응 방안</h5>
+                        <p>정착 인센티브 강화, 지속적 사후 관리, 지역 애착심 증진 프로그램, 네트워크 유지</p>
+                    </div>
+                </div>
+                
+                <div class="risk-card">
+                    <div class="risk-header">
+                        <div class="risk-icon">
+                            <i data-lucide="building-x"></i>
+                        </div>
+                        <h4 class="risk-title">인프라 부족</h4>
+                        <span class="risk-level low">낮음</span>
+                    </div>
+                    <p class="risk-description">기존 도시 인프라 한계로 인한 프로그램 운영 제약</p>
+                    <div class="risk-mitigation">
+                        <h5>대응 방안</h5>
+                        <p>기존 시설 활용 극대화, 공공-민간 시설 연계, 단계적 인프라 확충, 디지털 솔루션 활용</p>
+                    </div>
+                </div>
+                
+                <div class="risk-card">
+                    <div class="risk-header">
+                        <div class="risk-icon">
+                            <i data-lucide="users-2"></i>
+                        </div>
+                        <h4 class="risk-title">지역 갈등</h4>
+                        <span class="risk-level low">낮음</span>
+                    </div>
+                    <p class="risk-description">기존 주민과 신규 정착 청년 간의 갈등 발생 가능성</p>
+                    <div class="risk-mitigation">
+                        <h5>대응 방안</h5>
+                        <p>사전 소통 강화, 상생 프로그램 운영, 지역민 참여 유도, 갈등 조정 시스템 구축</p>
+                    </div>
+                </div>
+                
+                <div class="risk-card">
+                    <div class="risk-header">
+                        <div class="risk-icon">
+                            <i data-lucide="zap"></i>
+                        </div>
+                        <h4 class="risk-title">기술 변화</h4>
+                        <span class="risk-level medium">중간</span>
+                    </div>
+                    <p class="risk-description">급격한 기술 변화로 인한 교육 내용의 조기 노후화</p>
+                    <div class="risk-mitigation">
+                        <h5>대응 방안</h5>
+                        <p>유연한 커리큘럼 설계, 지속적 업데이트, 전문가 네트워크 활용, 트렌드 모니터링</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 성공 확률 -->
+    <section class="success-probability">
+        <div class="container">
+            <h2 class="mb-3">사업 성공 확률</h2>
+            <p class="lead mb-5">벤치마킹 분석과 리스크 평가를 종합한 객관적 성공 가능성</p>
+            
+            <div class="probability-chart">
+                <div class="probability-score">87%</div>
+                <p class="text-primary">높은 성공 가능성</p>
+            </div>
+            
+            <div class="probability-factors">
+                <div class="factor-item">
+                    <div class="factor-score">90%</div>
+                    <div class="factor-label">사업 모델</div>
+                </div>
+                
+                <div class="factor-item">
+                    <div class="factor-score">85%</div>
+                    <div class="factor-label">시장 준비도</div>
+                </div>
+                
+                <div class="factor-item">
+                    <div class="factor-score">88%</div>
+                    <div class="factor-label">정책 환경</div>
+                </div>
+                
+                <div class="factor-item">
+                    <div class="factor-score">84%</div>
+                    <div class="factor-label">재정 건전성</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 네비게이션 푸터 -->
+    <section class="navigation-footer">
+        <div class="container">
+            <div class="nav-footer-content">
+                <a href="effects.html" class="btn btn-outline">
+                    <i data-lucide="arrow-left"></i>
+                    이전 페이지
+                </a>
+                <span class="text-muted">5 / 5</span>
+                <a href="index.html" class="btn btn-primary">
+                    <i data-lucide="home"></i>
+                    홈으로
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 모달들 -->
+    <div class="modal" id="modal-seongnam">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-seongnam')">&times;</button>
+            <h3 class="modal-title">성남시 청년배당</h3>
+            <p><strong>위치:</strong> 경기도 성남시</p>
+            <p><strong>기간:</strong> 2016년~현재</p>
+            <p><strong>규모:</strong> 연간 180억원</p>
+            <h4>주요 내용</h4>
+            <ul>
+                <li>만 19-24세 청년에게 분기별 25만원 지급</li>
+                <li>지역화폐로 지급하여 지역경제 순환 효과</li>
+                <li>청년 정책 참여 의무화로 시민 참여 증진</li>
+            </ul>
+            <h4>성과</h4>
+            <ul>
+                <li>참여자 78%가 성남시 계속 거주</li>
+                <li>지역경제 파급효과 연간 250억원</li>
+                <li>청년 정책 만족도 85% 달성</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 플로팅 액션 버튼 -->
+    <div class="floating-actions">
+        <button class="floating-btn" onclick="downloadPDF()" title="PDF 다운로드">
+            <i data-lucide="download"></i>
+        </button>
+        <button class="floating-btn scroll-top" onclick="scrollToTop()" title="맨 위로">
+            <i data-lucide="arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- JavaScript -->    <script src="js/common.js"></script>
+    <script>
+        // Lucide 아이콘 초기화
+        lucide.createIcons();
+
+        // 모달 열기
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // 모달 닫기
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // 모달 외부 클릭 시 닫기
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // ESC 키로 모달 닫기
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const openModals = document.querySelectorAll('.modal[style*="flex"]');
+                openModals.forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // 스크롤 인디케이터 업데이트
+        function updateScrollIndicator() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            
+            document.getElementById('scrollIndicator').style.width = scrollPercent + '%';
+        }
+
+        // PDF 다운로드 함수
+        function downloadPDF() {
+            alert('PDF 다운로드 기능은 구현 예정입니다.');
+        }
+
+        // 맨 위로 스크롤
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 카드 호버 효과 강화
+        function initCardInteractions() {
+            const caseCards = document.querySelectorAll('.case-card');
+            
+            caseCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-12px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        }
+
+        // 테이블 필터링 기능
+        function initTableFiltering() {
+            const table = document.querySelector('.comparison-table');
+            if (!table) return;
+            
+            // 테이블 행에 호버 효과 추가
+            const rows = table.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                row.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = 'rgba(46, 91, 186, 0.1)';
+                });
+                
+                row.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = '';
+                });
+            });
+        }
+
+        // 성공 확률 애니메이션
+        function animateSuccessProbability() {
+            const probabilityScore = document.querySelector('.probability-score');
+            const factorScores = document.querySelectorAll('.factor-score');
+            
+            if (probabilityScore) {
+                let count = 0;
+                const target = 87;
+                const increment = target / 100;
+                
+                const updateCounter = () => {
+                    count += increment;
+                    if (count < target) {
+                        probabilityScore.textContent = Math.floor(count) + '%';
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        probabilityScore.textContent = target + '%';
+                    }
+                };
+                
+                // 요소가 화면에 보일 때 애니메이션 시작
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            updateCounter();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                observer.observe(probabilityScore);
+            }
+            
+            // 요인별 점수 애니메이션
+            factorScores.forEach((score, index) => {
+                const targets = [90, 85, 88, 84];
+                const target = targets[index];
+                let count = 0;
+                const increment = target / 80;
+                
+                const updateCounter = () => {
+                    count += increment;
+                    if (count < target) {
+                        score.textContent = Math.floor(count) + '%';
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        score.textContent = target + '%';
+                    }
+                };
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => updateCounter(), index * 200);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                observer.observe(score);
+            });
+        }
+
+        // 리스크 카드 인터랙션
+        function initRiskCardInteractions() {
+            const riskCards = document.querySelectorAll('.risk-card');
+            
+            riskCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const mitigation = this.querySelector('.risk-mitigation');
+                    
+                    // 다른 카드들의 확장 상태 제거
+                    riskCards.forEach(otherCard => {
+                        if (otherCard !== this) {
+                            otherCard.classList.remove('expanded');
+                            const otherMitigation = otherCard.querySelector('.risk-mitigation');
+                            if (otherMitigation) {
+                                otherMitigation.style.maxHeight = '60px';
+                            }
+                        }
+                    });
+                    
+                    // 현재 카드 토글
+                    this.classList.toggle('expanded');
+                    if (this.classList.contains('expanded')) {
+                        mitigation.style.maxHeight = mitigation.scrollHeight + 'px';
+                    } else {
+                        mitigation.style.maxHeight = '60px';
+                    }
+                });
+                
+                // 초기 상태 설정
+                const mitigation = card.querySelector('.risk-mitigation');
+                mitigation.style.maxHeight = '60px';
+                mitigation.style.overflow = 'hidden';
+                mitigation.style.transition = 'max-height 0.3s ease';
+            });
+        }
+
+        // 스크롤 애니메이션
+        function initScrollAnimations() {
+            const animateElements = document.querySelectorAll('.case-card, .analysis-card, .risk-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            animateElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        }
+
+        // 테이블 하이라이트 기능
+        function initTableHighlight() {
+            const table = document.querySelector('.comparison-table');
+            if (!table) return;
+            
+            const cells = table.querySelectorAll('td, th');
+            
+            cells.forEach(cell => {
+                cell.addEventListener('mouseenter', function() {
+                    const columnIndex = Array.from(this.parentNode.children).indexOf(this);
+                    const rows = table.querySelectorAll('tr');
+                    
+                    rows.forEach(row => {
+                        const cellInColumn = row.children[columnIndex];
+                        if (cellInColumn) {
+                            cellInColumn.style.backgroundColor = 'rgba(46, 91, 186, 0.1)';
+                        }
+                    });
+                });
+                
+                cell.addEventListener('mouseleave', function() {
+                    const columnIndex = Array.from(this.parentNode.children).indexOf(this);
+                    const rows = table.querySelectorAll('tr');
+                    
+                    rows.forEach(row => {
+                        const cellInColumn = row.children[columnIndex];
+                        if (cellInColumn && !cellInColumn.classList.contains('highlight') && !cellInColumn.classList.contains('project-name')) {
+                            cellInColumn.style.backgroundColor = '';
+                        }
+                    });
+                });
+            });
+        }
+
+        // 페이지 로드 시 실행
+        window.addEventListener('load', function() {
+            initCardInteractions();
+            initTableFiltering();
+            animateSuccessProbability();
+            initRiskCardInteractions();
+            initScrollAnimations();
+            initTableHighlight();
+        });
+
+        // 스크롤 이벤트
+        window.addEventListener('scroll', function() {
+            updateScrollIndicator();
+            
+            // 헤더 스크롤 효과
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 반응형 테이블 스크롤 힌트
+        function initResponsiveTableHint() {
+            const tableContainer = document.querySelector('.comparison-container');
+            if (!tableContainer) return;
+            
+            if (window.innerWidth <= 768) {
+                const hint = document.createElement('div');
+                hint.textContent = '← 좌우로 스크롤하여 전체 내용을 확인하세요 →';
+                hint.style.textAlign = 'center';
+                hint.style.padding = '10px';
+                hint.style.background = 'rgba(46, 91, 186, 0.1)';
+                hint.style.color = 'var(--primary-color)';
+                hint.style.fontSize = '0.9rem';
+                hint.style.marginBottom = '10px';
+                hint.style.borderRadius = '8px';
+                
+                tableContainer.insertBefore(hint, tableContainer.firstChild);
+            }
+        }
+
+        // 윈도우 리사이즈 이벤트
+        window.addEventListener('resize', function() {
+            initResponsiveTableHint();
+        });
+
+        // 페이지 로드 완료 후 실행
+        document.addEventListener('DOMContentLoaded', function() {
+            initResponsiveTableHint();
+        });
+    </script>
+</body>
+</html>

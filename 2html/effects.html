@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기대효과 | 밀양 청년 Re-Turn 브릿지</title>
+    <meta name="description" content="정량적·정성적 효과를 통한 사업 가치 및 파급효과 입증">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        /* 기대효과 페이지 전용 스타일 */
+        .page-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 120px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><polygon fill="rgba(255,255,255,0.1)" points="0,200 1000,0 1000,200"/></svg>');
+            background-size: cover;
+            background-position: bottom;
+        }
+        
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-title {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-md);
+            color: white;
+        }
+        
+        .page-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .breadcrumb {
+            margin-top: var(--spacing-md);
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            align-items: center;
+        }
+        
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+        
+        .breadcrumb a:hover {
+            color: white;
+        }
+        
+        .kpi-dashboard {
+            padding: var(--spacing-xxl) 0;
+            background: var(--neutral-bg);
+        }
+        
+        .kpi-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .kpi-card {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition-medium);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+        
+        .kpi-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .kpi-card.highlight {
+            background: var(--gradient-secondary);
+            color: white;
+        }
+        
+        .kpi-card.highlight::before {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .kpi-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .kpi-card.highlight .kpi-icon {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .kpi-number {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-xs);
+            color: var(--primary-color);
+        }
+        
+        .kpi-card.highlight .kpi-number {
+            color: white;
+        }
+        
+        .kpi-label {
+            font-weight: 500;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .kpi-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .kpi-card.highlight .kpi-description {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .kpi-progress {
+            width: 100%;
+            height: 6px;
+            background: var(--neutral-bg);
+            border-radius: 3px;
+            margin-top: var(--spacing-sm);
+            overflow: hidden;
+        }
+        
+        .kpi-progress-bar {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+            transition: width 2s ease-out;
+        }
+        
+        .kpi-card.highlight .kpi-progress {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .kpi-card.highlight .kpi-progress-bar {
+            background: white;
+        }
+        
+        .economic-impact {
+            padding: var(--spacing-xxl) 0;
+        }
+        
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .impact-card {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+            transition: var(--transition-medium);
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .impact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .impact-card.primary {
+            border-left-color: var(--primary-color);
+        }
+        
+        .impact-card.secondary {
+            border-left-color: var(--secondary-color);
+        }
+        
+        .impact-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .impact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--spacing-sm);
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .impact-card.primary .impact-icon {
+            background: var(--gradient-primary);
+        }
+        
+        .impact-card.secondary .impact-icon {
+            background: var(--gradient-secondary);
+        }
+        
+        .impact-card .impact-icon {
+            background: var(--gradient-accent);
+        }
+        
+        .impact-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .impact-value {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .impact-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .impact-details {
+            list-style: none;
+            margin-top: var(--spacing-md);
+        }
+        
+        .impact-details li {
+            padding: var(--spacing-xs) 0;
+            position: relative;
+            padding-left: var(--spacing-md);
+            color: var(--text-secondary);
+        }
+        
+        .impact-details li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+        
+        .calculation-section {
+            background: var(--neutral-bg);
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .calculation-formula {
+            background: white;
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            font-family: 'Roboto Mono', monospace;
+            text-align: center;
+            border: 2px solid var(--primary-color);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .social-impact {
+            padding: var(--spacing-xxl) 0;
+            background: var(--neutral-bg);
+        }
+        
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .social-card {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-md);
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition-medium);
+        }
+        
+        .social-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-sm);
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .social-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .social-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .long-term-vision {
+            padding: var(--spacing-xxl) 0;
+        }
+        
+        .vision-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gradient-primary);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .vision-item {
+            position: relative;
+            margin-bottom: var(--spacing-xl);
+            display: flex;
+            align-items: center;
+        }
+        
+        .vision-item:nth-child(odd) {
+            flex-direction: row;
+        }
+        
+        .vision-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .vision-content {
+            width: 45%;
+            background: white;
+            padding: var(--spacing-md);
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+        }
+        
+        .vision-year {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            z-index: 10;
+            border: 4px solid white;
+        }
+        
+        .vision-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .vision-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .success-metrics {
+            padding: var(--spacing-xxl) 0;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .metric-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .metric-number {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .chart-section {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .chart-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+            text-align: center;
+            color: var(--primary-color);
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+        }
+        
+        .navigation-footer {
+            padding: var(--spacing-lg) 0;
+            background: white;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-footer-content .btn {
+            min-width: 150px;
+        }
+        
+        @media (max-width: 768px) {
+            .kpi-overview {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .vision-timeline .timeline-line {
+                left: 30px;
+                transform: none;
+            }
+            
+            .vision-item {
+                flex-direction: row !important;
+            }
+            
+            .vision-content {
+                width: calc(100% - 80px);
+                margin-left: 80px;
+            }
+            
+            .vision-year {
+                left: 30px;
+                transform: translateY(-50%);
+                width: 60px;
+                height: 30px;
+                font-size: 0.9rem;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .nav-footer-content {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .kpi-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    
+    <!-- 외부 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i data-lucide="home"></i>
+                </div>
+                밀양 Re-Turn 브릿지
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">홈</a></li>
+                <li><a href="background.html" class="nav-link">배경·문제점</a></li>
+                <li><a href="solution.html" class="nav-link">개선방안</a></li>
+                <li><a href="budget.html" class="nav-link">사업예산</a></li>
+                <li><a href="effects.html" class="nav-link active">기대효과</a></li>
+                <li><a href="benchmarking.html" class="nav-link">벤치마킹</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 스크롤 인디케이터 -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- 페이지 헤더 -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1 class="page-title">기대효과</h1>
+                <p class="page-subtitle">정량적·정성적 효과를 통한 사업 가치 및 파급효과 입증</p>
+                <div class="breadcrumb">
+                    <a href="index.html">홈</a>
+                    <i data-lucide="chevron-right"></i>
+                    <span>기대효과</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KPI 대시보드 -->
+    <section class="kpi-dashboard">
+        <div class="container">
+            <h2 class="text-center mb-5">핵심 성과 지표 (KPI)</h2>
+            
+            <div class="kpi-overview">
+                <div class="kpi-card highlight">
+                    <div class="kpi-icon">
+                        <i data-lucide="users-round"></i>
+                    </div>
+                    <div class="kpi-number text-number" data-target="500">0</div>
+                    <div class="kpi-label">참여 청년 수</div>
+                    <div class="kpi-description">5년간 누적 참여자</div>
+                    <div class="kpi-progress">
+                        <div class="kpi-progress-bar" data-progress="100"></div>
+                    </div>
+                </div>
+                
+                <div class="kpi-card">
+                    <div class="kpi-icon">
+                        <i data-lucide="home"></i>
+                    </div>
+                    <div class="kpi-number text-number" data-target="85">0</div>
+                    <div class="kpi-label">정착률 (%)</div>
+                    <div class="kpi-description">프로그램 완료 후 정착</div>
+                    <div class="kpi-progress">
+                        <div class="kpi-progress-bar" data-progress="85"></div>
+                    </div>
+                </div>
+                
+                <div class="kpi-card">
+                    <div class="kpi-icon">
+                        <i data-lucide="briefcase"></i>
+                    </div>
+                    <div class="kpi-number text-number" data-target="350">0</div>
+                    <div class="kpi-label">일자리 창출</div>
+                    <div class="kpi-description">직접·간접 일자리</div>
+                    <div class="kpi-progress">
+                        <div class="kpi-progress-bar" data-progress="70"></div>
+                    </div>
+                </div>
+                
+                <div class="kpi-card">
+                    <div class="kpi-icon">
+                        <i data-lucide="rocket"></i>
+                    </div>
+                    <div class="kpi-number text-number" data-target="45">0</div>
+                    <div class="kpi-label">창업 기업 수</div>
+                    <div class="kpi-description">청년 창업 지원</div>
+                    <div class="kpi-progress">
+                        <div class="kpi-progress-bar" data-progress="60"></div>
+                    </div>
+                </div>
+                
+                <div class="kpi-card">
+                    <div class="kpi-icon">
+                        <i data-lucide="trending-up"></i>
+                    </div>
+                    <div class="kpi-number text-number" data-target="152">0</div>
+                    <div class="kpi-label">경제 파급효과</div>
+                    <div class="kpi-description">억원 지역경제 기여</div>
+                    <div class="kpi-progress">
+                        <div class="kpi-progress-bar" data-progress="90"></div>
+                    </div>
+                </div>
+                
+                <div class="kpi-card">
+                    <div class="kpi-icon">
+                        <i data-lucide="award"></i>
+                    </div>
+                    <div class="kpi-number text-number" data-target="92">0</div>
+                    <div class="kpi-label">만족도 (%)</div>
+                    <div class="kpi-description">참여자 만족도</div>
+                    <div class="kpi-progress">
+                        <div class="kpi-progress-bar" data-progress="92"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 경제적 파급효과 -->
+    <section class="economic-impact">
+        <div class="container">
+            <h2 class="text-center mb-5">경제적 파급효과</h2>
+            
+            <div class="impact-grid">
+                <div class="impact-card primary">
+                    <div class="impact-header">
+                        <div class="impact-icon">
+                            <i data-lucide="dollar-sign"></i>
+                        </div>
+                        <h3 class="impact-title">직접 경제효과</h3>
+                    </div>
+                    <div class="impact-value">89억원</div>
+                    <p class="impact-description">사업 참여자들의 직접적인 경제활동을 통한 생산 유발 효과</p>
+                    <ul class="impact-details">
+                        <li>창업 기업 매출: 45억원</li>
+                        <li>취업 임금 총액: 28억원</li>
+                        <li>소비 지출 증가: 16억원</li>
+                    </ul>
+                </div>
+                
+                <div class="impact-card secondary">
+                    <div class="impact-header">
+                        <div class="impact-icon">
+                            <i data-lucide="repeat"></i>
+                        </div>
+                        <h3 class="impact-title">간접 경제효과</h3>
+                    </div>
+                    <div class="impact-value">63억원</div>
+                    <p class="impact-description">연관 산업과 지역 내 순환 경제를 통한 부가적 경제 효과</p>
+                    <ul class="impact-details">
+                        <li>연관 산업 파급: 35억원</li>
+                        <li>지역 내 소비 증가: 18억원</li>
+                        <li>부동산 가치 상승: 10억원</li>
+                    </ul>
+                </div>
+                
+                <div class="impact-card">
+                    <div class="impact-header">
+                        <div class="impact-icon">
+                            <i data-lucide="piggy-bank"></i>
+                        </div>
+                        <h3 class="impact-title">세수 증대효과</h3>
+                    </div>
+                    <div class="impact-value">12억원</div>
+                    <p class="impact-description">소득세, 법인세, 지방세 등 세수 증가를 통한 재정 건전성 기여</p>
+                    <ul class="impact-details">
+                        <li>소득세 증가: 5억원</li>
+                        <li>법인세 증가: 4억원</li>
+                        <li>지방세 증가: 3억원</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="calculation-section">
+                <h3 class="text-center mb-3">경제적 파급효과 산출 근거</h3>
+                <div class="calculation-formula">
+                    총 경제적 파급효과 = 직접효과(89억) + 간접효과(63억) = 152억원
+                </div>
+                <p class="text-center text-secondary">
+                    한국은행 산업연관표(2019년 기준) 및 지역경제 승수효과 1.71 적용
+                </p>
+            </div>
+            
+            <!-- 경제효과 추이 차트 -->
+            <div class="chart-section">
+                <h3 class="chart-title">연도별 경제적 파급효과 추이</h3>
+                <div class="chart-wrapper">
+                    <canvas id="economicImpactChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 사회적 가치 -->
+    <section class="social-impact">
+        <div class="container">
+            <h2 class="text-center mb-5">사회적 가치 창출</h2>
+            
+            <div class="social-grid">
+                <div class="social-card">
+                    <div class="social-icon">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <h4 class="social-title">인구 증가</h4>
+                    <p class="social-description">청년 인구 유입을 통한 지역 활력 증진 및 지속가능한 도시 발전 기반 조성</p>
+                </div>
+                
+                <div class="social-card">
+                    <div class="social-icon">
+                        <i data-lucide="heart"></i>
+                    </div>
+                    <h4 class="social-title">지역 브랜드</h4>
+                    <p class="social-description">청년 친화적 도시 이미지 구축을 통한 밀양시 브랜드 가치 향상</p>
+                </div>
+                
+                <div class="social-card">
+                    <div class="social-icon">
+                        <i data-lucide="lightbulb"></i>
+                    </div>
+                    <h4 class="social-title">혁신 생태계</h4>
+                    <p class="social-description">창업과 혁신을 통한 지역 산업의 현대화 및 경쟁력 강화</p>
+                </div>
+                
+                <div class="social-card">
+                    <div class="social-icon">
+                        <i data-lucide="handshake"></i>
+                    </div>
+                    <h4 class="social-title">사회 통합</h4>
+                    <p class="social-description">세대 간 소통과 협력을 통한 지역 사회 결속력 강화</p>
+                </div>
+                
+                <div class="social-card">
+                    <div class="social-icon">
+                        <i data-lucide="recycle"></i>
+                    </div>
+                    <h4 class="social-title">지속가능성</h4>
+                    <p class="social-description">자립적 운영 모델을 통한 장기적이고 지속가능한 정책 추진</p>
+                </div>
+                
+                <div class="social-card">
+                    <div class="social-icon">
+                        <i data-lucide="globe"></i>
+                    </div>
+                    <h4 class="social-title">모델 확산</h4>
+                    <p class="social-description">성공 모델의 타 지역 확산을 통한 국가 균형발전 기여</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 장기 비전 -->
+    <section class="long-term-vision">
+        <div class="container">
+            <h2 class="text-center mb-5">장기 비전 및 확산 계획</h2>
+            
+            <div class="vision-timeline">
+                <div class="timeline-line"></div>
+                
+                <div class="vision-item">
+                    <div class="vision-year">2030</div>
+                    <div class="vision-content">
+                        <h4 class="vision-title">밀양 청년 도시 완성</h4>
+                        <p class="vision-description">청년 인구 2만명 달성, 자립적 청년 생태계 구축, 전국 대표 청년 도시로 브랜딩</p>
+                    </div>
+                </div>
+                
+                <div class="vision-item">
+                    <div class="vision-year">2032</div>
+                    <div class="vision-content">
+                        <h4 class="vision-title">경남권 확산</h4>
+                        <p class="vision-description">경상남도 내 5개 시·군으로 모델 확산, 광역 청년 네트워크 구축</p>
+                    </div>
+                </div>
+                
+                <div class="vision-item">
+                    <div class="vision-year">2035</div>
+                    <div class="vision-content">
+                        <h4 class="vision-title">전국 확산</h4>
+                        <p class="vision-description">전국 50개 지자체 확산, 국가 청년정책 표준 모델로 정착</p>
+                    </div>
+                </div>
+                
+                <div class="vision-item">
+                    <div class="vision-year">2040</div>
+                    <div class="vision-content">
+                        <h4 class="vision-title">글로벌 모델</h4>
+                        <p class="vision-description">아시아 지역 소멸 대응 모델로 국제적 인정, 해외 수출</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 성공 지표 -->
+    <section class="success-metrics">
+        <div class="container">
+            <h2>5년 후 달성 목표</h2>
+            <p class="lead">밀양 Re-Turn 브릿지를 통해 달성하고자 하는 구체적 성과</p>
+            
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <div class="metric-number text-number" data-target="500">0</div>
+                    <div class="metric-label">참여 청년 수 (명)</div>
+                </div>
+                
+                <div class="metric-item">
+                    <div class="metric-number text-number" data-target="425">0</div>
+                    <div class="metric-label">정착 청년 수 (명)</div>
+                </div>
+                
+                <div class="metric-item">
+                    <div class="metric-number text-number" data-target="45">0</div>
+                    <div class="metric-label">창업 기업 수 (개)</div>
+                </div>
+                
+                <div class="metric-item">
+                    <div class="metric-number text-number" data-target="350">0</div>
+                    <div class="metric-label">창출 일자리 (개)</div>
+                </div>
+                
+                <div class="metric-item">
+                    <div class="metric-number text-number" data-target="152">0</div>
+                    <div class="metric-label">경제 파급효과 (억원)</div>
+                </div>
+                
+                <div class="metric-item">
+                    <div class="metric-number">3.04</div>
+                    <div class="metric-label">투자 대비 효과 (배)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 네비게이션 푸터 -->
+    <section class="navigation-footer">
+        <div class="container">
+            <div class="nav-footer-content">
+                <a href="budget.html" class="btn btn-outline">
+                    <i data-lucide="arrow-left"></i>
+                    이전 페이지
+                </a>
+                <span class="text-muted">4 / 5</span>
+                <a href="benchmarking.html" class="btn btn-primary">
+                    다음 페이지
+                    <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 플로팅 액션 버튼 -->
+    <div class="floating-actions">
+        <button class="floating-btn" onclick="downloadPDF()" title="PDF 다운로드">
+            <i data-lucide="download"></i>
+        </button>
+        <button class="floating-btn scroll-top" onclick="scrollToTop()" title="맨 위로">
+            <i data-lucide="arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/common.js"></script>
+    <script>
+        // Lucide 아이콘 초기화
+        lucide.createIcons();
+
+        // 카운터 애니메이션
+        function animateCounter(element, target) {
+            let count = 0;
+            const increment = target / 100;
+            
+            const updateCounter = () => {
+                count += increment;
+                if (count < target) {
+                    element.textContent = Math.floor(count);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            };
+            
+            updateCounter();
+        }
+
+        // 숫자 카운터 실행
+        function startCounters() {
+            const counters = document.querySelectorAll('[data-target]');
+            counters.forEach(counter => {
+                const target = parseFloat(counter.dataset.target);
+                animateCounter(counter, target);
+            });
+        }
+
+        // 프로그레스 바 애니메이션
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('[data-progress]');
+            progressBars.forEach(bar => {
+                const progress = parseInt(bar.dataset.progress);
+                setTimeout(() => {
+                    bar.style.width = progress + '%';
+                }, 300);
+            });
+        }
+
+        // 경제효과 추이 차트
+        function drawEconomicImpactChart() {
+            const ctx = document.getElementById('economicImpactChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['2025년', '2026년', '2027년', '2028년', '2029년'],
+                    datasets: [{
+                        label: '직접 효과',
+                        data: [8, 15, 20, 23, 23],
+                        backgroundColor: '#2E5BBA',
+                        borderRadius: 4
+                    }, {
+                        label: '간접 효과',
+                        data: [5, 10, 14, 17, 17],
+                        backgroundColor: '#FF6B35',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + '억원';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: true,
+                            title: {
+                                display: true,
+                                text: '연도'
+                            }
+                        },
+                        y: {
+                            stacked: true,
+                            title: {
+                                display: true,
+                                text: '경제 효과 (억원)'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // 스크롤 인디케이터 업데이트
+        function updateScrollIndicator() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            
+            document.getElementById('scrollIndicator').style.width = scrollPercent + '%';
+        }
+
+        // PDF 다운로드 함수
+        function downloadPDF() {
+            alert('PDF 다운로드 기능은 구현 예정입니다.');
+        }
+
+        // 맨 위로 스크롤
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 페이지 로드 시 실행
+        window.addEventListener('load', function() {
+            startCounters();
+            animateProgressBars();
+            drawEconomicImpactChart();
+        });
+
+        // 스크롤 이벤트
+        window.addEventListener('scroll', function() {
+            updateScrollIndicator();
+            
+            // 헤더 스크롤 효과
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

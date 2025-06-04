@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사업예산 | 밀양 청년 Re-Turn 브릿지</title>
+    <meta name="description" content="투명하고 합리적인 예산 계획으로 사업의 실행 가능성 입증">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        /* 사업예산 페이지 전용 스타일 */
+        .page-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 120px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><polygon fill="rgba(255,255,255,0.1)" points="0,200 1000,0 1000,200"/></svg>');
+            background-size: cover;
+            background-position: bottom;
+        }
+        
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-title {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-md);
+            color: white;
+        }
+        
+        .page-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .breadcrumb {
+            margin-top: var(--spacing-md);
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            align-items: center;
+        }
+        
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+        
+        .breadcrumb a:hover {
+            color: white;
+        }
+        
+        .budget-summary {
+            padding: var(--spacing-xxl) 0;
+            background: var(--neutral-bg);
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .summary-card {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition-medium);
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        .summary-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .summary-card.total {
+            border-top-color: var(--secondary-color);
+            background: var(--gradient-secondary);
+            color: white;
+        }
+        
+        .summary-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            font-size: 1.5rem;
+            color: white;
+            background: var(--gradient-primary);
+        }
+        
+        .summary-card.total .summary-icon {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .summary-number {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-xs);
+            color: var(--primary-color);
+        }
+        
+        .summary-card.total .summary-number {
+            color: white;
+        }
+        
+        .summary-label {
+            font-weight: 500;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .summary-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .summary-card.total .summary-description {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .budget-chart-section {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .chart-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+            text-align: center;
+            color: var(--primary-color);
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+        }
+        
+        .detailed-budget {
+            padding: var(--spacing-xxl) 0;
+        }
+        
+        .year-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: var(--spacing-xl);
+            background: white;
+            border-radius: 12px;
+            padding: var(--spacing-xs);
+            box-shadow: var(--shadow-light);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .year-tab {
+            flex: 1;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        
+        .year-tab.active {
+            background: var(--gradient-primary);
+            color: white;
+        }
+        
+        .year-content {
+            display: none;
+        }
+        
+        .year-content.active {
+            display: block;
+        }
+        
+        .budget-table-container {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+            overflow-x: auto;
+        }
+        
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .budget-table th,
+        .budget-table td {
+            padding: var(--spacing-sm) var(--spacing-md);
+            text-align: left;
+            border-bottom: 1px solid var(--neutral-bg);
+        }
+        
+        .budget-table th {
+            background: var(--neutral-bg);
+            font-weight: 600;
+            color: var(--text-primary);
+            position: sticky;
+            top: 0;
+        }
+        
+        .budget-table tr:hover {
+            background: var(--neutral-bg);
+        }
+        
+        .category-header {
+            background: var(--gradient-primary);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .category-header:hover {
+            background: var(--gradient-primary) !important;
+        }
+        
+        .amount {
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 500;
+            text-align: right;
+        }
+        
+        .total-row {
+            background: var(--neutral-bg);
+            font-weight: 600;
+        }
+        
+        .sustainability {
+            padding: var(--spacing-xxl) 0;
+            background: var(--neutral-bg);
+        }
+        
+        .sustainability-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: start;
+        }
+        
+        .revenue-model {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+        }
+        
+        .revenue-sources {
+            list-style: none;
+            margin-top: var(--spacing-md);
+        }
+        
+        .revenue-sources li {
+            padding: var(--spacing-sm) 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--neutral-bg);
+        }
+        
+        .revenue-sources li:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            background: var(--neutral-bg);
+            padding: var(--spacing-sm);
+            border-radius: 8px;
+        }
+        
+        .revenue-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .revenue-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+        }
+        
+        .revenue-amount {
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 500;
+            color: var(--accent-color);
+        }
+        
+        .roadmap {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+        }
+        
+        .roadmap-timeline {
+            position: relative;
+            margin-top: var(--spacing-md);
+        }
+        
+        .roadmap-item {
+            position: relative;
+            padding-left: var(--spacing-xl);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: -var(--spacing-lg);
+            width: 2px;
+            background: var(--gradient-primary);
+        }
+        
+        .roadmap-item:last-child::before {
+            bottom: 0;
+        }
+        
+        .roadmap-marker {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--primary-color);
+        }
+        
+        .roadmap-year {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .roadmap-title {
+            font-weight: 500;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .roadmap-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .efficiency-analysis {
+            padding: var(--spacing-xxl) 0;
+        }
+        
+        .efficiency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        
+        .efficiency-card {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            transition: var(--transition-medium);
+        }
+        
+        .efficiency-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .efficiency-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .efficiency-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .efficiency-value {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .efficiency-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .comparison-table {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+            margin-top: var(--spacing-lg);
+            overflow-x: auto;
+        }
+        
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: var(--spacing-sm) var(--spacing-md);
+            text-align: center;
+            border-bottom: 1px solid var(--neutral-bg);
+        }
+        
+        .comparison-table th {
+            background: var(--neutral-bg);
+            font-weight: 600;
+        }
+        
+        .comparison-table .highlight {
+            background: rgba(76, 175, 80, 0.1);
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .navigation-footer {
+            padding: var(--spacing-lg) 0;
+            background: white;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-footer-content .btn {
+            min-width: 150px;
+        }
+        
+        @media (max-width: 768px) {
+            .sustainability-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .year-tabs {
+                flex-direction: column;
+            }
+            
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .efficiency-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .budget-table-container {
+                font-size: 0.9rem;
+            }
+            
+            .nav-footer-content {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+        }
+    </style>
+    
+    <!-- 외부 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i data-lucide="home"></i>
+                </div>
+                밀양 Re-Turn 브릿지
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">홈</a></li>
+                <li><a href="background.html" class="nav-link">배경·문제점</a></li>
+                <li><a href="solution.html" class="nav-link">개선방안</a></li>
+                <li><a href="budget.html" class="nav-link active">사업예산</a></li>
+                <li><a href="effects.html" class="nav-link">기대효과</a></li>
+                <li><a href="benchmarking.html" class="nav-link">벤치마킹</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 스크롤 인디케이터 -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- 페이지 헤더 -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1 class="page-title">사업예산</h1>
+                <p class="page-subtitle">투명하고 합리적인 예산 계획으로 사업의 실행 가능성 입증</p>
+                <div class="breadcrumb">
+                    <a href="index.html">홈</a>
+                    <i data-lucide="chevron-right"></i>
+                    <span>사업예산</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 예산 요약 -->
+    <section class="budget-summary">
+        <div class="container">
+            <h2 class="text-center mb-5">예산 요약</h2>
+            
+            <div class="summary-grid">
+                <div class="summary-card total">
+                    <div class="summary-icon">
+                        <i data-lucide="banknote"></i>
+                    </div>
+                    <div class="summary-number text-number" data-target="50">0</div>
+                    <div class="summary-label">총 사업비 (억원)</div>
+                    <div class="summary-description">5년간 총 투자 규모</div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i data-lucide="building"></i>
+                    </div>
+                    <div class="summary-number text-number" data-target="15">0</div>
+                    <div class="summary-label">인프라 구축비 (억원)</div>
+                    <div class="summary-description">Re-Turn 스페이스 조성</div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i data-lucide="graduation-cap"></i>
+                    </div>
+                    <div class="summary-number text-number" data-target="20">0</div>
+                    <div class="summary-label">교육 프로그램비 (억원)</div>
+                    <div class="summary-description">아카데미 운영 및 교육</div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i data-lucide="heart-handshake"></i>
+                    </div>
+                    <div class="summary-number text-number" data-target="12">0</div>
+                    <div class="summary-label">정착 지원비 (억원)</div>
+                    <div class="summary-description">주거·생활·창업 지원</div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i data-lucide="settings"></i>
+                    </div>
+                    <div class="summary-number text-number" data-target="3">0</div>
+                    <div class="summary-label">운영관리비 (억원)</div>
+                    <div class="summary-description">인건비 및 운영비</div>
+                </div>
+            </div>
+            
+            <!-- 예산 분배 차트 -->
+            <div class="budget-chart-section">
+                <h3 class="chart-title">예산 분배 현황</h3>
+                <div class="chart-wrapper">
+                    <canvas id="budgetPieChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- 연차별 투자 차트 -->
+            <div class="budget-chart-section">
+                <h3 class="chart-title">연차별 투자 계획</h3>
+                <div class="chart-wrapper">
+                    <canvas id="yearlyBudgetChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 연차별 상세 예산 -->
+    <section class="detailed-budget">
+        <div class="container">
+            <h2 class="text-center mb-5">연차별 상세 예산</h2>
+            
+            <div class="year-tabs">
+                <button class="year-tab active" data-year="2025">2025년</button>
+                <button class="year-tab" data-year="2026">2026년</button>
+                <button class="year-tab" data-year="2027">2027년</button>
+                <button class="year-tab" data-year="2028">2028년</button>
+                <button class="year-tab" data-year="2029">2029년</button>
+            </div>
+            
+            <!-- 2025년 예산 -->
+            <div class="year-content active" id="year-2025">
+                <div class="budget-table-container">
+                    <h3 class="mb-3">2025년 예산 계획 (15억원)</h3>
+                    <table class="budget-table">
+                        <thead>
+                            <tr>
+                                <th>항목</th>
+                                <th>세부 내역</th>
+                                <th>예산 (백만원)</th>
+                                <th>비율 (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="category-header">
+                                <td colspan="4">인프라 구축</td>
+                            </tr>
+                            <tr>
+                                <td>Re-Turn 스페이스</td>
+                                <td>건물 임차 및 리모델링</td>
+                                <td class="amount">800</td>
+                                <td class="amount">53.3</td>
+                            </tr>
+                            <tr>
+                                <td>IT 인프라</td>
+                                <td>서버, 네트워크, 소프트웨어</td>
+                                <td class="amount">200</td>
+                                <td class="amount">13.3</td>
+                            </tr>
+                            <tr class="category-header">
+                                <td colspan="4">프로그램 운영</td>
+                            </tr>
+                            <tr>
+                                <td>아카데미 개설</td>
+                                <td>커리큘럼 개발, 강사비</td>
+                                <td class="amount">300</td>
+                                <td class="amount">20.0</td>
+                            </tr>
+                            <tr>
+                                <td>멘토링 프로그램</td>
+                                <td>멘토 수당, 운영비</td>
+                                <td class="amount">100</td>
+                                <td class="amount">6.7</td>
+                            </tr>
+                            <tr class="category-header">
+                                <td colspan="4">운영비</td>
+                            </tr>
+                            <tr>
+                                <td>인건비</td>
+                                <td>상근직 3명</td>
+                                <td class="amount">80</td>
+                                <td class="amount">5.3</td>
+                            </tr>
+                            <tr>
+                                <td>관리비</td>
+                                <td>임대료, 유지비, 기타</td>
+                                <td class="amount">20</td>
+                                <td class="amount">1.3</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td colspan="2"><strong>총 계</strong></td>
+                                <td class="amount"><strong>1,500</strong></td>
+                                <td class="amount"><strong>100.0</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- 다른 연도들도 유사한 구조 -->
+            <div class="year-content" id="year-2026">
+                <div class="budget-table-container">
+                    <h3 class="mb-3">2026년 예산 계획 (12억원)</h3>
+                    <table class="budget-table">
+                        <thead>
+                            <tr>
+                                <th>항목</th>
+                                <th>세부 내역</th>
+                                <th>예산 (백만원)</th>
+                                <th>비율 (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="category-header">
+                                <td colspan="4">교육 프로그램 확대</td>
+                            </tr>
+                            <tr>
+                                <td>아카데미 운영</td>
+                                <td>정규 과정 3개 트랙</td>
+                                <td class="amount">500</td>
+                                <td class="amount">41.7</td>
+                            </tr>
+                            <tr>
+                                <td>창업 지원</td>
+                                <td>인큐베이팅, 자금 지원</td>
+                                <td class="amount">400</td>
+                                <td class="amount">33.3</td>
+                            </tr>
+                            <tr class="category-header">
+                                <td colspan="4">정착 지원</td>
+                            </tr>
+                            <tr>
+                                <td>주거 지원</td>
+                                <td>임대료 지원, 보증금</td>
+                                <td class="amount">200</td>
+                                <td class="amount">16.7</td>
+                            </tr>
+                            <tr>
+                                <td>생활 안정자금</td>
+                                <td>청년 100명 지원</td>
+                                <td class="amount">100</td>
+                                <td class="amount">8.3</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td colspan="2"><strong>총 계</strong></td>
+                                <td class="amount"><strong>1,200</strong></td>
+                                <td class="amount"><strong>100.0</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- 계속해서 다른 연도들... -->
+        </div>
+    </section>
+
+    <!-- 자립화 계획 -->
+    <section class="sustainability">
+        <div class="container">
+            <h2 class="text-center mb-5">지속가능성 및 자립화 계획</h2>
+            
+            <div class="sustainability-content">
+                <div class="revenue-model">
+                    <h3 class="mb-3"><i data-lucide="trending-up"></i> 수익 모델</h3>
+                    <p class="text-secondary mb-3">5년 후 자립 운영을 위한 다각화된 수익 구조</p>
+                    
+                    <ul class="revenue-sources">
+                        <li>
+                            <div class="revenue-item">
+                                <div class="revenue-icon">
+                                    <i data-lucide="building"></i>
+                                </div>
+                                <span>공간 임대 수익</span>
+                            </div>
+                            <span class="revenue-amount">3억원/년</span>
+                        </li>
+                        <li>
+                            <div class="revenue-item">
+                                <div class="revenue-icon">
+                                    <i data-lucide="graduation-cap"></i>
+                                </div>
+                                <span>교육 프로그램 수익</span>
+                            </div>
+                            <span class="revenue-amount">2억원/년</span>
+                        </li>
+                        <li>
+                            <div class="revenue-item">
+                                <div class="revenue-icon">
+                                    <i data-lucide="handshake"></i>
+                                </div>
+                                <span>기업 협력 수익</span>
+                            </div>
+                            <span class="revenue-amount">1.5억원/년</span>
+                        </li>
+                        <li>
+                            <div class="revenue-item">
+                                <div class="revenue-icon">
+                                    <i data-lucide="calendar"></i>
+                                </div>
+                                <span>이벤트 및 컨설팅</span>
+                            </div>
+                            <span class="revenue-amount">1억원/년</span>
+                        </li>
+                        <li>
+                            <div class="revenue-item">
+                                <strong>예상 총 수익</strong>
+                            </div>
+                            <span class="revenue-amount"><strong>7.5억원/년</strong></span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="roadmap">
+                    <h3 class="mb-3"><i data-lucide="map"></i> 자립화 로드맵</h3>
+                    <p class="text-secondary mb-3">단계적 자립 운영 달성 계획</p>
+                    
+                    <div class="roadmap-timeline">
+                        <div class="roadmap-item">
+                            <div class="roadmap-marker"></div>
+                            <div class="roadmap-year">2025-2026년</div>
+                            <div class="roadmap-title">기반 구축 단계</div>
+                            <div class="roadmap-description">인프라 조성 및 프로그램 런칭, 초기 참여자 모집</div>
+                        </div>
+                        
+                        <div class="roadmap-item">
+                            <div class="roadmap-marker"></div>
+                            <div class="roadmap-year">2027년</div>
+                            <div class="roadmap-title">성장 단계</div>
+                            <div class="roadmap-description">프로그램 안정화, 수익 모델 도입, 30% 자립 달성</div>
+                        </div>
+                        
+                        <div class="roadmap-item">
+                            <div class="roadmap-marker"></div>
+                            <div class="roadmap-year">2028년</div>
+                            <div class="roadmap-title">확장 단계</div>
+                            <div class="roadmap-description">사업 영역 확대, 기업 파트너십 강화, 60% 자립 달성</div>
+                        </div>
+                        
+                        <div class="roadmap-item">
+                            <div class="roadmap-marker"></div>
+                            <div class="roadmap-year">2029년</div>
+                            <div class="roadmap-title">자립 단계</div>
+                            <div class="roadmap-description">완전 자립 운영, 타 지역 확산 모델 구축</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 비용 효율성 분석 -->
+    <section class="efficiency-analysis">
+        <div class="container">
+            <h2 class="text-center mb-5">비용 효율성 분석</h2>
+            
+            <div class="efficiency-grid">
+                <div class="efficiency-card">
+                    <div class="efficiency-icon">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <h3 class="efficiency-title">1인당 투자비</h3>
+                    <div class="efficiency-value">1,000만원</div>
+                    <p class="efficiency-description">참여자 1인당 5년간 투자 금액으로 타 지역 대비 효율적 투자</p>
+                </div>
+                
+                <div class="efficiency-card">
+                    <div class="efficiency-icon">
+                        <i data-lucide="trending-up"></i>
+                    </div>
+                    <h3 class="efficiency-title">투자 대비 효과</h3>
+                    <div class="efficiency-value">3.04배</div>
+                    <p class="efficiency-description">50억 투자로 152억원의 경제적 파급효과 창출 예상</p>
+                </div>
+                
+                <div class="efficiency-card">
+                    <div class="efficiency-icon">
+                        <i data-lucide="briefcase"></i>
+                    </div>
+                    <h3 class="efficiency-title">일자리 창출비용</h3>
+                    <div class="efficiency-value">1,428만원</div>
+                    <p class="efficiency-description">일자리 1개 창출에 소요되는 비용 (350개 일자리 기준)</p>
+                </div>
+                
+                <div class="efficiency-card">
+                    <div class="efficiency-icon">
+                        <i data-lucide="clock"></i>
+                    </div>
+                    <h3 class="efficiency-title">투자회수 기간</h3>
+                    <div class="efficiency-value">7.2년</div>
+                    <p class="efficiency-description">경제적 파급효과를 고려한 투자 회수 예상 기간</p>
+                </div>
+            </div>
+            
+            <!-- 타 사업 대비 효율성 비교 -->
+            <div class="comparison-table">
+                <h3 class="text-center mb-3">타 지역 유사 사업 대비 효율성</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>구분</th>
+                            <th>밀양 Re-Turn 브릿지</th>
+                            <th>A시 청년정책</th>
+                            <th>B시 청년정책</th>
+                            <th>C시 청년정책</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>총 사업비</td>
+                            <td class="highlight">50억원</td>
+                            <td>75억원</td>
+                            <td>60억원</td>
+                            <td>45억원</td>
+                        </tr>
+                        <tr>
+                            <td>참여자 수</td>
+                            <td class="highlight">500명</td>
+                            <td>400명</td>
+                            <td>350명</td>
+                            <td>300명</td>
+                        </tr>
+                        <tr>
+                            <td>1인당 투자비</td>
+                            <td class="highlight">1,000만원</td>
+                            <td>1,875만원</td>
+                            <td>1,714만원</td>
+                            <td>1,500만원</td>
+                        </tr>
+                        <tr>
+                            <td>정착률</td>
+                            <td class="highlight">85%</td>
+                            <td>72%</td>
+                            <td>68%</td>
+                            <td>75%</td>
+                        </tr>
+                        <tr>
+                            <td>자립화 기간</td>
+                            <td class="highlight">5년</td>
+                            <td>7년</td>
+                            <td>8년</td>
+                            <td>6년</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 네비게이션 푸터 -->
+    <section class="navigation-footer">
+        <div class="container">
+            <div class="nav-footer-content">
+                <a href="solution.html" class="btn btn-outline">
+                    <i data-lucide="arrow-left"></i>
+                    이전 페이지
+                </a>
+                <span class="text-muted">3 / 5</span>
+                <a href="effects.html" class="btn btn-primary">
+                    다음 페이지
+                    <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 플로팅 액션 버튼 -->
+    <div class="floating-actions">
+        <button class="floating-btn" onclick="downloadPDF()" title="PDF 다운로드">
+            <i data-lucide="download"></i>
+        </button>
+        <button class="floating-btn scroll-top" onclick="scrollToTop()" title="맨 위로">
+            <i data-lucide="arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/common.js"></script>
+    <script>
+        // Lucide 아이콘 초기화
+        lucide.createIcons();
+
+        // 카운터 애니메이션
+        function animateCounter(element, target) {
+            let count = 0;
+            const increment = target / 100;
+            
+            const updateCounter = () => {
+                count += increment;
+                if (count < target) {
+                    element.textContent = Math.floor(count);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            };
+            
+            updateCounter();
+        }
+
+        // 숫자 카운터 실행
+        function startCounters() {
+            const counters = document.querySelectorAll('[data-target]');
+            counters.forEach(counter => {
+                const target = parseFloat(counter.dataset.target);
+                animateCounter(counter, target);
+            });
+        }
+
+        // 연도 탭 기능
+        function initYearTabs() {
+            const yearTabs = document.querySelectorAll('.year-tab');
+            const yearContents = document.querySelectorAll('.year-content');
+            
+            yearTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetYear = this.dataset.year;
+                    
+                    // 모든 탭과 콘텐츠에서 active 제거
+                    yearTabs.forEach(t => t.classList.remove('active'));
+                    yearContents.forEach(c => c.classList.remove('active'));
+                    
+                    // 클릭된 탭과 해당 콘텐츠에 active 추가
+                    this.classList.add('active');
+                    document.getElementById(`year-${targetYear}`).classList.add('active');
+                });
+            });
+        }
+
+        // 예산 분배 파이 차트
+        function drawBudgetPieChart() {
+            const ctx = document.getElementById('budgetPieChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['인프라 구축', '교육 프로그램', '정착 지원', '운영관리'],
+                    datasets: [{
+                        data: [15, 20, 12, 3],
+                        backgroundColor: [
+                            '#2E5BBA',
+                            '#FF6B35',
+                            '#4CAF50',
+                            '#FF9500'
+                        ],
+                        borderWidth: 0,
+                        cutout: '60%'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((context.parsed / total) * 100).toFixed(1);
+                                    return context.label + ': ' + context.parsed + '억원 (' + percentage + '%)';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 연차별 투자 차트
+        function drawYearlyBudgetChart() {
+            const ctx = document.getElementById('yearlyBudgetChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['2025년', '2026년', '2027년', '2028년', '2029년'],
+                    datasets: [{
+                        label: '정부 지원',
+                        data: [15, 12, 10, 8, 5],
+                        borderColor: '#2E5BBA',
+                        backgroundColor: 'rgba(46, 91, 186, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: '자체 수익',
+                        data: [0, 0, 3, 5, 7.5],
+                        borderColor: '#4CAF50',
+                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + '억원';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: '연도'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: '예산 (억원)'
+                            },
+                            beginAtZero: true
+                        }
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
+                    }
+                }
+            });
+        }
+
+        // 스크롤 인디케이터 업데이트
+        function updateScrollIndicator() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            
+            document.getElementById('scrollIndicator').style.width = scrollPercent + '%';
+        }
+
+        // PDF 다운로드 함수
+        function downloadPDF() {
+            alert('PDF 다운로드 기능은 구현 예정입니다.');
+        }
+
+        // 맨 위로 스크롤
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 페이지 로드 시 실행
+        window.addEventListener('load', function() {
+            startCounters();
+            initYearTabs();
+            drawBudgetPieChart();
+            drawYearlyBudgetChart();
+        });
+
+        // 스크롤 이벤트
+        window.addEventListener('scroll', function() {
+            updateScrollIndicator();
+            
+            // 헤더 스크롤 효과
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

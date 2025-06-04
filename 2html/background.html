@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배경 및 문제점 | 밀양 청년 Re-Turn 브릿지</title>
+    <meta name="description" content="밀양시 청년 현황과 주요 문제점을 데이터와 함께 분석">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        /* 배경 및 문제점 페이지 전용 스타일 */
+        .page-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 120px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><polygon fill="rgba(255,255,255,0.1)" points="0,200 1000,0 1000,200"/></svg>');
+            background-size: cover;
+            background-position: bottom;
+        }
+        
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-title {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-md);
+            color: white;
+        }
+        
+        .page-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .breadcrumb {
+            margin-top: var(--spacing-md);
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            align-items: center;
+        }
+        
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+        
+        .breadcrumb a:hover {
+            color: white;
+        }
+        
+        .dashboard-section {
+            padding: var(--spacing-xxl) 0;
+            background: var(--neutral-bg);
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .dashboard-card {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+            transition: var(--transition-medium);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .dashboard-card.critical {
+            border-left-color: var(--secondary-color);
+        }
+        
+        .dashboard-card.warning {
+            border-left-color: #FF9500;
+        }
+        
+        .dashboard-card.positive {
+            border-left-color: var(--accent-color);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--spacing-sm);
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .card-icon.critical {
+            background: var(--gradient-secondary);
+        }
+        
+        .card-icon.warning {
+            background: linear-gradient(135deg, #FF9500, #e6840a);
+        }
+        
+        .card-icon.positive {
+            background: var(--gradient-accent);
+        }
+        
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .card-number {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .card-number.critical {
+            color: var(--secondary-color);
+        }
+        
+        .card-number.warning {
+            color: #FF9500;
+        }
+        
+        .card-number.positive {
+            color: var(--accent-color);
+        }
+        
+        .card-label {
+            font-weight: 500;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .card-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .chart-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+            text-align: center;
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+        }
+        
+        .problem-analysis {
+            padding: var(--spacing-xxl) 0;
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        
+        .problem-item {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+            transition: var(--transition-medium);
+        }
+        
+        .problem-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .problem-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .problem-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-secondary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--spacing-md);
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .problem-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .problem-details {
+            list-style: none;
+        }
+        
+        .problem-details li {
+            padding: var(--spacing-xs) 0;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: var(--spacing-md);
+            line-height: 1.6;
+        }
+        
+        .problem-details li::before {
+            content: '⚠️';
+            position: absolute;
+            left: 0;
+            top: var(--spacing-xs);
+        }
+        
+        .swot-analysis {
+            padding: var(--spacing-xxl) 0;
+            background: var(--neutral-bg);
+        }
+        
+        .swot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .swot-item {
+            background: white;
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            transition: var(--transition-medium);
+        }
+        
+        .swot-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .swot-item.strengths {
+            border-top: 4px solid var(--accent-color);
+        }
+        
+        .swot-item.weaknesses {
+            border-top: 4px solid var(--secondary-color);
+        }
+        
+        .swot-item.opportunities {
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        .swot-item.threats {
+            border-top: 4px solid #FF9500;
+        }
+        
+        .swot-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .swot-item.strengths .swot-icon {
+            background: var(--gradient-accent);
+        }
+        
+        .swot-item.weaknesses .swot-icon {
+            background: var(--gradient-secondary);
+        }
+        
+        .swot-item.opportunities .swot-icon {
+            background: var(--gradient-primary);
+        }
+        
+        .swot-item.threats .swot-icon {
+            background: linear-gradient(135deg, #FF9500, #e6840a);
+        }
+        
+        .swot-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .swot-list {
+            list-style: none;
+            text-align: left;
+        }
+        
+        .swot-list li {
+            padding: var(--spacing-xs) 0;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: var(--spacing-md);
+            line-height: 1.5;
+        }
+        
+        .swot-list li::before {
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+        
+        .strengths .swot-list li::before {
+            content: '✓';
+            color: var(--accent-color);
+        }
+        
+        .weaknesses .swot-list li::before {
+            content: '✗';
+            color: var(--secondary-color);
+        }
+        
+        .opportunities .swot-list li::before {
+            content: '◯';
+            color: var(--primary-color);
+        }
+        
+        .threats .swot-list li::before {
+            content: '△';
+            color: #FF9500;
+        }
+        
+        .navigation-footer {
+            padding: var(--spacing-lg) 0;
+            background: white;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-footer-content .btn {
+            min-width: 150px;
+        }
+        
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .swot-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-footer-content {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+            
+            .breadcrumb {
+                flex-direction: column;
+                gap: var(--spacing-xs);
+            }
+        }
+    </style>
+    
+    <!-- 외부 라이브러리 -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i data-lucide="home"></i>
+                </div>
+                밀양 Re-Turn 브릿지
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">홈</a></li>
+                <li><a href="background.html" class="nav-link active">배경·문제점</a></li>
+                <li><a href="solution.html" class="nav-link">개선방안</a></li>
+                <li><a href="budget.html" class="nav-link">사업예산</a></li>
+                <li><a href="effects.html" class="nav-link">기대효과</a></li>
+                <li><a href="benchmarking.html" class="nav-link">벤치마킹</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 스크롤 인디케이터 -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- 페이지 헤더 -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1 class="page-title">배경 및 문제점</h1>
+                <p class="page-subtitle">데이터로 보는 밀양시 청년 문제의 현황과 심각성</p>
+                <div class="breadcrumb">
+                    <a href="index.html">홈</a>
+                    <i data-lucide="chevron-right"></i>
+                    <span>배경 및 문제점</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 현황 대시보드 -->
+    <section class="dashboard-section">
+        <div class="container">
+            <h2 class="text-center mb-5">밀양시 청년 현황 대시보드</h2>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card critical">
+                    <div class="card-header">
+                        <div class="card-icon critical">
+                            <i data-lucide="trending-down"></i>
+                        </div>
+                        <div class="card-title">인구 감소율</div>
+                    </div>
+                    <div class="card-number critical" data-target="4.2">0</div>
+                    <div class="card-label">연평균 감소율 (%)</div>
+                    <div class="card-description">최근 5년간 지속적인 인구 감소로 지역 소멸 위험 증가</div>
+                </div>
+                
+                <div class="dashboard-card critical">
+                    <div class="card-header">
+                        <div class="card-icon critical">
+                            <i data-lucide="user-minus"></i>
+                        </div>
+                        <div class="card-title">청년 순유출</div>
+                    </div>
+                    <div class="card-number critical" data-target="2847">0</div>
+                    <div class="card-label">2023년 순유출 인구</div>
+                    <div class="card-description">대학 진학 및 취업을 위한 대규모 청년 유출 발생</div>
+                </div>
+                
+                <div class="dashboard-card warning">
+                    <div class="card-header">
+                        <div class="card-icon warning">
+                            <i data-lucide="heart"></i>
+                        </div>
+                        <div class="card-title">출생아 수</div>
+                    </div>
+                    <div class="card-number warning" data-target="612">0</div>
+                    <div class="card-label">2023년 연간 출생</div>
+                    <div class="card-description">역대 최저 수준의 출생아 수로 고령화 가속</div>
+                </div>
+                
+                <div class="dashboard-card critical">
+                    <div class="card-header">
+                        <div class="card-icon critical">
+                            <i data-lucide="briefcase"></i>
+                        </div>
+                        <div class="card-title">청년 실업률</div>
+                    </div>
+                    <div class="card-number critical" data-target="23.5">0</div>
+                    <div class="card-label">15-29세 실업률 (%)</div>
+                    <div class="card-description">전국 평균(19.2%)보다 4.3%p 높은 실업률</div>
+                </div>
+                
+                <div class="dashboard-card warning">
+                    <div class="card-header">
+                        <div class="card-icon warning">
+                            <i data-lucide="building"></i>
+                        </div>
+                        <div class="card-title">청년 기업</div>
+                    </div>
+                    <div class="card-number warning" data-target="67">0</div>
+                    <div class="card-label">청년 창업 기업 수</div>
+                    <div class="card-description">창업 생태계 미흡으로 자체 일자리 창출 한계</div>
+                </div>
+                
+                <div class="dashboard-card positive">
+                    <div class="card-header">
+                        <div class="card-icon positive">
+                            <i data-lucide="map-pin"></i>
+                        </div>
+                        <div class="card-title">접근성</div>
+                    </div>
+                    <div class="card-number positive" data-target="45">0</div>
+                    <div class="card-label">부산 접근 시간(분)</div>
+                    <div class="card-description">KTX 및 고속도로로 우수한 교통 접근성 보유</div>
+                </div>
+            </div>
+            
+            <!-- 인구 변화 추이 차트 -->
+            <div class="chart-container">
+                <h3 class="chart-title">밀양시 인구 변화 추이 (2007-2025)</h3>
+                <div class="chart-wrapper">
+                    <canvas id="populationChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- 청년 유출 현황 차트 -->
+            <div class="chart-container">
+                <h3 class="chart-title">청년 연령대별 유출 현황 (2023년)</h3>
+                <div class="chart-wrapper">
+                    <canvas id="youthOutflowChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 문제점 분석 -->
+    <section class="problem-analysis">
+        <div class="container">
+            <h2 class="text-center mb-5">주요 문제점 분석</h2>
+            
+            <div class="problem-grid">
+                <div class="problem-item">
+                    <div class="problem-header">
+                        <div class="problem-icon">
+                            <i data-lucide="graduation-cap"></i>
+                        </div>
+                        <h3 class="problem-title">교육 기회 부족</h3>
+                    </div>
+                    <ul class="problem-details">
+                        <li>대학 진학 시 타 지역 이주 불가피</li>
+                        <li>직업교육 및 평생학습 기회 제한</li>
+                        <li>지역 특화 교육 프로그램 부재</li>
+                        <li>청년 대상 재교육 시스템 미흡</li>
+                    </ul>
+                </div>
+                
+                <div class="problem-item">
+                    <div class="problem-header">
+                        <div class="problem-icon">
+                            <i data-lucide="briefcase"></i>
+                        </div>
+                        <h3 class="problem-title">일자리 기회 제한</h3>
+                    </div>
+                    <ul class="problem-details">
+                        <li>청년 대상 양질의 일자리 부족</li>
+                        <li>산업 구조의 한계 (농업 위주)</li>
+                        <li>창업 지원 인프라 미흡</li>
+                        <li>지역 기업과 청년 간 매칭 시스템 부재</li>
+                    </ul>
+                </div>
+                
+                <div class="problem-item">
+                    <div class="problem-header">
+                        <div class="problem-icon">
+                            <i data-lucide="home"></i>
+                        </div>
+                        <h3 class="problem-title">정착 환경 미흡</h3>
+                    </div>
+                    <ul class="problem-details">
+                        <li>청년 맞춤형 주거 시설 부족</li>
+                        <li>문화·여가 시설 제한</li>
+                        <li>대중교통 접근성 제약</li>
+                        <li>청년 커뮤니티 및 네트워킹 공간 부재</li>
+                    </ul>
+                </div>
+                
+                <div class="problem-item">
+                    <div class="problem-header">
+                        <div class="problem-icon">
+                            <i data-lucide="heart-handshake"></i>
+                        </div>
+                        <h3 class="problem-title">지역 매력도 저하</h3>
+                    </div>
+                    <ul class="problem-details">
+                        <li>젊고 역동적인 도시 이미지 부족</li>
+                        <li>청년 친화적 정책 및 서비스 미흡</li>
+                        <li>지역 브랜드 가치 저하</li>
+                        <li>청년 세대와의 소통 부족</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SWOT 분석 -->
+    <section class="swot-analysis">
+        <div class="container">
+            <h2 class="text-center mb-5">밀양시 SWOT 분석</h2>
+            
+            <div class="swot-grid">
+                <div class="swot-item strengths">
+                    <div class="swot-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3 class="swot-title">강점 (Strengths)</h3>
+                    <ul class="swot-list">
+                        <li>우수한 교통 접근성 (KTX, 고속도로)</li>
+                        <li>풍부한 자연환경과 관광자원</li>
+                        <li>안정적인 행정 및 정책 추진력</li>
+                        <li>상대적으로 저렴한 생활비</li>
+                        <li>전통과 현대가 조화된 도시 특성</li>
+                    </ul>
+                </div>
+                
+                <div class="swot-item weaknesses">
+                    <div class="swot-icon">
+                        <i data-lucide="alert-triangle"></i>
+                    </div>
+                    <h3 class="swot-title">약점 (Weaknesses)</h3>
+                    <ul class="swot-list">
+                        <li>제한적인 산업 기반</li>
+                        <li>청년 일자리 기회 부족</li>
+                        <li>문화·여가 인프라 부족</li>
+                        <li>인구 감소 및 고령화 진행</li>
+                        <li>청년 유출 지속</li>
+                    </ul>
+                </div>
+                
+                <div class="swot-item opportunities">
+                    <div class="swot-icon">
+                        <i data-lucide="trending-up"></i>
+                    </div>
+                    <h3 class="swot-title">기회 (Opportunities)</h3>
+                    <ul class="swot-list">
+                        <li>원격 근무 문화 확산</li>
+                        <li>귀농·귀촌 트렌드 증가</li>
+                        <li>국가 균형발전 정책 추진</li>
+                        <li>청년 대상 지원 정책 확대</li>
+                        <li>스마트시티 및 디지털 전환</li>
+                    </ul>
+                </div>
+                
+                <div class="swot-item threats">
+                    <div class="swot-icon">
+                        <i data-lucide="alert-circle"></i>
+                    </div>
+                    <h3 class="swot-title">위협 (Threats)</h3>
+                    <ul class="swot-list">
+                        <li>수도권 집중 심화</li>
+                        <li>지방 소멸 위험 증대</li>
+                        <li>타 지자체와의 경쟁 심화</li>
+                        <li>저출산·고령화 가속</li>
+                        <li>지역경제 침체 지속</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 네비게이션 푸터 -->
+    <section class="navigation-footer">
+        <div class="container">
+            <div class="nav-footer-content">
+                <a href="index.html" class="btn btn-outline">
+                    <i data-lucide="arrow-left"></i>
+                    이전 페이지
+                </a>
+                <span class="text-muted">1 / 5</span>
+                <a href="solution.html" class="btn btn-primary">
+                    다음 페이지
+                    <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 플로팅 액션 버튼 -->
+    <div class="floating-actions">
+        <button class="floating-btn" onclick="downloadPDF()" title="PDF 다운로드">
+            <i data-lucide="download"></i>
+        </button>
+        <button class="floating-btn scroll-top" onclick="scrollToTop()" title="맨 위로">
+            <i data-lucide="arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/common.js"></script>
+    <script>
+        // Lucide 아이콘 초기화
+        lucide.createIcons();
+
+        // 카운터 애니메이션
+        function animateCounter(element, target) {
+            let count = 0;
+            const increment = target / 100;
+            
+            const updateCounter = () => {
+                count += increment;
+                if (count < target) {
+                    element.textContent = Math.floor(count);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            };
+            
+            updateCounter();
+        }
+
+        // 숫자 카운터 실행
+        function startCounters() {
+            const counters = document.querySelectorAll('[data-target]');
+            counters.forEach(counter => {
+                const target = parseFloat(counter.dataset.target);
+                animateCounter(counter, target);
+            });
+        }
+
+        // 인구 변화 추이 차트
+        function drawPopulationChart() {
+            const ctx = document.getElementById('populationChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['2007', '2009', '2011', '2013', '2015', '2017', '2019', '2021', '2023', '2025'],
+                    datasets: [{
+                        label: '총 인구',
+                        data: [111899, 110654, 109321, 107892, 106445, 105123, 103856, 102534, 101247, 105447],
+                        borderColor: '#2E5BBA',
+                        backgroundColor: 'rgba(46, 91, 186, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: '청년 인구 (20-39세)',
+                        data: [28456, 26834, 25123, 23456, 21789, 20123, 18456, 16789, 15123, 14234],
+                        borderColor: '#FF6B35',
+                        backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y.toLocaleString() + '명';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: '연도'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: '인구 수 (명)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toLocaleString() + '명';
+                                }
+                            }
+                        }
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
+                    }
+                }
+            });
+        }
+
+        // 청년 유출 현황 차트
+        function drawYouthOutflowChart() {
+            const ctx = document.getElementById('youthOutflowChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['15-19세', '20-24세', '25-29세'],
+                    datasets: [{
+                        data: [1247, 1356, 244],
+                        backgroundColor: [
+                            '#FF6B35',
+                            '#2E5BBA',
+                            '#4CAF50'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((context.parsed / total) * 100).toFixed(1);
+                                    return context.label + ': ' + context.parsed + '명 (' + percentage + '%)';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 스크롤 인디케이터 업데이트
+        function updateScrollIndicator() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            
+            document.getElementById('scrollIndicator').style.width = scrollPercent + '%';
+        }
+
+        // PDF 다운로드 함수
+        function downloadPDF() {
+            alert('PDF 다운로드 기능은 구현 예정입니다.');
+        }
+
+        // 맨 위로 스크롤
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 페이지 로드 시 실행
+        window.addEventListener('load', function() {
+            startCounters();
+            drawPopulationChart();
+            drawYouthOutflowChart();
+        });
+
+        // 스크롤 이벤트
+        window.addEventListener('scroll', function() {
+            updateScrollIndicator();
+            
+            // 헤더 스크롤 효과
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
