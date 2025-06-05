@@ -67,6 +67,22 @@
             transform: translateY(-5px) scale(1.02);
             box-shadow: 0 25px 50px rgba(0,0,0,0.15);
         }
+
+        /* 모바일 메뉴 애니메이션 */
+        #mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        #mobile-menu.open {
+            max-height: 400px;
+        }
+
+        /* 모바일 메뉴 링크 클릭 시 스무스 스크롤 */
+        .mobile-menu-link {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -79,6 +95,8 @@
                         <h1 class="text-xl font-bold gradient-text">AR 기반 생활환경 체험 서비스</h1>
                     </div>
                 </div>
+                
+                <!-- 데스크톱 메뉴 -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#problem" class="text-gray-700 hover:text-blue-600 transition duration-300">문제분석</a>
                     <a href="#solution" class="text-gray-700 hover:text-blue-600 transition duration-300">해결방안</a>
@@ -86,17 +104,32 @@
                     <a href="#impact" class="text-gray-700 hover:text-blue-600 transition duration-300">기대효과</a>
                     <a href="trend_analysis_report.html" class="text-gray-700 hover:text-blue-600 transition duration-300">트렌드분석</a>
                 </div>
+                
+                <!-- 모바일 메뉴 버튼 -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-button" class="text-gray-700">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <button id="mobile-menu-button" class="text-gray-700 focus:outline-none focus:text-blue-600">
+                        <svg id="menu-open-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <svg id="menu-close-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
                 </div>
             </div>
         </div>
+        
+        <!-- 모바일 메뉴 -->
+        <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-200 shadow-lg">
+            <div class="px-4 py-3 space-y-1">
+                <a href="#problem" class="mobile-menu-link block text-gray-700 hover:text-blue-600 hover:bg-blue-50 py-3 px-3 rounded-lg text-lg font-medium transition duration-300">📊 문제분석</a>
+                <a href="#solution" class="mobile-menu-link block text-gray-700 hover:text-blue-600 hover:bg-blue-50 py-3 px-3 rounded-lg text-lg font-medium transition duration-300">🚀 해결방안</a>
+                <a href="#technology" class="mobile-menu-link block text-gray-700 hover:text-blue-600 hover:bg-blue-50 py-3 px-3 rounded-lg text-lg font-medium transition duration-300">⚙️ 기술스택</a>
+                <a href="#impact" class="mobile-menu-link block text-gray-700 hover:text-blue-600 hover:bg-blue-50 py-3 px-3 rounded-lg text-lg font-medium transition duration-300">💰 기대효과</a>
+                <a href="trend_analysis_report.html" class="mobile-menu-link block text-gray-700 hover:text-blue-600 hover:bg-blue-50 py-3 px-3 rounded-lg text-lg font-medium transition duration-300">📈 트렌드분석</a>
+            </div>
+        </div>
     </nav>
-
     <!-- Hero Section -->
     <section class="hero-bg min-h-screen flex items-center justify-center text-white relative overflow-hidden">
         <div class="absolute inset-0 bg-black opacity-30"></div>
@@ -204,7 +237,7 @@
         </div>
     </section>
 
-    <!-- Solution Section - 대폭 확장 -->
+    <!-- Solution Section -->
     <section id="solution" class="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16" data-aos="fade-up">
@@ -247,407 +280,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- 1. AR 체험 서비스 상세 -->
-            <div class="mb-20" data-aos="fade-up">
-                <h3 class="text-3xl font-bold text-gray-900 mb-12 text-center">🎪 1단계: 혁신적 AR 체험 서비스</h3>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-                    <div>
-                        <h4 class="text-2xl font-bold text-gray-900 mb-6">📍 실시간 AR 정보 오버레이</h4>
-                        <div class="space-y-4">
-                            <div class="feature-card rounded-xl p-6">
-                                <div class="flex items-center space-x-4">
-                                    <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
-                                        <span class="text-white text-lg">🏥</span>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-bold text-gray-900">의료시설 완전 분석</h5>
-                                        <p class="text-gray-600 text-sm">병원까지 도보시간, 진료과목, 대기시간, 응급실 현황까지 실시간 표시</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="feature-card rounded-xl p-6">
-                                <div class="flex items-center space-x-4">
-                                    <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                                        <span class="text-white text-lg">🛒</span>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-bold text-gray-900">생활편의 스마트 분석</h5>
-                                        <p class="text-gray-600 text-sm">마트 가격비교, 24시간 편의점, 택배함 위치, 세탁소까지 완벽 매핑</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="feature-card rounded-xl p-6">
-                                <div class="flex items-center space-x-4">
-                                    <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
-                                        <span class="text-white text-lg">🚌</span>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-bold text-gray-900">교통 최적화 분석</h5>
-                                        <p class="text-gray-600 text-sm">실시간 버스 도착정보, 출퇴근 최적경로, 교통비 시뮬레이터</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="relative">
-                        <!-- AR 스마트폰 시연 -->
-                        <div class="relative mx-auto w-80 h-[500px] bg-gray-900 rounded-[3rem] p-6 shadow-2xl">
-                            <div class="w-full h-full bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 rounded-[2rem] relative overflow-hidden">
-                                <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                                
-                                <!-- AR 화면 콘텐츠 -->
-                                <div class="absolute inset-4 text-white">
-                                    <div class="text-center mb-4">
-                                        <div class="text-sm opacity-90">📍 밀양시 중앙로 157</div>
-                                        <div class="text-xs opacity-75">실시간 AR 생활정보</div>
-                                    </div>
-                                    
-                                    <!-- AR 정보 카드들 -->
-                                    <div class="space-y-3">
-                                        <div class="bg-white bg-opacity-20 backdrop-blur rounded-lg p-3">
-                                            <div class="flex items-center justify-between">
-                                                <div class="flex items-center space-x-2">
-                                                    <span>🏥</span>
-                                                    <span class="text-sm">밀양시립병원</span>
-                                                </div>
-                                                <span class="text-xs">도보 3분</span>
-                                            </div>
-                                            <div class="text-xs opacity-90 mt-1">응급실 운영중 • 대기 15분</div>
-                                        </div>
-
-                                        <div class="bg-white bg-opacity-20 backdrop-blur rounded-lg p-3">
-                                            <div class="flex items-center justify-between">
-                                                <div class="flex items-center space-x-2">
-                                                    <span>🛒</span>
-                                                    <span class="text-sm">이마트24</span>
-                                                </div>
-                                                <span class="text-xs">도보 1분</span>
-                                            </div>
-                                            <div class="text-xs opacity-90 mt-1">24시간 • 택배함 있음</div>
-                                        </div>
-
-                                        <div class="bg-white bg-opacity-20 backdrop-blur rounded-lg p-3">
-                                            <div class="flex items-center justify-between">
-                                                <div class="flex items-center space-x-2">
-                                                    <span>🚌</span>
-                                                    <span class="text-sm">중앙로정류장</span>
-                                                </div>
-                                                <span class="text-xs">도보 30초</span>
-                                            </div>
-                                            <div class="text-xs opacity-90 mt-1">다음버스 3분 후 • 부산 1시간</div>
-                                        </div>
-
-                                        <div class="bg-white bg-opacity-20 backdrop-blur rounded-lg p-3">
-                                            <div class="flex items-center justify-between">
-                                                <div class="flex items-center space-x-2">
-                                                    <span>☕</span>
-                                                    <span class="text-sm">스타벅스</span>
-                                                </div>
-                                                <span class="text-xs">도보 2분</span>
-                                            </div>
-                                            <div class="text-xs opacity-90 mt-1">Wi-Fi 무료 • 24시간 스터디</div>
-                                        </div>
-                                    </div>
-
-                                    <!-- 하단 액션 버튼 -->
-                                    <div class="absolute bottom-4 left-4 right-4">
-                                        <div class="bg-white bg-opacity-30 backdrop-blur rounded-full p-3 text-center">
-                                            <div class="text-sm font-semibold">💰 월 예상 생활비: 65만원</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 플로팅 AR 아이콘들 -->
-                        <div class="absolute -top-4 -right-4 w-16 h-16 bg-yellow-400 rounded-full pulse-dot flex items-center justify-center shadow-lg">
-                            <span class="text-2xl">🏥</span>
-                        </div>
-                        <div class="absolute top-32 -left-6 w-14 h-14 bg-green-400 rounded-full pulse-dot flex items-center justify-center shadow-lg" style="animation-delay: 0.5s;">
-                            <span class="text-xl">🛒</span>
-                        </div>
-                        <div class="absolute bottom-32 -right-6 w-12 h-12 bg-purple-400 rounded-full pulse-dot flex items-center justify-center shadow-lg" style="animation-delay: 1s;">
-                            <span class="text-lg">☕</span>
-                        </div>
-                        <div class="absolute bottom-12 -left-4 w-14 h-14 bg-blue-400 rounded-full pulse-dot flex items-center justify-center shadow-lg" style="animation-delay: 1.5s;">
-                            <span class="text-xl">🚌</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 혁신 기능들 -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="tech-stack-card rounded-xl p-6 text-center">
-                        <div class="text-4xl mb-4">🌅</div>
-                        <h5 class="font-bold text-gray-900 mb-2">시간 여행 기능</h5>
-                        <p class="text-gray-600 text-sm">아침, 점심, 저녁, 새벽까지 24시간 동네 분위기 체험</p>
-                    </div>
-                    
-                    <div class="tech-stack-card rounded-xl p-6 text-center">
-                        <div class="text-4xl mb-4">🌸</div>
-                        <h5 class="font-bold text-gray-900 mb-2">계절 체험 모드</h5>
-                        <p class="text-gray-600 text-sm">봄 벚꽃, 여름 축제, 가을 단풍까지 사계절 미리보기</p>
-                    </div>
-
-                    <div class="tech-stack-card rounded-xl p-6 text-center">
-                        <div class="text-4xl mb-4">🎯</div>
-                        <h5 class="font-bold text-gray-900 mb-2">라이프스타일 매칭</h5>
-                        <p class="text-gray-600 text-sm">개인 성향 분석 후 최적 거주지역 AI 추천</p>
-                    </div>
-
-                    <div class="tech-stack-card rounded-xl p-6 text-center">
-                        <div class="text-4xl mb-4">👥</div>
-                        <h5 class="font-bold text-gray-900 mb-2">가상 이웃 만나기</h5>
-                        <p class="text-gray-600 text-sm">기존 정착민의 실제 생활 모습을 AR 아바타로 체험</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 2. 통합 정보 플랫폼 -->
-            <div class="mb-20" data-aos="fade-up">
-                <h3 class="text-3xl font-bold text-gray-900 mb-12 text-center">🌐 2단계: 스마트 통합 정보 플랫폼</h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- 주거 정보 -->
-                    <div class="bg-white rounded-2xl shadow-xl p-8">
-                        <div class="text-center mb-6">
-                            <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <span class="text-white text-2xl">🏠</span>
-                            </div>
-                            <h4 class="text-xl font-bold text-gray-900">스마트 주거 분석</h4>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="border-l-4 border-blue-500 pl-4">
-                                <h5 class="font-semibold text-gray-900">실거래가 실시간 연동</h5>
-                                <p class="text-gray-600 text-sm">국토교통부 데이터 기반 정확한 시세 정보</p>
-                            </div>
-                            <div class="border-l-4 border-blue-500 pl-4">
-                                <h5 class="font-semibold text-gray-900">거주자 만족도 평가</h5>
-                                <p class="text-gray-600 text-sm">실제 입주민들의 솔직한 후기와 평점</p>
-                            </div>
-                            <div class="border-l-4 border-blue-500 pl-4">
-                                <h5 class="font-semibold text-gray-900">생활비 시뮬레이터</h5>
-                                <p class="text-gray-600 text-sm">개인 소비패턴 반영한 맞춤 예산 계산</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 일자리 정보 -->
-                    <div class="bg-white rounded-2xl shadow-xl p-8">
-                        <div class="text-center mb-6">
-                            <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <span class="text-white text-2xl">💼</span>
-                            </div>
-                            <h4 class="text-xl font-bold text-gray-900">맞춤형 일자리 매칭</h4>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="border-l-4 border-green-500 pl-4">
-                                <h5 class="font-semibold text-gray-900">실시간 구인정보</h5>
-                                <p class="text-gray-600 text-sm">워크넷, 사람인 등 주요 채용사이트 통합</p>
-                            </div>
-                            <div class="border-l-4 border-green-500 pl-4">
-                                <h5 class="font-semibold text-gray-900">나노산업단지 특화</h5>
-                                <p class="text-gray-600 text-sm">밀양 나노산업단지 입주기업 우선 노출</p>
-                            </div>
-                            <div class="border-l-4 border-green-500 pl-4">
-                                <h5 class="font-semibold text-gray-900">원격근무 필터링</h5>
-                                <p class="text-gray-600 text-sm">WFH 가능 일자리 별도 카테고리 운영</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 생활 정보 -->
-                    <div class="bg-white rounded-2xl shadow-xl p-8">
-                        <div class="text-center mb-6">
-                            <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <span class="text-white text-2xl">🌟</span>
-                            </div>
-                            <h4 class="text-xl font-bold text-gray-900">생활 편의 서비스</h4>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="border-l-4 border-purple-500 pl-4">
-                                <h5 class="font-semibold text-gray-900">문화·여가 가이드</h5>
-                                <p class="text-gray-600 text-sm">공연, 전시, 축제 일정과 할인 혜택</p>
-                            </div>
-                            <div class="border-l-4 border-purple-500 pl-4">
-                                <h5 class="font-semibold text-gray-900">공공서비스 안내</h5>
-                                <p class="text-gray-600 text-sm">도서관, 체육시설, 복지센터 이용 정보</p>
-                            </div>
-                            <div class="border-l-4 border-purple-500 pl-4">
-                                <h5 class="font-semibold text-gray-900">응급상황 대응</h5>
-                                <p class="text-gray-600 text-sm">야간 응급실, 약국, 24시간 서비스 정보</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. 멘토링 생태계 -->
-            <div class="mb-20" data-aos="fade-up">
-                <h3 class="text-3xl font-bold text-gray-900 mb-12 text-center">🤝 3단계: AI 기반 멘토링 생태계</h3>
-                
-                <div class="bg-white rounded-3xl shadow-2xl p-12">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <h4 class="text-2xl font-bold text-gray-900 mb-6">🧠 똑똑한 매칭 알고리즘</h4>
-                            <div class="space-y-6">
-                                <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6">
-                                    <h5 class="font-bold text-gray-900 mb-3">🔍 정밀 분석 매칭</h5>
-                                    <p class="text-gray-700 mb-4">연령대, 직업군, 취미, 성격, 가족구성까지 30여 가지 요소를 종합 분석</p>
-                                    <div class="flex flex-wrap gap-2">
-                                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">성격 유형</span>
-                                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs">라이프스타일</span>
-                                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">출신 지역</span>
-                                        <span class="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-xs">취미/관심사</span>
-                                    </div>
-                                </div>
-
-                                <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-6">
-                                    <h5 class="font-bold text-gray-900 mb-3">📚 단계별 가이드 시스템</h5>
-                                    <div class="space-y-3">
-                                        <div class="flex items-center space-x-3">
-                                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-sm">1</div>
-                                            <span class="text-gray-700">이주 준비: 집 찾기, 이사 체크리스트</span>
-                                        </div>
-                                        <div class="flex items-center space-x-3">
-                                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">2</div>
-                                            <span class="text-gray-700">정착 초기: 주민등록, 생활 인프라 등록</span>
-                                        </div>
-                                        <div class="flex items-center space-x-3">
-                                            <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm">3</div>
-                                            <span class="text-gray-700">커뮤니티 참여: 지역 모임, 인맥 형성</span>
-                                        </div>
-                                        <div class="flex items-center space-x-3">
-                                            <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-sm">4</div>
-                                            <span class="text-gray-700">완전 정착: 지역 발전 참여, 후배 멘토링</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="space-y-6">
-                            <!-- 멘토링 매칭 시뮬레이션 -->
-                            <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl p-8 text-white">
-                                <h5 class="text-xl font-bold mb-6 text-center">🎯 실시간 멘토 매칭</h5>
-                                
-                                <div class="space-y-4">
-                                    <div class="bg-white bg-opacity-20 backdrop-blur rounded-lg p-4">
-                                        <div class="flex items-center space-x-3 mb-2">
-                                            <div class="w-10 h-10 bg-white bg-opacity-30 rounded-full flex items-center justify-center">
-                                                <span class="text-lg">👨‍💼</span>
-                                            </div>
-                                            <div>
-                                                <div class="font-semibold">김멘토 (32세, IT 개발자)</div>
-                                                <div class="text-sm opacity-90">정착 3년차 • 매칭도 98%</div>
-                                            </div>
-                                        </div>
-                                        <div class="text-sm opacity-90">
-                                            "서울에서 이주한 개발자입니다. 원격근무 노하우와 밀양 생활의 장점을 알려드릴게요!"
-                                        </div>
-                                    </div>
-
-                                    <div class="bg-white bg-opacity-20 backdrop-blur rounded-lg p-4">
-                                        <div class="flex items-center space-x-3 mb-2">
-                                            <div class="w-10 h-10 bg-white bg-opacity-30 rounded-full flex items-center justify-center">
-                                                <span class="text-lg">👩‍🎨</span>
-                                            </div>
-                                            <div>
-                                                <div class="font-semibold">이멘토 (29세, 디자이너)</div>
-                                                <div class="text-sm opacity-90">정착 2년차 • 매칭도 95%</div>
-                                            </div>
-                                        </div>
-                                        <div class="text-sm opacity-90">
-                                            "부산에서 온 디자이너예요. 문화생활과 카페 맛집 정보가 궁금하다면 연락주세요!"
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="mt-6 text-center">
-                                    <button class="bg-white text-purple-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300">
-                                        💬 멘토와 채팅 시작하기
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- 커뮤니티 활동 -->
-                            <div class="bg-white border border-gray-200 rounded-2xl p-6">
-                                <h5 class="font-bold text-gray-900 mb-4">🌐 활발한 커뮤니티</h5>
-                                <div class="space-y-3">
-                                    <div class="flex justify-between items-center py-2 border-b border-gray-100">
-                                        <span class="text-gray-700">📚 청년 독서모임</span>
-                                        <span class="text-sm text-gray-500">매주 토요일</span>
-                                    </div>
-                                    <div class="flex justify-between items-center py-2 border-b border-gray-100">
-                                        <span class="text-gray-700">🏃‍♂️ 밀양 러닝 크루</span>
-                                        <span class="text-sm text-gray-500">매주 일요일</span>
-                                    </div>
-                                    <div class="flex justify-between items-center py-2 border-b border-gray-100">
-                                        <span class="text-gray-700">🍺 신규 정착민 환영회</span>
-                                        <span class="text-sm text-gray-500">매월 첫째 금요일</span>
-                                    </div>
-                                    <div class="flex justify-between items-center py-2">
-                                        <span class="text-gray-700">💻 IT 개발자 모임</span>
-                                        <span class="text-sm text-gray-500">매월 둘째 토요일</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 차별화 포인트 -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8" data-aos="fade-up">
-                <div class="bg-white rounded-2xl p-8 text-center shadow-xl card-hover">
-                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <span class="text-white text-3xl">🥇</span>
-                    </div>
-                    <h4 class="text-xl font-bold text-gray-900 mb-4">전국 최초 혁신</h4>
-                    <p class="text-gray-600 mb-4">지자체 최초 AR 기반 정착 지원 서비스로 전국 벤치마킹 대상</p>
-                    <div class="bg-blue-50 rounded-lg p-3">
-                        <span class="text-blue-800 font-semibold text-sm">💡 혁신도: 99/100점</span>
-                    </div>
-                </div>
-                
-                <div class="bg-white rounded-2xl p-8 text-center shadow-xl card-hover">
-                    <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <span class="text-white text-3xl">⚡</span>
-                    </div>
-                    <h4 class="text-xl font-bold text-gray-900 mb-4">즉시 접근 가능</h4>
-                    <p class="text-gray-600 mb-4">앱 설치 없이 링크 클릭만으로 바로 체험하는 WebXR 기술</p>
-                    <div class="bg-green-50 rounded-lg p-3">
-                        <span class="text-green-800 font-semibold text-sm">🚀 접근성: 100/100점</span>
-                    </div>
-                </div>
-                
-                <div class="bg-white rounded-2xl p-8 text-center shadow-xl card-hover">
-                    <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <span class="text-white text-3xl">🎯</span>
-                    </div>
-                    <h4 class="text-xl font-bold text-gray-900 mb-4">완벽한 맞춤화</h4>
-                    <p class="text-gray-600 mb-4">AI 기반 개인 라이프스타일 분석으로 최적 정착지 추천</p>
-                    <div class="bg-purple-50 rounded-lg p-3">
-                        <span class="text-purple-800 font-semibold text-sm">🎯 정확도: 98/100점</span>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-8 text-center shadow-xl card-hover">
-                    <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <span class="text-white text-3xl">💰</span>
-                    </div>
-                    <h4 class="text-xl font-bold text-gray-900 mb-4">확장 가능한 수익</h4>
-                    <p class="text-gray-600 mb-4">전국 226개 지자체 라이선스로 연간 45억원 잠재 시장</p>
-                    <div class="bg-orange-50 rounded-lg p-3">
-                        <span class="text-orange-800 font-semibold text-sm">📈 확장성: 226개 지자체</span>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -683,41 +315,10 @@
                     <p class="text-sm text-orange-600">개인 맞춤 최적화</p>
                 </div>
             </div>
-
-            <!-- 구현 타임라인 -->
-            <div class="bg-gray-50 rounded-2xl p-8" data-aos="fade-up">
-                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">📅 4단계 구현 계획</h3>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">1</div>
-                        <h4 class="font-bold text-gray-900 mb-2">MVP 개발</h4>
-                        <p class="text-sm text-gray-600 mb-2">3개월</p>
-                        <p class="text-xs text-gray-500">기본 플랫폼 구축 및 핵심 AR 기능</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">2</div>
-                        <h4 class="font-bold text-gray-900 mb-2">베타 서비스</h4>
-                        <p class="text-sm text-gray-600 mb-2">3개월</p>
-                        <p class="text-xs text-gray-500">전체 지역 확장 및 사용자 테스트</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">3</div>
-                        <h4 class="font-bold text-gray-900 mb-2">정식 런칭</h4>
-                        <p class="text-sm text-gray-600 mb-2">3개월</p>
-                        <p class="text-xs text-gray-500">완전 기능 통합 및 마케팅 시작</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">4</div>
-                        <h4 class="font-bold text-gray-900 mb-2">전국 확산 및 수익화</h4>
-                        <p class="text-sm text-gray-600 mb-2">6개월</p>
-                        <p class="text-xs text-gray-500">226개 지자체 라이선스 및 다각화된 수익 모델 가동</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- Impact & ROI Section -->
+    <!-- Impact Section -->
     <section id="impact" class="py-20 bg-gradient-to-br from-green-50 to-blue-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16" data-aos="fade-up">
@@ -725,65 +326,6 @@
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
                     구체적인 수치로 검증된 투자 가치와 전국 226개 지자체 확산을 통한 지속가능한 수익 모델
                 </p>
-            </div>
-
-            <!-- ROI 계산기 -->
-            <div class="bg-white rounded-2xl shadow-2xl p-8 mb-16" data-aos="zoom-in">
-                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">📊 ROI 계산기</h3>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    <div>
-                        <div class="space-y-6">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">연간 청년 유입 목표</label>
-                                <input type="range" id="youthInflux" min="100" max="500" value="200" class="w-full">
-                                <div class="flex justify-between text-sm text-gray-500">
-                                    <span>100명</span>
-                                    <span id="youthInfluxValue" class="font-bold text-blue-600">200명</span>
-                                    <span>500명</span>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">정착률 개선 목표 (30% → 60%)</label>
-                                <input type="range" id="settlementRate" min="30" max="80" value="60" class="w-full">
-                                <div class="flex justify-between text-sm text-gray-500">
-                                    <span>30%</span>
-                                    <span id="settlementRateValue" class="font-bold text-green-600">60%</span>
-                                    <span>80%</span>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">1인당 연간 지방세 기여</label>
-                                <input type="range" id="taxContribution" min="100" max="300" value="150" class="w-full">
-                                <div class="flex justify-between text-sm text-gray-500">
-                                    <span>100만원</span>
-                                    <span id="taxContributionValue" class="font-bold text-purple-600">150만원</span>
-                                    <span>300만원</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 rounded-xl p-6">
-                        <h4 class="text-xl font-bold text-gray-900 mb-6">💡 투자 수익 분석</h4>
-                        <div class="space-y-4">
-                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
-                                <span class="text-gray-700">초기 투자 비용</span>
-                                <span class="font-bold text-red-600">1.1억원</span>
-                            </div>
-                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
-                                <span class="text-gray-700">연간 세수 증대</span>
-                                <span id="annualRevenue" class="font-bold text-green-600">1.8억원</span>
-                            </div>
-                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
-                                <span class="text-gray-700">투자 회수 기간</span>
-                                <span id="paybackPeriod" class="font-bold text-blue-600">7개월</span>
-                            </div>
-                            <div class="flex justify-between items-center py-3 bg-green-100 rounded-lg px-4">
-                                <span class="text-green-800 font-bold">3년 누적 수익</span>
-                                <span id="totalProfit" class="font-bold text-green-800 text-xl">4.3억원</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- 기대 효과 카운터 -->
@@ -807,223 +349,6 @@
                     <div class="text-4xl font-bold text-orange-600 mb-2" data-counter="36">0</div>
                     <div class="text-gray-600">투자 회수 기간</div>
                     <div class="text-sm text-gray-500 mt-1">개월</div>
-                </div>
-            </div>
-
-            <!-- 수익 모델 차트 -->
-            <div class="mt-16 bg-white rounded-2xl shadow-xl p-8" data-aos="fade-up">
-                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">📈 지속가능한 수익 모델</h3>
-                <div class="h-96">
-                    <canvas id="revenueChart"></canvas>
-                </div>
-            </div>
-
-            <!-- 장기 수익 모델 상세 -->
-            <div class="mt-16 bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8" data-aos="fade-up">
-                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">🚀 전국 확산 기반 장기 수익 모델</h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                    <!-- 1. 타 지자체 라이선스 -->
-                    <div class="bg-white rounded-xl p-6 shadow-lg">
-                        <div class="text-center mb-4">
-                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <span class="text-white text-xl">🏛️</span>
-                            </div>
-                            <h4 class="font-bold text-gray-900">지자체 라이선스</h4>
-                        </div>
-                        <div class="space-y-2 text-sm">
-                            <div class="flex justify-between">
-                                <span class="text-gray-600">전국 기초지자체</span>
-                                <span class="font-semibold">226개</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-gray-600">연간 라이선스비</span>
-                                <span class="font-semibold">2,000만원</span>
-                            </div>
-                            <div class="border-t pt-2 mt-2">
-                                <div class="flex justify-between">
-                                    <span class="text-blue-600 font-bold">잠재 시장 규모</span>
-                                    <span class="text-blue-600 font-bold">45억원</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 2. 플랫폼 중개 수수료 -->
-                    <div class="bg-white rounded-xl p-6 shadow-lg">
-                        <div class="text-center mb-4">
-                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <span class="text-white text-xl">💰</span>
-                            </div>
-                            <h4 class="font-bold text-gray-900">중개 수수료</h4>
-                        </div>
-                        <div class="space-y-2 text-sm">
-                            <div class="flex justify-between">
-                                <span class="text-gray-600">부동산 거래</span>
-                                <span class="font-semibold">1% 수수료</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-gray-600">일자리 매칭</span>
-                                <span class="font-semibold">성공 수수료</span>
-                            </div>
-                            <div class="border-t pt-2 mt-2">
-                                <div class="flex justify-between">
-                                    <span class="text-green-600 font-bold">연간 목표</span>
-                                    <span class="text-green-600 font-bold">5억원</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3. 지역 상권 광고 -->
-                    <div class="bg-white rounded-xl p-6 shadow-lg">
-                        <div class="text-center mb-4">
-                            <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <span class="text-white text-xl">📢</span>
-                            </div>
-                            <h4 class="font-bold text-gray-900">제휴 광고</h4>
-                        </div>
-                        <div class="space-y-2 text-sm">
-                            <div class="flex justify-between">
-                                <span class="text-gray-600">식당·카페</span>
-                                <span class="font-semibold">월 광고비</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-gray-600">마트·편의점</span>
-                                <span class="font-semibold">제휴 수수료</span>
-                            </div>
-                            <div class="border-t pt-2 mt-2">
-                                <div class="flex justify-between">
-                                    <span class="text-purple-600 font-bold">연간 목표</span>
-                                    <span class="text-purple-600 font-bold">2억원</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 4. 프리미엄 서비스 -->
-                    <div class="bg-white rounded-xl p-6 shadow-lg">
-                        <div class="text-center mb-4">
-                            <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <span class="text-white text-xl">⭐</span>
-                            </div>
-                            <h4 class="font-bold text-gray-900">프리미엄 서비스</h4>
-                        </div>
-                        <div class="space-y-2 text-sm">
-                            <div class="flex justify-between">
-                                <span class="text-gray-600">맞춤 컨설팅</span>
-                                <span class="font-semibold">개별 상담</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-gray-600">VIP 멘토링</span>
-                                <span class="font-semibold">1:1 전담</span>
-                            </div>
-                            <div class="border-t pt-2 mt-2">
-                                <div class="flex justify-between">
-                                    <span class="text-orange-600 font-bold">연간 목표</span>
-                                    <span class="text-orange-600 font-bold">1억원</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 수익 모델 요약 -->
-                <div class="bg-white rounded-xl p-8 shadow-lg">
-                    <h4 class="text-xl font-bold text-gray-900 mb-6 text-center">💡 단계별 수익 확산 전략</h4>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <!-- 1단계: 밀양 검증 -->
-                        <div class="text-center">
-                            <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <span class="text-white text-2xl">🎯</span>
-                            </div>
-                            <h5 class="font-bold text-gray-900 mb-3">1단계: 밀양 성공 모델 구축</h5>
-                            <div class="space-y-2 text-sm">
-                                <div class="bg-blue-50 rounded-lg p-3">
-                                    <div class="font-semibold text-blue-800">연간 200명 청년 유입</div>
-                                    <div class="text-blue-600">정착률 30% → 60% 개선</div>
-                                </div>
-                                <div class="text-gray-600">검증된 성공 사례 확보</div>
-                            </div>
-                        </div>
-
-                        <!-- 2단계: 권역별 확산 -->
-                        <div class="text-center">
-                            <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <span class="text-white text-2xl">🌍</span>
-                            </div>
-                            <h5 class="font-bold text-gray-900 mb-3">2단계: 권역별 라이선스 확산</h5>
-                            <div class="space-y-2 text-sm">
-                                <div class="bg-green-50 rounded-lg p-3">
-                                    <div class="font-semibold text-green-800">경남권 → 전국 확산</div>
-                                    <div class="text-green-600">연 50개 지자체 목표</div>
-                                </div>
-                                <div class="text-gray-600">벤치마킹 → 라이선스 전환</div>
-                            </div>
-                        </div>
-
-                        <!-- 3단계: 플랫폼 생태계 -->
-                        <div class="text-center">
-                            <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <span class="text-white text-2xl">🚀</span>
-                            </div>
-                            <h5 class="font-bold text-gray-900 mb-3">3단계: 종합 플랫폼 완성</h5>
-                            <div class="space-y-2 text-sm">
-                                <div class="bg-purple-50 rounded-lg p-3">
-                                    <div class="font-semibold text-purple-800">전국 생태계 구축</div>
-                                    <div class="text-purple-600">다양한 수익원 확보</div>
-                                </div>
-                                <div class="text-gray-600">지속가능한 비즈니스 모델</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 총 수익 예상 -->
-                    <div class="mt-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-6 text-white text-center">
-                        <h5 class="text-xl font-bold mb-4">🎯 5년 후 연간 총 수익 목표</h5>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                            <div>
-                                <div class="text-2xl font-bold">10억원</div>
-                                <div class="text-sm opacity-90">라이선스</div>
-                            </div>
-                            <div>
-                                <div class="text-2xl font-bold">5억원</div>
-                                <div class="text-sm opacity-90">중개수수료</div>
-                            </div>
-                            <div>
-                                <div class="text-2xl font-bold">3억원</div>
-                                <div class="text-sm opacity-90">제휴광고</div>
-                            </div>
-                            <div>
-                                <div class="text-2xl font-bold">2억원</div>
-                                <div class="text-sm opacity-90">프리미엄</div>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-4 border-t border-white border-opacity-30">
-                            <div class="text-3xl font-bold">총 20억원</div>
-                            <div class="text-lg opacity-90">연간 수익 목표 (5년 후)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 정부 지원 연계 -->
-                <div class="mt-8 bg-white rounded-xl p-6 shadow-lg">
-                    <h4 class="text-lg font-bold text-gray-900 mb-4 text-center">🏛️ 정부 지원 사업 연계 가능성</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="bg-blue-50 rounded-lg p-4">
-                            <h5 class="font-semibold text-blue-800 mb-2">스마트시티 국가시범도시</h5>
-                            <p class="text-sm text-blue-600">AR/VR 기술 활용 도시 서비스 연계</p>
-                        </div>
-                        <div class="bg-green-50 rounded-lg p-4">
-                            <h5 class="font-semibold text-green-800 mb-2">디지털 뉴딜 정책</h5>
-                            <p class="text-sm text-green-600">디지털 전환 우수사례 지원금</p>
-                        </div>
-                        <div class="bg-purple-50 rounded-lg p-4">
-                            <h5 class="font-semibold text-purple-800 mb-2">지역균형뉴딜</h5>
-                            <p class="text-sm text-purple-600">인구 감소 지역 특별 지원</p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1115,14 +440,62 @@
     </footer>
 
     <script>
-        // Chart.js 로딩 확인
+        // 모바일 메뉴 토글 기능
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM loaded');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuOpenIcon = document.getElementById('menu-open-icon');
+            const menuCloseIcon = document.getElementById('menu-close-icon');
+
+            mobileMenuButton.addEventListener('click', function() {
+                const isOpen = mobileMenu.classList.contains('open');
+                
+                if (isOpen) {
+                    // 메뉴 닫기
+                    mobileMenu.classList.remove('open');
+                    menuOpenIcon.classList.remove('hidden');
+                    menuCloseIcon.classList.add('hidden');
+                } else {
+                    // 메뉴 열기
+                    mobileMenu.classList.add('open');
+                    menuOpenIcon.classList.add('hidden');
+                    menuCloseIcon.classList.remove('hidden');
+                }
+            });
+
+            // 모바일 메뉴 링크 클릭 시 메뉴 닫기
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 메뉴 닫기
+                    mobileMenu.classList.remove('open');
+                    menuOpenIcon.classList.remove('hidden');
+                    menuCloseIcon.classList.add('hidden');
+                    
+                    // 스무스 스크롤
+                    const target = this.getAttribute('href');
+                    if (target.startsWith('#')) {
+                        const element = document.querySelector(target);
+                        if (element) {
+                            element.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    } else {
+                        // 외부 링크는 바로 이동
+                        window.location.href = target;
+                    }
+                });
+            });
+
+            // Chart.js 로딩 확인
             if (typeof Chart === 'undefined') {
                 console.error('Chart.js is not loaded');
-                return;
+            } else {
+                console.log('Chart.js loaded successfully:', Chart.version);
             }
-            console.log('Chart.js loaded successfully:', Chart.version);
             
             // AOS 초기화
             AOS.init({
@@ -1151,12 +524,6 @@
                 behavior: 'smooth'
             });
         }
-
-        // 모바일 메뉴 토글
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            // 모바일 메뉴 구현 (간단한 버전)
-            alert('모바일 메뉴 기능은 실제 구현에서 완성됩니다.');
-        });
 
         // 카운터 애니메이션
         function animateCounters() {
