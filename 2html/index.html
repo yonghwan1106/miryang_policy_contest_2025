@@ -2,9 +2,16 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>밀양 청년 Re-Turn 브릿지 | 청년이 돌아오는 밀양, 꿈이 시작되는 공간</title>
     <meta name="description" content="밀양시 정책제안 공모전 - 청년 정착 지원 종합 솔루션">
+    <meta name="theme-color" content="#2E5BBA">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="밀양 청년 Re-Turn 브릿지">
+    <meta property="og:description" content="청년이 돌아오는 밀양, 꿈이 시작되는 공간 - 밀양시 정책제안">
+    <meta property="og:url" content="">
     
     <!-- CSS -->
     <link rel="stylesheet" href="css/common.css">
@@ -13,6 +20,9 @@
     <!-- 외부 라이브러리 -->
     <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" as="style">
 </head>
 <body class="index-page">
     <!-- 헤더 -->
@@ -22,7 +32,7 @@
                 <div class="logo-icon">
                     <i data-lucide="home"></i>
                 </div>
-                밀양 Re-Turn 브릿지
+                <span class="logo-text" title="밀양 청년 Re-Turn 브릿지">밀양 Re-Turn 브릿지</span>
             </a>
             
             <ul class="nav-menu">
@@ -33,8 +43,18 @@
                 <li><a href="effects.html" class="nav-link">기대효과</a></li>
                 <li><a href="benchmarking.html" class="nav-link">벤치마킹</a></li>
             </ul>
+            
+            <!-- 모바일 메뉴 토글 버튼 -->
+            <button class="mobile-menu-toggle" aria-label="메뉴 열기">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
+
+    <!-- 모바일 오버레이 -->
+    <div class="mobile-overlay"></div>
 
     <!-- 스크롤 인디케이터 -->
     <div class="scroll-indicator" id="scrollIndicator"></div>
@@ -43,21 +63,24 @@
     <section class="hero" id="hero">
         <div class="hero-content">
             <div class="hero-text">
-                <h1 class="animate-fadeInUp">청년이 돌아오는 밀양,<br>꿈이 시작되는 공간</h1>
+                <h1 class="animate-fadeInUp">청년이 돌아오는 밀양,<br><span class="highlight">꿈이 시작되는 공간</span></h1>
                 <p class="hero-subtitle animate-fadeInUp">밀양 청년 Re-Turn 브릿지로 지역 청년 생태계를 혁신하고<br>지속 가능한 청년 정착 모델을 구축합니다</p>
                 
                 <div class="hero-stats">
                     <div class="hero-stat animate-fadeInUp">
                         <span class="hero-stat-number text-number" data-target="50">0</span>
                         <div class="hero-stat-label">억원 투자</div>
+                        <div class="hero-stat-desc">5년간 총 투자규모</div>
                     </div>
                     <div class="hero-stat animate-fadeInUp">
                         <span class="hero-stat-number text-number" data-target="500">0</span>
                         <div class="hero-stat-label">명 청년 참여</div>
+                        <div class="hero-stat-desc">프로그램 참여 대상</div>
                     </div>
                     <div class="hero-stat animate-fadeInUp">
                         <span class="hero-stat-number text-number" data-target="85">0</span>
                         <div class="hero-stat-label">% 정착률 목표</div>
+                        <div class="hero-stat-desc">프로그램 완료 후</div>
                     </div>
                 </div>
                 
@@ -428,7 +451,7 @@
             </div>
             
             <div class="navigation-grid">
-                <a href="background.html" class="nav-card">
+                <a href="background.html" class="nav-card" tabindex="0">
                     <div class="nav-card-header">
                         <i class="nav-card-icon" data-lucide="bar-chart-3"></i>
                     </div>
@@ -446,7 +469,7 @@
                     </div>
                 </a>
                 
-                <a href="solution.html" class="nav-card">
+                <a href="solution.html" class="nav-card" tabindex="0">
                     <div class="nav-card-header">
                         <i class="nav-card-icon" data-lucide="lightbulb"></i>
                     </div>
@@ -464,7 +487,7 @@
                     </div>
                 </a>
                 
-                <a href="budget.html" class="nav-card">
+                <a href="budget.html" class="nav-card" tabindex="0">
                     <div class="nav-card-header">
                         <i class="nav-card-icon" data-lucide="calculator"></i>
                     </div>
@@ -482,7 +505,7 @@
                     </div>
                 </a>
                 
-                <a href="effects.html" class="nav-card">
+                <a href="effects.html" class="nav-card" tabindex="0">
                     <div class="nav-card-header">
                         <i class="nav-card-icon" data-lucide="target"></i>
                     </div>
@@ -500,7 +523,7 @@
                     </div>
                 </a>
                 
-                <a href="benchmarking.html" class="nav-card">
+                <a href="benchmarking.html" class="nav-card" tabindex="0">
                     <div class="nav-card-header">
                         <i class="nav-card-icon" data-lucide="search"></i>
                     </div>
@@ -518,16 +541,17 @@
                     </div>
                 </a>
                 
-                <div class="nav-card" style="background: var(--gradient-primary); color: white;">
+                <div class="nav-card contact-card" style="background: var(--gradient-primary); color: white;">
                     <div class="nav-card-header" style="background: rgba(255,255,255,0.1);">
-                        <i class="nav-card-icon" data-lucide="contact"></i>
+                        <i class="nav-card-icon" data-lucide="contact" style="color: white;"></i>
                     </div>
                     <div class="nav-card-content">
                         <h3 class="nav-card-title" style="color: white;">제안자 정보</h3>
                         <p class="nav-card-description" style="color: rgba(255,255,255,0.9);">제안자: 박용환 (크리에이티브 넥서스)</p>
                         <ul class="nav-card-features">
-                            <li>연락처: 010-7939-3123</li>
-                            <li>이메일: sanoramyun8@gmail.com</li> 
+                            <li style="color: rgba(255,255,255,0.9);">연락처: 010-7939-3123</li>
+                            <li style="color: rgba(255,255,255,0.9);">이메일: sanoramyun8@gmail.com</li>
+                            <li style="color: rgba(255,255,255,0.9);">소재지: 경기도 용인시 수지구</li>
                         </ul>
                     </div>
                 </div>
@@ -537,10 +561,10 @@
 
     <!-- 플로팅 액션 버튼 -->
     <div class="floating-actions">
-        <button class="floating-btn" onclick="downloadPDF()" title="PDF 다운로드">
+        <button class="floating-btn" onclick="downloadPDF()" title="PDF 다운로드" aria-label="PDF 다운로드">
             <i data-lucide="download"></i>
         </button>
-        <button class="floating-btn scroll-top" onclick="scrollToTop()" title="맨 위로">
+        <button class="floating-btn scroll-top" onclick="scrollToTop()" title="맨 위로" aria-label="맨 위로 스크롤">
             <i data-lucide="arrow-up"></i>
         </button>
     </div>
@@ -551,47 +575,10 @@
         // Lucide 아이콘 초기화
         lucide.createIcons();
 
-        // 카운터 애니메이션
-        function animateCounter(element, target) {
-            let count = 0;
-            const increment = target / 100;
-            
-            const updateCounter = () => {
-                count += increment;
-                if (count < target) {
-                    element.textContent = Math.floor(count);
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    element.textContent = target;
-                }
-            };
-            
-            updateCounter();
-        }
-
-        // 숫자 카운터 실행
-        function startCounters() {
-            const counters = document.querySelectorAll('[data-target]');
-            counters.forEach(counter => {
-                const target = parseInt(counter.dataset.target);
-                animateCounter(counter, target);
-            });
-        }
-
-        // 프로그레스 바 애니메이션
-        function animateProgressBars() {
-            const progressBars = document.querySelectorAll('[data-progress]');
-            progressBars.forEach(bar => {
-                const progress = parseInt(bar.dataset.progress);
-                setTimeout(() => {
-                    bar.style.width = progress + '%';
-                }, 300);
-            });
-        }
-
-        // Hero 차트 그리기 (개선된 단순 버전)
+        // Hero 차트 그리기 (모바일 최적화)
         function drawHeroChart() {
             const ctx = document.getElementById('heroChart').getContext('2d');
+            const isMobile = window.innerWidth <= 768;
             
             new Chart(ctx, {
                 type: 'line',
@@ -602,44 +589,50 @@
                         data: [15420, 14892, 14256, 13687, 13142, 12634, 10500],
                         borderColor: '#FF6B35',
                         backgroundColor: 'rgba(255, 107, 53, 0.1)',
-                        borderWidth: 4,
+                        borderWidth: isMobile ? 3 : 4,
                         fill: false,
                         tension: 0.4,
                         pointBackgroundColor: '#FF6B35',
                         pointBorderColor: '#ffffff',
-                        pointBorderWidth: 3,
-                        pointRadius: 6,
-                        pointHoverRadius: 8
+                        pointBorderWidth: 2,
+                        pointRadius: isMobile ? 4 : 6,
+                        pointHoverRadius: isMobile ? 6 : 8
                     }, {
                         label: '정책 적용 후',
                         data: [null, null, null, null, null, 12634, 16500],
                         borderColor: '#4CAF50',
                         backgroundColor: 'rgba(76, 175, 80, 0.1)',
-                        borderWidth: 4,
+                        borderWidth: isMobile ? 3 : 4,
                         fill: false,
                         tension: 0.4,
                         borderDash: [10, 5],
                         pointBackgroundColor: '#4CAF50',
                         pointBorderColor: '#ffffff',
-                        pointBorderWidth: 3,
-                        pointRadius: 6,
-                        pointHoverRadius: 8
+                        pointBorderWidth: 2,
+                        pointRadius: isMobile ? 4 : 6,
+                        pointHoverRadius: isMobile ? 6 : 8
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    },
                     plugins: {
                         legend: {
                             display: true,
-                            position: 'bottom',
+                            position: isMobile ? 'top' : 'bottom',
                             labels: {
                                 color: 'white',
                                 font: {
-                                    size: 14,
+                                    size: isMobile ? 12 : 14,
                                     weight: 'bold'
                                 },
-                                padding: 20
+                                padding: isMobile ? 10 : 20,
+                                usePointStyle: true,
+                                pointStyle: 'line'
                             }
                         },
                         tooltip: {
@@ -649,6 +642,12 @@
                             borderColor: 'rgba(255, 255, 255, 0.3)',
                             borderWidth: 1,
                             cornerRadius: 10,
+                            titleFont: {
+                                size: isMobile ? 12 : 14
+                            },
+                            bodyFont: {
+                                size: isMobile ? 11 : 13
+                            },
                             callbacks: {
                                 label: function(context) {
                                     return context.dataset.label + ': ' + 
@@ -666,11 +665,11 @@
                                 color: 'white',
                                 font: {
                                     weight: 'bold',
-                                    size: 12
+                                    size: isMobile ? 10 : 12
                                 }
                             },
                             title: {
-                                display: true,
+                                display: !isMobile,
                                 text: '연도',
                                 color: 'white',
                                 font: {
@@ -687,14 +686,16 @@
                                 color: 'white',
                                 font: {
                                     weight: 'bold',
-                                    size: 12
+                                    size: isMobile ? 10 : 12
                                 },
                                 callback: function(value) {
-                                    return (value / 1000).toFixed(0) + 'K명';
+                                    return isMobile ? 
+                                        (value / 1000).toFixed(0) + 'K' :
+                                        (value / 1000).toFixed(0) + 'K명';
                                 }
                             },
                             title: {
-                                display: true,
+                                display: !isMobile,
                                 text: '청년 인구 수 (명)',
                                 color: 'white',
                                 font: {
@@ -715,43 +716,19 @@
         // 프로그레스 링 애니메이션
         function animateProgressRings() {
             setTimeout(() => {
-                document.querySelector('.academy-progress').style.strokeDashoffset = '122'; // 70%
+                const academyProgress = document.querySelector('.academy-progress');
+                if (academyProgress) academyProgress.style.strokeDashoffset = '122'; // 70%
             }, 500);
             
             setTimeout(() => {
-                document.querySelector('.space-progress').style.strokeDashoffset = '163'; // 60%
+                const spaceProgress = document.querySelector('.space-progress');
+                if (spaceProgress) spaceProgress.style.strokeDashoffset = '163'; // 60%
             }, 1000);
             
             setTimeout(() => {
-                document.querySelector('.settlement-progress').style.strokeDashoffset = '82'; // 80%
+                const settlementProgress = document.querySelector('.settlement-progress');
+                if (settlementProgress) settlementProgress.style.strokeDashoffset = '82'; // 80%
             }, 1500);
-        }
-
-        // 개선된 카운터 애니메이션
-        function animateCounter(element, target, suffix = '') {
-            let count = 0;
-            const increment = target / 150; // 더 부드러운 애니메이션
-            const isDecimal = target % 1 !== 0;
-            
-            const updateCounter = () => {
-                count += increment;
-                if (count < target) {
-                    if (isDecimal) {
-                        element.textContent = count.toFixed(1) + suffix;
-                    } else {
-                        element.textContent = Math.floor(count).toLocaleString() + suffix;
-                    }
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    if (isDecimal) {
-                        element.textContent = target.toFixed(1) + suffix;
-                    } else {
-                        element.textContent = target.toLocaleString() + suffix;
-                    }
-                }
-            };
-            
-            updateCounter();
         }
 
         // 지연된 애니메이션 시작
@@ -766,18 +743,9 @@
             });
         }
 
-        // 스크롤 인디케이터 업데이트
-        function updateScrollIndicator() {
-            const scrollTop = window.pageYOffset;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            
-            document.getElementById('scrollIndicator').style.width = scrollPercent + '%';
-        }
-
         // PDF 다운로드 함수
         function downloadPDF() {
-            alert('PDF 다운로드 기능은 구현 예정입니다.');
+            window.AppUtils.showNotification('PDF 다운로드 기능은 준비 중입니다.', 'info');
         }
 
         // 맨 위로 스크롤
@@ -788,19 +756,78 @@
             });
         }
 
+        // 차트 반응형 업데이트
+        function updateChartResponsive() {
+            const chart = Chart.getChart('heroChart');
+            if (chart) {
+                chart.destroy();
+                drawHeroChart();
+            }
+        }
+
+        // 카운터 애니메이션 함수
+        function animateCounter(element) {
+            if (element.classList.contains('counted')) return;
+            
+            const target = parseFloat(element.getAttribute('data-target'));
+            const duration = 2000; // 2초
+            const startTime = Date.now();
+            const startValue = 0;
+            const isDecimal = target % 1 !== 0;
+            
+            function updateCounter() {
+                const currentTime = Date.now();
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // easeOutCubic 함수
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                const currentValue = startValue + (target - startValue) * easeProgress;
+                
+                if (isDecimal) {
+                    element.textContent = currentValue.toFixed(1);
+                } else {
+                    element.textContent = Math.floor(currentValue).toLocaleString();
+                }
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = isDecimal ? target.toFixed(1) : target.toLocaleString();
+                    element.classList.add('counted');
+                }
+            }
+            
+            updateCounter();
+        }
+
         // 페이지 로드 시 실행
         window.addEventListener('load', function() {
-            // 기존 기능들
-            startCounters();
-            animateProgressBars();
             drawHeroChart();
             animateProgressRings();
             startDelayedAnimations();
+            
+            // 히어로 섹션 카운터 애니메이션 즉시 시작
+            setTimeout(() => {
+                const heroCounters = document.querySelectorAll('.hero-stat .text-number[data-target]');
+                heroCounters.forEach(counter => {
+                    animateCounter(counter);
+                });
+            }, 500);
             
             // 페이지 진입 애니메이션 강화 (인덱스 페이지만)
             setTimeout(() => {
                 document.body.classList.add('page-loaded');
             }, 100);
+        });
+
+        // 리사이즈 이벤트
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                updateChartResponsive();
+            }, 250);
         });
 
         // 스크롤 기반 애니메이션 추가
@@ -813,27 +840,29 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('animate-in-view');
+                    
+                    // 카운터 애니메이션 트리거
+                    const counters = entry.target.querySelectorAll('.text-number[data-target]');
+                    counters.forEach(counter => {
+                        if (!counter.classList.contains('counted')) {
+                            animateCounter(counter);
+                        }
+                    });
+                    
+                    // 단일 카운터 처리
+                    if (entry.target.hasAttribute('data-target') && entry.target.classList.contains('text-number')) {
+                        if (!entry.target.classList.contains('counted')) {
+                            animateCounter(entry.target);
+                        }
+                    }
                 }
             });
         }, observerOptions);
 
         // 애니메이션 대상 요소들 관찰
         window.addEventListener('load', function() {
-            const animateElements = document.querySelectorAll('.solution-step, .kpi-card, .nav-card');
+            const animateElements = document.querySelectorAll('.solution-step, .kpi-card, .nav-card, .problem-stat, .kpi-dashboard, .problem-overview');
             animateElements.forEach(el => observer.observe(el));
-        });
-
-        // 스크롤 이벤트
-        window.addEventListener('scroll', function() {
-            updateScrollIndicator();
-            
-            // 헤더 스크롤 효과
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
         });
 
         // 네비게이션 카드 클릭 추적
@@ -844,7 +873,31 @@
                     progressBar.style.width = '100%';
                 }
             });
+
+            // 키보드 접근성
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
         });
+
+        // 성능 최적화: 비중요한 애니메이션 지연 로딩
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(() => {
+                // 비중요한 애니메이션이나 기능들을 여기서 초기화
+                console.log('비중요한 기능들이 초기화되었습니다.');
+            });
+        }
+
+        // 서비스 워커 등록 (PWA 지원)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // 서비스 워커가 있다면 등록
+                // navigator.serviceWorker.register('/sw.js');
+            });
+        }
     </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 /* ==============================================
-   밀양 청년 Re-Turn 브릿지 제안서 - 공통 스타일
+   밀양 청년 Re-Turn 브릿지 제안서 - 공통 스타일 (모바일 최적화)
    ============================================== */
 
 /* 폰트 임포트 */
@@ -158,6 +158,7 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .logo {
@@ -167,6 +168,7 @@ p {
   font-weight: 700;
   color: var(--primary-color);
   text-decoration: none;
+  z-index: 1001;
 }
 
 .logo-icon {
@@ -181,6 +183,38 @@ p {
   color: white;
 }
 
+/* 모바일 메뉴 토글 버튼 */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1001;
+}
+
+.mobile-menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background: var(--primary-color);
+  transition: var(--transition-medium);
+  border-radius: 2px;
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
 .nav-menu {
   display: flex;
   list-style: none;
@@ -192,10 +226,13 @@ p {
   color: var(--text-primary);
   text-decoration: none;
   font-weight: 500;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: 6px;
+  padding: var(--spacing-sm);
+  border-radius: 8px;
   transition: var(--transition-fast);
   position: relative;
+  min-height: 44px; /* 터치 최적화 */
+  display: flex;
+  align-items: center;
 }
 
 .nav-link:hover {
@@ -240,6 +277,8 @@ p {
   position: relative;
   overflow: hidden;
   gap: var(--spacing-xs);
+  min-height: 44px; /* 터치 최적화 */
+  text-align: center;
 }
 
 .btn-primary {
@@ -278,6 +317,7 @@ p {
 .btn-large {
   padding: var(--spacing-md) var(--spacing-lg);
   font-size: 1.125rem;
+  min-height: 48px;
 }
 
 /* 카드 */
@@ -510,7 +550,7 @@ p {
 /* 반응형 디자인 */
 @media (max-width: 1200px) {
   .container {
-    padding: 0 var(--spacing-sm);
+    padding: 0 var(--spacing-md);
   }
   
   h1 {
@@ -534,24 +574,107 @@ p {
     --spacing-xxl: 3rem;
   }
   
+  html {
+    font-size: 14px;
+  }
+  
   h1 {
     font-size: 2.5rem;
+    line-height: 1.1;
   }
   
   h2 {
     font-size: 2rem;
   }
   
+  h3 {
+    font-size: 1.75rem;
+  }
+  
+  .lead {
+    font-size: 1.1rem;
+  }
+  
+  /* 모바일 네비게이션 */
+  .mobile-menu-toggle {
+    display: flex;
+  }
+  
+  .logo-text {
+    display: block; /* 모바일에서도 로고 텍스트 표시 */
+    font-size: 1rem;
+  }
+  
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 0.75rem;
+  }
+  
   .nav-menu {
-    gap: var(--spacing-sm);
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: white;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 100px 30px 30px;
+    box-shadow: var(--shadow-heavy);
+    transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    gap: 0;
+  }
+  
+  .nav-menu.active {
+    right: 0;
+  }
+  
+  .nav-menu li {
+    width: 100%;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .nav-link {
+    width: 100%;
+    padding: var(--spacing-md);
+    font-size: 1.1rem;
+    border-radius: 12px;
+    text-align: left;
+    min-height: 48px;
+  }
+  
+  /* 모바일 오버레이 */
+  .mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .mobile-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .container {
+    padding: 0 var(--spacing-sm);
   }
   
   .btn {
     padding: var(--spacing-sm);
+    font-size: 0.95rem;
   }
   
   .btn-large {
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-md);
     font-size: 1rem;
   }
   
@@ -561,6 +684,61 @@ p {
   
   .grid-4 {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 2.5rem;
+  }
+  
+  html {
+    font-size: 14px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+  
+  .logo {
+    font-size: 1rem;
+  }
+  
+  .logo-text {
+    display: block;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+  }
+  
+  .logo-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 0.5rem;
+  }
+  
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .nav-menu {
+    width: 100%;
+    right: -100%;
+    padding: 80px 20px 20px;
   }
 }
 
@@ -586,4 +764,45 @@ p {
 ::selection {
   background: rgba(46, 91, 186, 0.2);
   color: var(--text-primary);
+}
+
+/* 터치 디바이스 최적화 */
+@media (hover: none) and (pointer: coarse) {
+  .btn:hover {
+    transform: none;
+  }
+  
+  .card:hover {
+    transform: none;
+  }
+  
+  .nav-link:hover {
+    background-color: transparent;
+  }
+}
+
+/* 포커스 상태 개선 */
+.btn:focus,
+.nav-link:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* 로딩 스테이트 */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* 접근성 개선 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
