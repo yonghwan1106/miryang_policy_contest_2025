@@ -807,6 +807,9 @@
             animateProgressRings();
             startDelayedAnimations();
             
+            // 로고 텍스트 강제 표시 (JavaScript로 보장)
+            ensureLogoTextVisible();
+            
             // 히어로 섹션 카운터 애니메이션 즉시 시작
             setTimeout(() => {
                 const heroCounters = document.querySelectorAll('.hero-stat .text-number[data-target]');
@@ -820,6 +823,31 @@
                 document.body.classList.add('page-loaded');
             }, 100);
         });
+
+        // 로고 텍스트 표시 강제 함수
+        function ensureLogoTextVisible() {
+            const logoTexts = document.querySelectorAll('.logo-text');
+            logoTexts.forEach(logoText => {
+                logoText.style.display = 'inline-block';
+                logoText.style.visibility = 'visible';
+                logoText.style.opacity = '1';
+                logoText.style.fontSize = window.innerWidth <= 480 ? '0.9rem' : '1rem';
+                logoText.style.color = 'var(--primary-color)';
+                logoText.style.fontWeight = '700';
+                logoText.style.textDecoration = 'none';
+                logoText.style.whiteSpace = 'nowrap';
+                logoText.style.overflow = 'visible';
+                logoText.style.textOverflow = 'clip';
+                logoText.style.maxWidth = 'none';
+            });
+            
+            // 윈도우 리사이즈 시에도 확인
+            window.addEventListener('resize', () => {
+                logoTexts.forEach(logoText => {
+                    logoText.style.fontSize = window.innerWidth <= 480 ? '0.9rem' : '1rem';
+                });
+            });
+        }
 
         // 리사이즈 이벤트
         let resizeTimeout;
